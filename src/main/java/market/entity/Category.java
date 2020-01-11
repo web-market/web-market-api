@@ -40,8 +40,8 @@ public class Category {
     @JoinColumn(name = "parent_category_id")
     private Category parentCategory;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentCategory")
-    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parentCategory")
+//    @JsonIgnore
     private List<Category> subCategories;
 
     @ManyToMany(fetch = FetchType.LAZY)
