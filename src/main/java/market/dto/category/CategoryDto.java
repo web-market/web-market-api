@@ -23,5 +23,5 @@ public class CategoryDto {
 
     private Long sortOrder;
 
-    private CategoryDropdownDto parentCategory;
+    private Long parentCategory;
 }
