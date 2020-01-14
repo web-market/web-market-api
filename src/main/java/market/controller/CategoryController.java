@@ -25,17 +25,17 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping(produces = "application/vnd.category-dropdown+json")
+    @GetMapping("/allSmall")
     public List<CategoryDropdownDto> getAll() {
         return this.categoryService.getAll();
     }
 
-    @GetMapping("/sideMenu")
+    @GetMapping("/getAllCategories")
     public List<CategorySideMenuDto> getSideMenu() {
         return this.categoryService.getSideMenu();
     }
 
-    @GetMapping(produces = "application/vnd.category-full+json")
+    @GetMapping("/allFull")
     public List<CategoryDto> getAllFull(){
         return this.categoryService.getAllFull();
     }
