@@ -3,13 +3,12 @@ package market.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import market.dto.category.CategoryDto;
 import market.dto.category.CategoryDropdownDto;
-import market.dto.category.CategorySideMenuDto;
+import market.dto.category.CreateCategoryDto;
 import market.entity.Category;
 import market.repository.CategoryRepository;
 import market.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -25,15 +24,21 @@ public class CategoryServiceImpl implements CategoryService {
     private final ModelMapper modelMapper;
 
     @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
-    public List<CategoryDropdownDto> getAll() {
-        return this.modelMapper.map(this.categoryRepository.findAll(),
-                new TypeToken<List<CategoryDropdownDto>>(){}.getType());
+    public List<CategoryDto> getAllByParentCategoryId(Long id) {
+        return this.modelMapper.map(this.categoryRepository.getAllByParentCategoryId(id),
+                new TypeToken<List<CategoryDto>>(){}.getType());
     }
 
     @Transactional(readOnly = true)
-    public List<CategorySideMenuDto> getSideMenu() {
-        return this.modelMapper.map(this.categoryRepository.findAll(),
-                new TypeToken<List<CategorySideMenuDto>>(){}.getType());
+    public List<CreateCategoryDto> getSideMenu() {
+        List<CreateCategoryDto> cat = this.modelMapper.map(this.categoryRepository.findAll(),
+                new TypeToken<List<CreateCategoryDto>>(){}.getType());
+        return cat;
+    }
+
+    @Override
+    public List<CategoryDropdownDto> getAll() {
+        return null;
     }
 
     @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
@@ -43,10 +48,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Category create(CategoryDto categoryDto) {
-        Category newCategory = this.modelMapper.map(categoryDto, Category.class);
-        if (categoryDto.getParentCategory() != null) {
-            Category parentCategory = this.categoryRepository.getById(categoryDto.getParentCategory());
+    public Category create(CreateCategoryDto createCategoryDto) {
+        Category newCategory = this.modelMapper.map(createCategoryDto, Category.class);
+        if (createCategoryDto.getParentCategoryId() != null) {
+            Category parentCategory = this.categoryRepository.getById(createCategoryDto.getParentCategoryId());
             newCategory.setParentCategory(parentCategory);
         }
         return this.categoryRepository.save(newCategory);

@@ -2,6 +2,8 @@ package market.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +20,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Data
+@ToString(exclude = "subCategories")
 @Table(name = "category")
 @Entity
 public class Category {
@@ -36,12 +39,15 @@ public class Category {
     @Column(name = "sort_order")
     private Long sortOrder;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Column(name = "color")
+    private String color;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_category_id")
     private Category parentCategory;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parentCategory")
-//    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentCategory")
+    @JsonIgnore
     private List<Category> subCategories;
 
     @ManyToMany(fetch = FetchType.LAZY)

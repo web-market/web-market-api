@@ -23,5 +23,5 @@ public class CategoryDto {
 
     private Long sortOrder;
 
-    private Long parentCategory;
+    private String color;
 }

@@ -1,10 +1,9 @@
 package market.dto.category;
 
 import lombok.Data;
-import java.util.List;
 
 @Data
-public class CategorySideMenuDto {
+public class CreateCategoryDto {
 
     private Long id;
 
@@ -14,7 +13,8 @@ public class CategorySideMenuDto {
 
     private Long sortOrder;
 
-    private CategoryDto parentCategory;
+    private String color;
 
-    private List<CategoryDto> childCategories;
+    private Long parentCategoryId;
+
 }

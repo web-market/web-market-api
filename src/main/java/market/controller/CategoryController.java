@@ -3,7 +3,7 @@ package market.controller;
 import lombok.RequiredArgsConstructor;
 import market.dto.category.CategoryDropdownDto;
 import market.dto.category.CategoryDto;
-import market.dto.category.CategorySideMenuDto;
+import market.dto.category.CreateCategoryDto;
 import market.entity.Category;
 import market.service.CategoryService;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,23 +26,23 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping("/allSmall")
-    public List<CategoryDropdownDto> getAll() {
-        return this.categoryService.getAll();
+    @GetMapping
+    public List<CategoryDto> getAllByParentCategoryId(@RequestParam(required = false, value = "id") Long id) {
+        return this.categoryService.getAllByParentCategoryId(id);
     }
 
     @GetMapping("/getAllCategories")
-    public List<CategorySideMenuDto> getSideMenu() {
+    public List<CreateCategoryDto> getSideMenu() {
         return this.categoryService.getSideMenu();
     }
 
     @GetMapping("/allFull")
-    public List<CategoryDto> getAllFull(){
+    public List<CategoryDto> getAllFull() {
         return this.categoryService.getAllFull();
     }
 
     @PostMapping
-    public Category create(@RequestBody CategoryDto categoryDto) {
+    public Category create(@RequestBody CreateCategoryDto categoryDto) {
         return this.categoryService.create(categoryDto);
     }
 
