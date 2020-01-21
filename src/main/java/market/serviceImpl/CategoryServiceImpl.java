@@ -14,7 +14,9 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Transactional(readOnly = true)
     public List<CategoryDto> getAllByParentCategoryId(Long id) {
-        return this.modelMapper.map(this.categoryRepository.getAllByParentCategoryId(id),
-                new TypeToken<List<CategoryDto>>(){}.getType());
+        return checkForChildren(this.categoryRepository.getAllByParentCategoryId(id));
     }
 
     @Override
@@ -55,8 +56,18 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository.deleteById(id);
     }
 
-//    private List<CategoryDto> checkForChildren(List<Category> categories, List<CategoryDto> categoryDtos) {
-//        return categories.stream().map(category -> {category.getSubCategories().isEmpty() ? });
-//    }
+    private List<CategoryDto> checkForChildren(List<Category> categories) {
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        categories.forEach(category -> {
+            CategoryDto categoryDto = this.modelMapper.map(category, CategoryDto.class);
+            if (category.getSubCategories().isEmpty()) {
+                categoryDto.setHasSubCategories(false);
+            } else {
+                categoryDto.setHasSubCategories(true);
+            }
+            categoryDtos.add(categoryDto);
+        });
+        return categoryDtos;
+    }
 
 }

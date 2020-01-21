@@ -24,4 +24,7 @@ public class CategoryDto {
     private Long sortOrder;
 
     private String color;
+
+    private Boolean hasSubCategories;
+
 }
