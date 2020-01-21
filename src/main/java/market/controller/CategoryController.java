@@ -26,19 +26,14 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping
-    public List<CategoryDto> getAllByParentCategoryId(@RequestParam(required = false, value = "id") Long id) {
+    @GetMapping("/all")
+    public List<CategoryDropdownDto> getAll() {
+        return this.categoryService.getAll();
+    }
+
+    @GetMapping(value = {"", "/{id}"})
+    public List<CategoryDto> getAllByParentCategoryId(@PathVariable(required = false, value = "id") Long id) {
         return this.categoryService.getAllByParentCategoryId(id);
-    }
-
-    @GetMapping("/getAllCategories")
-    public List<CreateCategoryDto> getSideMenu() {
-        return this.categoryService.getSideMenu();
-    }
-
-    @GetMapping("/allFull")
-    public List<CategoryDto> getAllFull() {
-        return this.categoryService.getAllFull();
     }
 
     @PostMapping
@@ -52,7 +47,7 @@ public class CategoryController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         this.categoryService.deleteCategory(id);
         return ResponseEntity.ok("deleted successfully");
     }

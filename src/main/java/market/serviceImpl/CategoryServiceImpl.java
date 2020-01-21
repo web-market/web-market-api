@@ -23,28 +23,16 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final ModelMapper modelMapper;
 
-    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
+    @Transactional(readOnly = true)
     public List<CategoryDto> getAllByParentCategoryId(Long id) {
         return this.modelMapper.map(this.categoryRepository.getAllByParentCategoryId(id),
                 new TypeToken<List<CategoryDto>>(){}.getType());
     }
 
-    @Transactional(readOnly = true)
-    public List<CreateCategoryDto> getSideMenu() {
-        List<CreateCategoryDto> cat = this.modelMapper.map(this.categoryRepository.findAll(),
-                new TypeToken<List<CreateCategoryDto>>(){}.getType());
-        return cat;
-    }
-
     @Override
     public List<CategoryDropdownDto> getAll() {
-        return null;
-    }
-
-    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
-    public List<CategoryDto> getAllFull() {
         return this.modelMapper.map(this.categoryRepository.findAll(),
-                new TypeToken<List<CategoryDto>>(){}.getType());
+                new TypeToken<List<CategoryDropdownDto>>(){}.getType());
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -66,5 +54,9 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategory(Long id) {
         this.categoryRepository.deleteById(id);
     }
+
+//    private List<CategoryDto> checkForChildren(List<Category> categories, List<CategoryDto> categoryDtos) {
+//        return categories.stream().map(category -> {category.getSubCategories().isEmpty() ? });
+//    }
 
 }

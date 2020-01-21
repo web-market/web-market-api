@@ -11,13 +11,9 @@ public interface CategoryService {
 
     List<CategoryDropdownDto> getAll();
 
-    List<CategoryDto> getAllFull();
-
     Category create(CreateCategoryDto createCategoryDto);
 
     Category update(CategoryDto categoryDto);
-
-    List<CreateCategoryDto> getSideMenu();
 
     List<CategoryDto> getAllByParentCategoryId(Long id);
 
