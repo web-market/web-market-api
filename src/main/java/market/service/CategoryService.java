@@ -11,6 +11,8 @@ public interface CategoryService {
 
     List<CategoryDropdownDto> getAll();
 
+    Category getById(Long id);
+
     Category create(CreateCategoryDto createCategoryDto);
 
     Category update(CategoryDto categoryDto);

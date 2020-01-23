@@ -30,13 +30,13 @@ public class Category {
     @SequenceGenerator(name = "category_sequence", sequenceName = "category_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @Column(name = "sort_order")
+    @Column(name = "sort_order", columnDefinition = "bigint default 0")
     private Long sortOrder;
 
     @Column(name = "color")

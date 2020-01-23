@@ -1,8 +1,8 @@
 package market.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
-import market.dto.category.CategoryDto;
 import market.dto.category.CategoryDropdownDto;
+import market.dto.category.CategoryDto;
 import market.dto.category.CreateCategoryDto;
 import market.entity.Category;
 import market.repository.CategoryRepository;
@@ -10,13 +10,11 @@ import market.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +26,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional(readOnly = true)
     public List<CategoryDto> getAllByParentCategoryId(Long id) {
         return checkForChildren(this.categoryRepository.getAllByParentCategoryId(id));
+    }
+
+    @Transactional(readOnly = true)
+    public Category getById(Long id) {
+        return this.categoryRepository.getById(id);
     }
 
     @Override

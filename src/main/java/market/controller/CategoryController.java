@@ -36,6 +36,11 @@ public class CategoryController {
         return this.categoryService.getAllByParentCategoryId(id);
     }
 
+    @GetMapping("/category/{id}")
+    public Category getSingleCategory(@PathVariable Long id) {
+        return this.categoryService.getById(id);
+    }
+
     @PostMapping
     public Category create(@RequestBody CreateCategoryDto categoryDto) {
         return this.categoryService.create(categoryDto);
