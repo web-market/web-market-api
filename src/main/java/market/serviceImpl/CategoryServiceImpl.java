@@ -42,6 +42,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Category create(CreateCategoryDto createCategoryDto) {
         Category newCategory = this.modelMapper.map(createCategoryDto, Category.class);
+        if (newCategory.getSortOrder() == null) {
+            newCategory.setSortOrder(0L);
+        }
         if (createCategoryDto.getParentCategoryId() != null) {
             Category parentCategory = this.categoryRepository.getById(createCategoryDto.getParentCategoryId());
             newCategory.setParentCategory(parentCategory);
