@@ -3,6 +3,7 @@ package market.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import market.dto.category.CategoryDropdownDto;
 import market.dto.category.CategoryDto;
+import market.dto.category.CategoryUpdateDto;
 import market.dto.category.CreateCategoryDto;
 import market.entity.Category;
 import market.repository.CategoryRepository;
@@ -29,14 +30,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public Category getById(Long id) {
-        return this.categoryRepository.getById(id);
+    public CategoryUpdateDto getById(Long id) {
+        Category category = this.categoryRepository.getById(id);
+        CategoryUpdateDto categoryUpdateDto = this.modelMapper.map(category, CategoryUpdateDto.class);
+        categoryUpdateDto.setParentCategory(this.modelMapper.map(category.getParentCategory(), CategoryDropdownDto.class));
+        return categoryUpdateDto;
     }
 
     @Override
     public List<CategoryDropdownDto> getAll() {
         return this.modelMapper.map(this.categoryRepository.findAll(),
-                new TypeToken<List<CategoryDropdownDto>>(){}.getType());
+                new TypeToken<List<CategoryDropdownDto>>() {
+                }.getType());
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)

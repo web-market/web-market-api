@@ -3,6 +3,7 @@ package market.controller;
 import lombok.RequiredArgsConstructor;
 import market.dto.category.CategoryDropdownDto;
 import market.dto.category.CategoryDto;
+import market.dto.category.CategoryUpdateDto;
 import market.dto.category.CreateCategoryDto;
 import market.entity.Category;
 import market.service.CategoryService;
@@ -37,7 +38,7 @@ public class CategoryController {
     }
 
     @GetMapping("/category/{id}")
-    public Category getSingleCategory(@PathVariable Long id) {
+    public CategoryUpdateDto getSingleCategory(@PathVariable Long id) {
         return this.categoryService.getById(id);
     }
 
