@@ -33,7 +33,9 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryUpdateDto getById(Long id) {
         Category category = this.categoryRepository.getById(id);
         CategoryUpdateDto categoryUpdateDto = this.modelMapper.map(category, CategoryUpdateDto.class);
-        categoryUpdateDto.setParentCategory(this.modelMapper.map(category.getParentCategory(), CategoryDropdownDto.class));
+        if (category.getParentCategory() != null) {
+            categoryUpdateDto.setParentCategory(this.modelMapper.map(category.getParentCategory(), CategoryDropdownDto.class));
+        }
         return categoryUpdateDto;
     }
 
