@@ -54,6 +54,10 @@ public class Product {
     @JsonIgnore
     private List<Category> categories;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy="products")
+    @JsonIgnore
+    private List<FilterValue> filterValues;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     @JsonIgnore
     private List<Image> images;

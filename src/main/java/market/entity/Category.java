@@ -47,6 +47,7 @@ public class Category {
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "parent_category_id")
+    @JsonIgnore
     private Category parentCategory;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentCategory")

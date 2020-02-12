@@ -23,6 +23,8 @@ public class CategoryDto {
 
     private String color;
 
+    private Long parentCategoryId;
+
     private Boolean hasSubCategories;
 
 }
