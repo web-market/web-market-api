@@ -1,25 +1,25 @@
 package market.service;
 
-import market.dto.category.CategoryDropdownDto;
 import market.dto.category.CategoryDto;
-import market.dto.category.CategoryUpdateDto;
-import market.dto.category.CreateCategoryDto;
 import market.entity.Category;
+import market.projection.category.CategoryDropdownView;
+import market.projection.category.CategoryEditView;
+import market.projection.category.CategoryItemView;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    List<CategoryDropdownDto> getAll();
+    List<CategoryDropdownView> getAll();
 
-    CategoryUpdateDto getById(Long id);
+    CategoryEditView getById(Long id);
 
-    Category create(CreateCategoryDto createCategoryDto);
+    Category create(CategoryDto categoryDto);
 
     Category update(CategoryDto categoryDto);
 
-    List<CategoryDto> getAllByParentCategoryId(Long id);
+    List<CategoryItemView> getAllByParentCategoryId(Long id);
 
-    void deleteCategory(Long id);
+    void delete(Long id);
 
 }

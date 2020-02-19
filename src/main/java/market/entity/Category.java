@@ -51,6 +51,7 @@ public class Category {
     private Category parentCategory;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentCategory")
+    @Fetch(FetchMode.JOIN)
     @JsonIgnore
     private List<Category> subCategories;
 

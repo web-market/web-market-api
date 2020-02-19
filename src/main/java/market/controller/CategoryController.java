@@ -1,11 +1,11 @@
 package market.controller;
 
 import lombok.RequiredArgsConstructor;
-import market.dto.category.CategoryDropdownDto;
 import market.dto.category.CategoryDto;
-import market.dto.category.CategoryUpdateDto;
-import market.dto.category.CreateCategoryDto;
 import market.entity.Category;
+import market.projection.category.CategoryDropdownView;
+import market.projection.category.CategoryEditView;
+import market.projection.category.CategoryItemView;
 import market.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,33 +30,33 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/all")
-    public List<CategoryDropdownDto> getAll() {
+    public List<CategoryDropdownView> getAll() {
         return this.categoryService.getAll();
     }
 
     @GetMapping(value = {"", "/{id}"})
-    public List<CategoryDto> getAllByParentCategoryId(@PathVariable(required = false, value = "id") Long id) {
+    public List<CategoryItemView> getAllByParentCategoryId(@PathVariable(required = false, value = "id") Long id) {
         return this.categoryService.getAllByParentCategoryId(id);
     }
 
     @GetMapping("/category/{id}")
-    public CategoryUpdateDto getSingleCategory(@PathVariable Long id) {
+    public CategoryEditView getSingleCategory(@PathVariable Long id) {
         return this.categoryService.getById(id);
     }
 
     @PostMapping
-    public Category create(@RequestBody CreateCategoryDto categoryDto) {
+    public Category create(@RequestBody CategoryDto categoryDto) {
         return this.categoryService.create(categoryDto);
     }
 
     @PutMapping
-    public Category update(@RequestBody CategoryDto categoryDto) {
+    public Category update(@RequestBody CategoryDto categoryDto)   {
         return this.categoryService.update(categoryDto);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
-        this.categoryService.deleteCategory(id);
+        this.categoryService.delete(id);
         return ResponseEntity.ok("deleted successfully");
     }
 
