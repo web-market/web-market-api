@@ -1,7 +1,7 @@
 package market.controller;
 
 import lombok.RequiredArgsConstructor;
-import market.dto.category.CategoryDropdownDto;
+import market.dto.filter.FilterDto;
 import market.entity.Filter;
 import market.service.FilterService;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +25,15 @@ public class FilterController {
     public ResponseEntity<String> delete(@PathVariable Long id) {
         this.filterService.delete(id);
         return ResponseEntity.ok("deleted successfully");
+    }
+
+    @PostMapping
+    public Filter create(@RequestBody FilterDto filterDto) {
+        return this.filterService.create(filterDto);
+    }
+
+    @PutMapping
+    public Filter update(@RequestBody FilterDto filterDto)   {
+        return this.filterService.update(filterDto);
     }
 }
