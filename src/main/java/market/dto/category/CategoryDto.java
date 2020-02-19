@@ -1,15 +1,12 @@
 package market.dto.category;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
 @Data
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor
 public class CategoryDto {
 
     private Long id;
@@ -17,6 +14,7 @@ public class CategoryDto {
     @NotNull
     private String name;
 
+    @NotNull
     private Boolean isActive;
 
     private Long sortOrder;
@@ -24,7 +22,5 @@ public class CategoryDto {
     private String color;
 
     private Long parentCategoryId;
-
-    private Boolean hasSubCategories;
 
 }
