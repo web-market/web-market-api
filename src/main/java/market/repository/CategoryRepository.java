@@ -17,4 +17,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     CategoryEditView getCategoryEditViewById(Long id);
 
     Category getById(Long id);
+
 }

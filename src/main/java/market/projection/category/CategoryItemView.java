@@ -14,8 +14,8 @@ public interface CategoryItemView {
 
     String getColor();
 
-    @Value("#{target.getParentCategory().getId()}")
-    Long getParentCategoryId();
+    @Value("#{target.parentCategory}")
+    CategoryDropdownView getParentCategory();
 
     @Value("#{target.getSubCategories().size() == 0}")
     Boolean hasSubCategories();
