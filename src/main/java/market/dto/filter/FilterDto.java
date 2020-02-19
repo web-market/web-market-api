@@ -13,4 +13,9 @@ public class FilterDto {
 
     @NotNull
     private String name;
+
+    @NotNull
+    private String displayName;
+
+    private Long sortOrder;
 }
