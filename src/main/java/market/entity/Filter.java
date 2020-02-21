@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Data
+@ToString(exclude = "filterValues")
 @Table(name = "filter")
 @Entity
 public class Filter {
