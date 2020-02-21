@@ -54,4 +54,9 @@ public class FilterValueServiceImpl implements market.service.FilterValueService
         }
         return this.filterValueRepository.save(newFilterValue);
     }
+
+    @Override
+    public List<FilterValue> getAllByFilterId(Long filterId) {
+        return filterValueRepository.findAllByFilterId(filterId);
+    }
 }

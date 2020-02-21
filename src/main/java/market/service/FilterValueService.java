@@ -14,4 +14,6 @@ public interface FilterValueService {
     FilterValue create(FilterValueDto filterValueDto);
 
     FilterValue update(FilterValueDto filterValueDto);
+
+    List<FilterValue> getAllByFilterId(Long filterId);
 }

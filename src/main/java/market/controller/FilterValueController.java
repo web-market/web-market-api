@@ -21,6 +21,11 @@ public class FilterValueController {
         return this.filterValueService.getAll();
     }
 
+    @GetMapping(path = "/{id}")
+    public List<FilterValue> getAllByFilterId(@PathVariable Long id) {
+        return this.filterValueService.getAllByFilterId(id);
+    }
+
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         this.filterValueService.delete(id);
