@@ -28,8 +28,13 @@ public class Filter {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "display_name")
+    private String displayName;
+
+    @Column(name = "sort_order", columnDefinition = "bigint default 0")
+    private Long sortOrder;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "filter")
     @JsonIgnore
     private List<FilterValue> filterValues;
-
 }
