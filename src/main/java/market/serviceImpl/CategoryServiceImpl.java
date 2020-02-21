@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,12 +30,19 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Transactional(readOnly = true)
     public List<CategoryItemView> getAllByParentCategoryId(Long id) {
-        return this.categoryRepository.getAllByParentCategoryId(id);
+        return this.categoryRepository.getAllByParentCategoryIdOrderBySortOrderDesc(id);
     }
 
     @Transactional(readOnly = true)
     public CategoryEditView getById(Long id) {
         return this.categoryRepository.getCategoryEditViewById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoryDropdownView> getAvailableParentCategories(Long id) {
+        List<Long> childIdsWithCurrentId = this.getChildCategoriesIds(id);
+        childIdsWithCurrentId.add(id);
+        return this.categoryRepository.findAllByIdIsNotIn(childIdsWithCurrentId);
     }
 
     @Transactional
@@ -62,4 +70,12 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository.deleteById(id);
     }
 
+    private List<Long> getChildCategoriesIds(Long id) {
+        List<Long> childIds = new ArrayList<>();
+        this.categoryRepository.getAllByParentCategoryId(id).forEach(child -> {
+            childIds.add(child.getId());
+            childIds.addAll(getChildCategoriesIds(child.getId()));
+        });
+        return childIds;
+    }
 }

@@ -29,6 +29,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
+
     @GetMapping("/all")
     public List<CategoryDropdownView> getAll() {
         return this.categoryService.getAll();
@@ -37,6 +38,11 @@ public class CategoryController {
     @GetMapping(value = {"", "/{id}"})
     public List<CategoryItemView> getAllByParentCategoryId(@PathVariable(required = false, value = "id") Long id) {
         return this.categoryService.getAllByParentCategoryId(id);
+    }
+
+    @GetMapping("/availableParent/{id}")
+    public List<CategoryDropdownView> getAvailableParents(@PathVariable Long id) {
+        return this.categoryService.getAvailableParentCategories(id);
     }
 
     @GetMapping("/category/{id}")

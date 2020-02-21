@@ -10,12 +10,20 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
+    //Projections
     List<CategoryDropdownView> findAllBy();
 
-    List<CategoryItemView> getAllByParentCategoryId(Long id);
+    List<CategoryDropdownView> getAllByParentCategoryId(Long id);
+
+    List<CategoryItemView> getAllByParentCategoryIdOrderBySortOrderDesc(Long id);
 
     CategoryEditView getCategoryEditViewById(Long id);
 
+    //For dtos but just check
     Category getById(Long id);
+
+    List<CategoryDropdownView> findAllByIdIsNotIn(List<Long> id);
+
+
 
 }
