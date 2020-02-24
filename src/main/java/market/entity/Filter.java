@@ -3,6 +3,8 @@ package market.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +38,7 @@ public class Filter {
     private Long sortOrder;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "filter")
+    @Fetch(FetchMode.JOIN)
     @JsonIgnore
     private List<FilterValue> filterValues;
 }

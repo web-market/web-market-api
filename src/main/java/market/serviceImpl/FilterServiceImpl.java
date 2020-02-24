@@ -3,6 +3,7 @@ package market.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import market.dto.filter.FilterDto;
 import market.entity.Filter;
+import market.projection.filter.FilterView;
 import market.repository.FilterRepository;
 import market.service.FilterService;
 import org.modelmapper.ModelMapper;
@@ -19,8 +20,8 @@ public class FilterServiceImpl implements FilterService {
     private final ModelMapper modelMapper;
 
     @Override
-    public List<Filter> getAll() {
-        return this.filterRepository.findAll();
+    public List<FilterView> getAll() {
+        return this.filterRepository.findAllBy();
     }
 
     @Override
