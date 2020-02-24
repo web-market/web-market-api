@@ -35,6 +35,7 @@ public class FilterValue {
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "filter_id")
+    @JsonIgnore
     private Filter filter;
 
     @ManyToMany(fetch = FetchType.LAZY)
