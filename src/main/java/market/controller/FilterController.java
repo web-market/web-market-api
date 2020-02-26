@@ -3,6 +3,7 @@ package market.controller;
 import lombok.RequiredArgsConstructor;
 import market.dto.filter.FilterDto;
 import market.entity.Filter;
+import market.projection.filter.FilterView;
 import market.service.FilterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class FilterController {
     private final FilterService filterService;
 
     @GetMapping("/all")
-    public List<Filter> getAll() {
+    public List<FilterView> getAll() {
         return this.filterService.getAll();
     }
 
