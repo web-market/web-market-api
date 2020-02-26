@@ -20,6 +20,8 @@ public interface CategoryService {
 
     List<CategoryItemView> getAllByParentCategoryId(Long id);
 
+    List<CategoryItemView> getAllRootCategories();
+
     void delete(Long id);
 
     List<CategoryDropdownView> getAvailableParentCategories(Long id);

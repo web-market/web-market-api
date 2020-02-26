@@ -34,6 +34,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Transactional(readOnly = true)
+    public List<CategoryItemView> getAllRootCategories() {
+        return this.categoryRepository.getAllByParentCategoryIdIsNull();
+    }
+
+    @Transactional(readOnly = true)
     public CategoryEditView getById(Long id) {
         return this.categoryRepository.getCategoryEditViewById(id);
     }
