@@ -32,6 +32,9 @@ public class FilterValue {
     @Column(name = "value")
     private String value;
 
+    @Column(name = "sort_order", columnDefinition = "bigint default 0")
+    private Long sortOrder;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "filter_id")

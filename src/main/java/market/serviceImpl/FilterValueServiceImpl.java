@@ -41,18 +41,24 @@ public class FilterValueServiceImpl implements market.service.FilterValueService
             Filter filter = this.filterRepository.getById(filterValueDto.getFilterId());
             newFilterValue.setFilter(filter);
         }
+        if (newFilterValue.getSortOrder() == null) {
+            newFilterValue.setSortOrder(0L);
+        }
         return this.filterValueRepository.save(newFilterValue);
     }
 
     @Override
     @Transactional
     public FilterValue update(FilterValueDto filterValueDto) {
-        FilterValue newFilterValue = this.modelMapper.map(filterValueDto, FilterValue.class);
+        FilterValue filterValue = this.modelMapper.map(filterValueDto, FilterValue.class);
         if (filterValueDto.getFilterId() != null) {
             Filter filter = this.filterRepository.getById(filterValueDto.getFilterId());
-            newFilterValue.setFilter(filter);
+            filterValue.setFilter(filter);
         }
-        return this.filterValueRepository.save(newFilterValue);
+        if (filterValue.getSortOrder() == null) {
+            filterValue.setSortOrder(0L);
+        }
+        return this.filterValueRepository.save(filterValue);
     }
 
     @Override

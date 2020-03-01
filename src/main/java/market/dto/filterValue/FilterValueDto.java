@@ -15,6 +15,8 @@ public class FilterValueDto {
     @NotNull
     private String value;
 
+    private Long sortOrder;
+
     @NotNull
     private Long filterId;
 
