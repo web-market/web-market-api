@@ -17,15 +17,9 @@ public class FilterController {
 
     private final FilterService filterService;
 
-    @GetMapping("/all")
+    @GetMapping
     public List<FilterView> getAll() {
         return this.filterService.getAll();
-    }
-
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
-        this.filterService.delete(id);
-        return ResponseEntity.ok("deleted successfully");
     }
 
     @PostMapping
@@ -36,5 +30,11 @@ public class FilterController {
     @PutMapping
     public Filter update(@RequestBody FilterDto filterDto)   {
         return this.filterService.update(filterDto);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        this.filterService.delete(id);
+        return ResponseEntity.ok("deleted successfully");
     }
 }

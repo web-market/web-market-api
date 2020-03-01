@@ -71,5 +71,4 @@ public class CategoryController {
         this.categoryService.delete(categoryDropDto.getId());
         return ResponseEntity.ok("deleted successfully");
     }
-
 }

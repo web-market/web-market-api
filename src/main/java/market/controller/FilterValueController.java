@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/filterValues")
+@RequestMapping(path = "/filter-values")
 @RequiredArgsConstructor
 public class FilterValueController {
 
     private final FilterValueService filterValueService;
 
-    @GetMapping("/all")
+    @GetMapping
     public List<FilterValue> getAll() {
         return this.filterValueService.getAll();
     }
@@ -24,12 +24,6 @@ public class FilterValueController {
     @GetMapping(path = "/{id}")
     public List<FilterValue> getAllByFilterId(@PathVariable Long id) {
         return this.filterValueService.getAllByFilterId(id);
-    }
-
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
-        this.filterValueService.delete(id);
-        return ResponseEntity.ok("deleted successfully");
     }
 
     @PostMapping
@@ -40,5 +34,11 @@ public class FilterValueController {
     @PutMapping
     public FilterValue update(@RequestBody FilterValueDto filterValueDto) {
         return this.filterValueService.update(filterValueDto);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        this.filterValueService.delete(id);
+        return ResponseEntity.ok("deleted successfully");
     }
 }
