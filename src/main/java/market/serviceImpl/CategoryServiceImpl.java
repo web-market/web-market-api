@@ -75,6 +75,28 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository.deleteById(id);
     }
 
+    @Transactional
+    public void delete(Long id, Boolean deleteChildren) {
+        if (deleteChildren) {
+            List<Long> categoryIdsToDelete = this.getChildCategoriesIds(id);
+            categoryIdsToDelete.add(id);
+            this.categoryRepository.deleteAllByIdIn(categoryIdsToDelete);
+            return;
+        }
+        Category currentCategory = this.categoryRepository.getById(id);
+        if (currentCategory.getParentCategory() != null) {
+            Category newParent = currentCategory.getParentCategory();
+            List<Category> childCategories = this.categoryRepository.getCategoriesByParentCategoryId(id);
+
+            childCategories.forEach(childCategory -> {
+                childCategory.setParentCategory(newParent);
+                this.categoryRepository.save(childCategory);
+            });
+        }
+        this.categoryRepository.delete(currentCategory);
+    }
+
+
     private List<Long> getChildCategoriesIds(Long id) {
         List<Long> childIds = new ArrayList<>();
         this.categoryRepository.getAllByParentCategoryId(id).forEach(child -> {
