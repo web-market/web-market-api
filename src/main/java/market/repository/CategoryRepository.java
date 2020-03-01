@@ -23,11 +23,11 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     List<CategoryDropdownView> findAllByIdIsNotIn(List<Long> id);
 
+    void deleteAllByIdIn(List<Long> ids);
+
     //For dtos but just check
     Category getById(Long id);
 
-
-
-
+    List<Category> getCategoriesByParentCategoryId(Long id);
 
 }

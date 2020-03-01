@@ -68,7 +68,7 @@ public class CategoryController {
 
     @DeleteMapping("/categories")
     public ResponseEntity<String> delete(@RequestBody CategoryDropDto categoryDropDto) {
-        this.categoryService.delete(categoryDropDto.getId());
+        this.categoryService.delete(categoryDropDto.getId(), categoryDropDto.getDeleteSubCategories());
         return ResponseEntity.ok("deleted successfully");
     }
 }

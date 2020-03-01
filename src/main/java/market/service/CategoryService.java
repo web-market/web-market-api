@@ -26,4 +26,6 @@ public interface CategoryService {
 
     List<CategoryDropdownView> getAvailableParentCategories(Long id);
 
+    void delete(Long id, Boolean deleteChildren);
+
 }
