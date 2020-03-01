@@ -20,6 +20,7 @@ public class FilterServiceImpl implements FilterService {
     private final ModelMapper modelMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public List<FilterView> getAll() {
         return this.filterRepository.findAllBy();
     }

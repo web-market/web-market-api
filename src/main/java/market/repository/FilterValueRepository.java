@@ -8,4 +8,6 @@ import java.util.List;
 public interface FilterValueRepository extends JpaRepository<FilterValue, Long> {
 
     List<FilterValue> findAllByFilterId(Long filterId);
+
+    void deleteAllByIdIn(List<Long> ids);
 }

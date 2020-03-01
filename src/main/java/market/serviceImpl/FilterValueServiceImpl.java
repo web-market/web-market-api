@@ -1,9 +1,7 @@
 package market.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
-import market.dto.filter.FilterDto;
 import market.dto.filterValue.FilterValueDto;
-import market.entity.Category;
 import market.entity.Filter;
 import market.entity.FilterValue;
 import market.repository.FilterRepository;
@@ -23,6 +21,7 @@ public class FilterValueServiceImpl implements market.service.FilterValueService
     private final ModelMapper modelMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public List<FilterValue> getAll() {
         return this.filterValueRepository.findAll();
     }
@@ -58,7 +57,14 @@ public class FilterValueServiceImpl implements market.service.FilterValueService
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<FilterValue> getAllByFilterId(Long filterId) {
         return filterValueRepository.findAllByFilterId(filterId);
+    }
+
+    @Override
+    @Transactional
+    public void bulkDelete(List<Long> ids) {
+        this.filterValueRepository.deleteAllByIdIn(ids);
     }
 }

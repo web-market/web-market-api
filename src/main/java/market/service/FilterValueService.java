@@ -16,4 +16,6 @@ public interface FilterValueService {
     FilterValue update(FilterValueDto filterValueDto);
 
     List<FilterValue> getAllByFilterId(Long filterId);
+
+    void bulkDelete(List<Long> ids);
 }

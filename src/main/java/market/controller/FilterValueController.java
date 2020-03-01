@@ -36,9 +36,9 @@ public class FilterValueController {
         return this.filterValueService.update(filterValueDto);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
-        this.filterValueService.delete(id);
+    @DeleteMapping
+    public ResponseEntity<String> delete(@RequestParam(name = "ids") List<Long> ids) {
+        this.filterValueService.bulkDelete(ids);
         return ResponseEntity.ok("deleted successfully");
     }
 }
