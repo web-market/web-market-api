@@ -37,7 +37,7 @@ public class FilterValue {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "filter_id")
+    @JoinColumn(name = "filter_id", updatable = false)
     @JsonIgnore
     private Filter filter;
 

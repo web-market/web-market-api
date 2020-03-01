@@ -51,10 +51,6 @@ public class FilterValueServiceImpl implements market.service.FilterValueService
     @Transactional
     public FilterValue update(FilterValueDto filterValueDto) {
         FilterValue filterValue = this.modelMapper.map(filterValueDto, FilterValue.class);
-        if (filterValueDto.getFilterId() != null) {
-            Filter filter = this.filterRepository.getById(filterValueDto.getFilterId());
-            filterValue.setFilter(filter);
-        }
         if (filterValue.getSortOrder() == null) {
             filterValue.setSortOrder(0L);
         }
