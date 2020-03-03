@@ -3,6 +3,7 @@ package market.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import market.dto.filter.FilterDto;
 import market.entity.Filter;
+import market.projection.filter.FilterEditView;
 import market.projection.filter.FilterView;
 import market.repository.FilterRepository;
 import market.service.FilterService;
@@ -23,6 +24,11 @@ public class FilterServiceImpl implements FilterService {
     @Transactional(readOnly = true)
     public List<FilterView> getAll() {
         return this.filterRepository.findAllBy();
+    }
+
+    @Override
+    public FilterEditView findOneById(Long id) {
+        return this.filterRepository.findOneById(id);
     }
 
     @Override

@@ -14,5 +14,4 @@ public interface FilterView {
 
     @Value("#{target.getFilterValues().size() != 0}")
     Boolean getHasFilterValues();
-
 }

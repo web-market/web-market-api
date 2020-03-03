@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import market.dto.BulkDeleteDto;
 import market.dto.filter.FilterDto;
 import market.entity.Filter;
+import market.projection.filter.FilterEditView;
 import market.projection.filter.FilterView;
 import market.service.FilterService;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,11 @@ public class FilterController {
     @GetMapping
     public List<FilterView> getAll() {
         return this.filterService.getAll();
+    }
+
+    @GetMapping(path = "/{id}")
+    public FilterEditView getById(@PathVariable Long id) {
+        return this.filterService.findOneById(id);
     }
 
     @PostMapping
