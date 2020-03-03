@@ -28,6 +28,12 @@ public class FilterValueServiceImpl implements market.service.FilterValueService
 
     @Override
     @Transactional
+    public FilterValue findOneById(Long id) {
+        return this.filterValueRepository.findOneById(id);
+    }
+
+    @Override
+    @Transactional
     public void delete(Long id) {
         this.filterValueRepository.deleteById(id);
     }

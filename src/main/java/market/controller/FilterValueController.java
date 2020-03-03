@@ -23,6 +23,11 @@ public class FilterValueController {
     }
 
     @GetMapping(path = "/{id}")
+    public FilterValue getById(@PathVariable Long id) {
+        return this.filterValueService.findOneById(id);
+    }
+
+    @GetMapping(path = "/filter/{id}")
     public List<FilterValue> getAllByFilterId(@PathVariable Long id) {
         return this.filterValueService.getAllByFilterId(id);
     }

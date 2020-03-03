@@ -9,6 +9,8 @@ public interface FilterValueService {
 
     List<FilterValue> getAll();
 
+    FilterValue findOneById(Long id);
+
     void delete(Long id);
 
     FilterValue create(FilterValueDto filterValueDto);

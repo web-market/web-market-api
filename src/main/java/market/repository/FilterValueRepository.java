@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface FilterValueRepository extends JpaRepository<FilterValue, Long> {
 
+    FilterValue findOneById(Long id);
+
     List<FilterValue> findAllByFilterId(Long filterId);
 
     void deleteAllByIdIn(List<Long> ids);
