@@ -1,6 +1,7 @@
 package market.controller;
 
 import lombok.RequiredArgsConstructor;
+import market.dto.BulkDeleteDto;
 import market.dto.filter.FilterDto;
 import market.entity.Filter;
 import market.projection.filter.FilterView;
@@ -32,9 +33,9 @@ public class FilterController {
         return this.filterService.update(filterDto);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
-        this.filterService.delete(id);
+    @DeleteMapping
+    public ResponseEntity<String> delete(@RequestBody BulkDeleteDto bulkDeleteDto) {
+        this.filterService.bulkDelete(bulkDeleteDto.getIds());
         return ResponseEntity.ok("deleted successfully");
     }
 }

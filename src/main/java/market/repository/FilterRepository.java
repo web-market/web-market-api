@@ -11,4 +11,6 @@ public interface FilterRepository extends JpaRepository<Filter, Long> {
     Filter getById(Long id);
 
     List<FilterView> findAllBy();
+
+    void deleteAllByIdIn(List<Long> ids);
 }

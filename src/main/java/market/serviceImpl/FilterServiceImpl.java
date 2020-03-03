@@ -50,4 +50,10 @@ public class FilterServiceImpl implements FilterService {
         }
         return this.filterRepository.save(filter);
     }
+
+    @Override
+    @Transactional
+    public void bulkDelete(List<Long> ids) {
+        this.filterRepository.deleteAllByIdIn(ids);
+    }
 }

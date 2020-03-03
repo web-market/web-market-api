@@ -15,4 +15,6 @@ public interface FilterService {
     Filter create(FilterDto filterDto);
 
     Filter update(FilterDto filterDto);
+
+    void bulkDelete(List<Long> ids);
 }
