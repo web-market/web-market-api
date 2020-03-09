@@ -23,7 +23,7 @@ public class FilterServiceImpl implements FilterService {
     @Override
     @Transactional(readOnly = true)
     public List<FilterView> getAll() {
-        return this.filterRepository.findAllBy();
+        return this.filterRepository.findAllByOrderBySortOrderAsc();
     }
 
     @Override

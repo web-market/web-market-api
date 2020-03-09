@@ -23,7 +23,7 @@ public class FilterValueServiceImpl implements market.service.FilterValueService
     @Override
     @Transactional(readOnly = true)
     public List<FilterValue> getAll() {
-        return this.filterValueRepository.findAll();
+        return this.filterValueRepository.findAllByOrderBySortOrderAsc();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class FilterValueServiceImpl implements market.service.FilterValueService
     @Override
     @Transactional(readOnly = true)
     public List<FilterValue> getAllByFilterId(Long filterId) {
-        return filterValueRepository.findAllByFilterId(filterId);
+        return filterValueRepository.findAllByFilterIdOrderBySortOrderAsc(filterId);
     }
 
     @Override

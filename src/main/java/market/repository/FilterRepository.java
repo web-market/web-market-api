@@ -13,7 +13,7 @@ public interface FilterRepository extends JpaRepository<Filter, Long> {
 
     FilterEditView findOneById(Long id);
 
-    List<FilterView> findAllBy();
+    List<FilterView> findAllByOrderBySortOrderAsc();
 
     void deleteAllByIdIn(List<Long> ids);
 }
