@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.List;
@@ -62,9 +61,9 @@ public class Product {
     @JsonIgnore
     private List<FilterValue> filterValues;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy="products")
     @JsonIgnore
-    private List<Image> images;
+    private List<Media> media;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
