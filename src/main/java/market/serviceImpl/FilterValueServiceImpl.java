@@ -33,9 +33,9 @@ public class FilterValueServiceImpl implements market.service.FilterValueService
     }
 
     @Override
-    @Transactional
-    public void delete(Long id) {
-        this.filterValueRepository.deleteById(id);
+    @Transactional(readOnly = true)
+    public List<FilterValue> getAllByFilterId(Long filterId) {
+        return filterValueRepository.findAllByFilterIdOrderBySortOrderAsc(filterId);
     }
 
     @Override
@@ -63,9 +63,9 @@ public class FilterValueServiceImpl implements market.service.FilterValueService
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<FilterValue> getAllByFilterId(Long filterId) {
-        return filterValueRepository.findAllByFilterIdOrderBySortOrderAsc(filterId);
+    @Transactional
+    public void delete(Long id) {
+        this.filterValueRepository.deleteById(id);
     }
 
     @Override

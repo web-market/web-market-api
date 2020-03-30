@@ -17,6 +17,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
+    @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<Product> getAll() {
         return this.productRepository.findAll();

@@ -27,14 +27,9 @@ public class FilterServiceImpl implements FilterService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public FilterEditView findOneById(Long id) {
         return this.filterRepository.findOneById(id);
-    }
-
-    @Override
-    @Transactional
-    public void delete(Long id) {
-        this.filterRepository.deleteById(id);
     }
 
     @Override
@@ -55,6 +50,12 @@ public class FilterServiceImpl implements FilterService {
             filter.setSortOrder(0L);
         }
         return this.filterRepository.save(filter);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        this.filterRepository.deleteById(id);
     }
 
     @Override

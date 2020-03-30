@@ -28,21 +28,25 @@ public class CategoryServiceImpl implements CategoryService {
         return this.categoryRepository.findAllBy();
     }
 
+    @Override
     @Transactional(readOnly = true)
     public List<CategoryItemView> getAllByParentCategoryId(Long id) {
         return this.categoryRepository.getAllByParentCategoryIdOrderBySortOrderDesc(id);
     }
 
+    @Override
     @Transactional(readOnly = true)
     public List<CategoryItemView> getAllRootCategories() {
         return this.categoryRepository.getAllByParentCategoryIdIsNull();
     }
 
+    @Override
     @Transactional(readOnly = true)
     public CategoryEditView getById(Long id) {
         return this.categoryRepository.getCategoryEditViewById(id);
     }
 
+    @Override
     @Transactional(readOnly = true)
     public List<CategoryDropdownView> getAvailableParentCategories(Long id) {
         List<Long> childIdsWithCurrentId = this.getChildCategoriesIds(id);
@@ -50,6 +54,7 @@ public class CategoryServiceImpl implements CategoryService {
         return this.categoryRepository.findAllByIdIsNotIn(childIdsWithCurrentId);
     }
 
+    @Override
     @Transactional
     public Category create(CategoryDto createCategoryDto) {
         Category newCategory = this.modelMapper.map(createCategoryDto, Category.class);
@@ -63,6 +68,7 @@ public class CategoryServiceImpl implements CategoryService {
         return this.categoryRepository.save(newCategory);
     }
 
+    @Override
     @Transactional
     public Category update(CategoryDto categoryDto) {
         Category category = modelMapper.map(categoryDto, Category.class);
@@ -70,11 +76,13 @@ public class CategoryServiceImpl implements CategoryService {
         return this.categoryRepository.save(category);
     }
 
+    @Override
     @Transactional
     public void delete(Long id) {
         this.categoryRepository.deleteById(id);
     }
 
+    @Override
     @Transactional
     public void delete(Long id, Boolean deleteChildren) {
         if (deleteChildren) {
@@ -95,7 +103,6 @@ public class CategoryServiceImpl implements CategoryService {
         }
         this.categoryRepository.delete(currentCategory);
     }
-
 
     private List<Long> getChildCategoriesIds(Long id) {
         List<Long> childIds = new ArrayList<>();
