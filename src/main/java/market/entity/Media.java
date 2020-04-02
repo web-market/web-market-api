@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -31,23 +32,26 @@ public class Media {
     @SequenceGenerator(name = "media_sequence", sequenceName = "media_id_seq", allocationSize = 1)
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "public_id")
     private String publicId;
 
-    @Column(name = "height")
-    private Long height;
-
-    @Column(name = "width")
-    private Long width;
-
     @Column(name = "format")
     private String format;
+
+    @Column(name = "media_type")
+    private String mediaType;
 
     @Column(name = "url")
     private String url;
 
     @Column(name = "secure_url")
     private String secureUrl;
+
+    @Column(name = "created_at")
+    private LocalDateTime creationDate;
 
     @Column(name = "is_primary", columnDefinition = "boolean default false")
     private boolean isPrimary;
