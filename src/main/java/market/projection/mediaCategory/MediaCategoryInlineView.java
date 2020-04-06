@@ -8,6 +8,6 @@ public interface MediaCategoryInlineView {
 
     String getName();
 
-    @Value("#{target.parentCategory}")
-    MediaCategoryDropdownView getParentCategory();
+    @Value("#{target.parentCategory == null ? null : target.parentCategory.getId()}")
+    Long getParentCategoryId();
 }
