@@ -21,7 +21,6 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         applicationContext.register(EncryptionConfig.class);
         applicationContext.register(L10nConfig.class);
         //applicationContext.register(WebSecurityConfig.class);
-        applicationContext.register(CloudinaryConfig.class);
         servletContext.addListener(new ContextLoaderListener(applicationContext));
 
         applicationContext.setServletContext(servletContext);

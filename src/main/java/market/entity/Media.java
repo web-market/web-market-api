@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
@@ -32,35 +33,19 @@ public class Media {
     @SequenceGenerator(name = "media_sequence", sequenceName = "media_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "public_id")
-    private String publicId;
-
-    @Column(name = "format")
-    private String format;
-
-    @Column(name = "media_type")
-    private String mediaType;
-
-    @Column(name = "url")
-    private String url;
-
-    @Column(name = "secure_url")
-    private String secureUrl;
-
     @Column(name = "created_at")
     private LocalDateTime creationDate;
-
-    @Column(name = "is_primary", columnDefinition = "boolean default false")
-    private boolean isPrimary;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "media_category_id")
     @JsonIgnore
     private MediaCategory mediaCategory;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
+    @Fetch(FetchMode.JOIN)
+    @JsonIgnore
+    private List<File> files;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

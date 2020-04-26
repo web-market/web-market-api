@@ -20,7 +20,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Data
-@ToString(exclude = {"subCategories", "media"})
+@ToString(exclude = "subCategories")
 @Table(name = "media_category")
 @Entity
 public class MediaCategory {

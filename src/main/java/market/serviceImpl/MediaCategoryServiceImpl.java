@@ -26,6 +26,12 @@ public class MediaCategoryServiceImpl implements MediaCategoryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public MediaCategory getById(Long id) {
+        return this.mediaCategoryRepository.getById(id);
+    }
+
+    @Override
     @Transactional
     public MediaCategory create(MediaCategoryDto mediaCategoryDto) {
         MediaCategory newCategory = this.modelMapper.map(mediaCategoryDto, MediaCategory.class);

@@ -10,6 +10,8 @@ public interface MediaCategoryService {
 
     List<MediaCategoryInlineView> getAllInline();
 
+    MediaCategory getById(Long id);
+
     MediaCategory create(MediaCategoryDto mediaCategoryDto);
 
     MediaCategory update(MediaCategoryDto mediaCategoryDto);

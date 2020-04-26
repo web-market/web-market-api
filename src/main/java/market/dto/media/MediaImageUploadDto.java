@@ -6,10 +6,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
-public class MediaUploadDto {
+public class MediaImageUploadDto {
 
-    private Long id;
+    private Long mediaCategoryId;
 
     private MultipartFile[] files;
 
+    private Boolean lowResolution;
+
+    private Boolean mediumResolution;
+
+    private Boolean highResolution;
 }

@@ -6,6 +6,7 @@ import market.entity.Filter;
 import market.entity.FilterValue;
 import market.repository.FilterRepository;
 import market.repository.FilterValueRepository;
+import market.service.FilterValueService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FilterValueServiceImpl implements market.service.FilterValueService {
+public class FilterValueServiceImpl implements FilterValueService {
 
     private final FilterValueRepository filterValueRepository;
     private final FilterRepository filterRepository;

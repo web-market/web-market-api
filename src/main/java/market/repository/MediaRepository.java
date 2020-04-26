@@ -5,4 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MediaRepository extends JpaRepository<Media, Long> {
 
+    Media getById(Long id);
+
+    void deleteById(Long id);
+
 }
