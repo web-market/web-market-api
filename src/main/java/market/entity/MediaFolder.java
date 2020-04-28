@@ -20,14 +20,14 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Data
-@ToString(exclude = "subCategories")
-@Table(name = "media_category")
+@ToString(exclude = "subFolders")
+@Table(name = "media_folder")
 @Entity
-public class MediaCategory {
+public class MediaFolder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "media_category_sequence")
-    @SequenceGenerator(name = "media_category_sequence", sequenceName = "media_category_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "media_folder_sequence")
+    @SequenceGenerator(name = "media_folder_sequence", sequenceName = "media_folder_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name")
@@ -35,16 +35,16 @@ public class MediaCategory {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "parent_category_id")
+    @JoinColumn(name = "parent_folder_id")
     @JsonIgnore
-    private MediaCategory parentCategory;
+    private MediaFolder parentFolder;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentCategory")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentFolder")
     @Fetch(FetchMode.JOIN)
     @JsonIgnore
-    private List<MediaCategory> subCategories;
+    private List<MediaFolder> subFolders;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mediaCategory")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mediaFolder")
     @Fetch(FetchMode.JOIN)
     @JsonIgnore
     private List<Media> media;

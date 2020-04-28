@@ -2,7 +2,7 @@ package market.dto.media;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import market.entity.MediaCategory;
+import market.entity.MediaFolder;
 import java.time.LocalDateTime;
 
 @Data
@@ -11,5 +11,5 @@ public class MediaDto {
 
     private LocalDateTime creationDate;
 
-    private MediaCategory mediaCategory;
+    private MediaFolder mediaFolder;
 }

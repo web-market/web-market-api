@@ -40,7 +40,7 @@ public class Media {
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "media_category_id")
     @JsonIgnore
-    private MediaCategory mediaCategory;
+    private MediaFolder mediaFolder;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
     @Fetch(FetchMode.JOIN)

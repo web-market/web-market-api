@@ -5,11 +5,11 @@ import market.dto.file.image.ImageDto;
 import market.dto.media.MediaImageStoreDto;
 import market.dto.media.MediaImageUploadDto;
 import market.entity.Media;
-import market.entity.MediaCategory;
+import market.entity.MediaFolder;
 import market.repository.MediaRepository;
 import market.service.FileService;
 import market.service.ImageManagementService;
-import market.service.MediaCategoryService;
+import market.service.MediaFolderService;
 import market.service.MediaService;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -35,14 +35,14 @@ public class MediaServiceImpl implements MediaService {
 
     private final FileService fileService;
     private final ImageManagementService imageManagementService;
-    private final MediaCategoryService mediaCategoryService;
+    private final MediaFolderService mediaFolderService;
     private final MediaRepository mediaRepository;
 
     @Override
     @Transactional
-    public Media createMedia(MediaCategory folder) {
+    public Media createMedia(MediaFolder folder) {
         Media media = new Media();
-        media.setMediaCategory(folder);
+        media.setMediaFolder(folder);
         media.setCreationDate(LocalDateTime.now());
         return this.mediaRepository.save(media);
     }
@@ -76,19 +76,19 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public List<MediaImageStoreDto> prepareAllImages(MediaImageUploadDto images) throws IOException {
-        MediaCategory mediaCategory = this.mediaCategoryService.getById(images.getMediaCategoryId());
+        MediaFolder mediaFolder = this.mediaFolderService.getById(images.getMediaCategoryId());
         List<MediaImageStoreDto> imagesToStore = new ArrayList<>();
         for (MultipartFile image : images.getFiles()) {
             List<ImageDto> imagesPrepared = this.imageManagementService.getInMentionedResolutions(image,
                     images.getLowResolution(), images.getMediumResolution(), images.getHighResolution());
 
-            imagesToStore.add(this.getPreparedImages(imagesPrepared, mediaCategory));
+            imagesToStore.add(this.getPreparedImages(imagesPrepared, mediaFolder));
         }
         return imagesToStore;
     }
 
     @Override
-    public MediaImageStoreDto getPreparedImages(List<ImageDto> images, MediaCategory folder) {
+    public MediaImageStoreDto getPreparedImages(List<ImageDto> images, MediaFolder folder) {
         MediaImageStoreDto mediaImageStoreDto = new MediaImageStoreDto();
         mediaImageStoreDto.setMediaId(this.createMedia(folder).getId());
         mediaImageStoreDto.setImages(images);
