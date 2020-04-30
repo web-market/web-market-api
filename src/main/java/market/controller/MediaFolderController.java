@@ -3,7 +3,6 @@ package market.controller;
 import lombok.RequiredArgsConstructor;
 import market.dto.mediaFolder.MediaFolderDto;
 import market.entity.MediaFolder;
-import market.projection.category.CategoryDropdownView;
 import market.projection.mediaFolder.MediaFolderDropdownView;
 import market.projection.mediaFolder.MediaFolderInlineView;
 import market.service.MediaFolderService;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController

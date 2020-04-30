@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 public interface MediaFolderInlineView {
 
-    String getId();
+    Long getId();
 
     String getName();
 

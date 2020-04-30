@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CategoryItemView {
 
-    String getId();
+    Long getId();
 
     String getName();
 

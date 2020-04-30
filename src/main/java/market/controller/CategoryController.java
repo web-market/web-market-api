@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 //*TODO: parent_category_id not null but zero
@@ -57,7 +58,7 @@ public class CategoryController {
     }
 
     @PostMapping("/categories")
-    public Category create(@RequestBody CategoryDto categoryDto) {
+    public Category create(@Valid @RequestBody CategoryDto categoryDto) {
         return this.categoryService.create(categoryDto);
     }
 

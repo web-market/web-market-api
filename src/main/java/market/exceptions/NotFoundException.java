@@ -1,0 +1,12 @@
+package market.exceptions;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class NotFoundException extends RuntimeException {
+
+    private String message;
+
+}

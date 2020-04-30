@@ -3,6 +3,7 @@ package market.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import market.dto.category.CategoryDto;
 import market.entity.Category;
+import market.exceptions.NotFoundException;
 import market.projection.category.CategoryDropdownView;
 import market.projection.category.CategoryEditView;
 import market.projection.category.CategoryItemView;
@@ -11,9 +12,9 @@ import market.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +44,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional(readOnly = true)
     public CategoryEditView getById(Long id) {
-        return this.categoryRepository.getCategoryEditViewById(id);
+        return Optional.ofNullable(this.categoryRepository.getCategoryEditViewById(id))
+                .orElseThrow(NotFoundException::new);
     }
 
     @Override
