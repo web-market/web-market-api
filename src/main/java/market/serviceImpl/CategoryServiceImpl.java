@@ -3,7 +3,6 @@ package market.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import market.dto.category.CategoryDto;
 import market.entity.Category;
-import market.exceptions.NotFoundException;
 import market.projection.category.CategoryDropdownView;
 import market.projection.category.CategoryEditView;
 import market.projection.category.CategoryItemView;
@@ -12,6 +11,8 @@ import market.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional(readOnly = true)
     public CategoryEditView getById(Long id) {
         return Optional.ofNullable(this.categoryRepository.getCategoryEditViewById(id))
-                .orElseThrow(NotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -60,9 +61,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public Category create(CategoryDto createCategoryDto) {
         Category newCategory = this.modelMapper.map(createCategoryDto, Category.class);
-        if (newCategory.getSortOrder() == null) {
-            newCategory.setSortOrder(0L);
-        }
         if (createCategoryDto.getParentCategoryId() != null) {
             Category parentCategory = this.categoryRepository.getById(createCategoryDto.getParentCategoryId());
             newCategory.setParentCategory(parentCategory);

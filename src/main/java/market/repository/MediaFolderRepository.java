@@ -15,6 +15,8 @@ public interface MediaFolderRepository extends JpaRepository<MediaFolder, Long> 
 
     List<MediaFolderDropdownView> findAllByIdIsNotInAndIdIsNot(List<Long> ids, Long currentId);
 
+    List<MediaFolderDropdownView> getAllBy();
+
     MediaFolder getById(Long id);
 
     void deleteAllByIdIn(List<Long> ids);

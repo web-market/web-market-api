@@ -29,6 +29,11 @@ public class MediaFolderController {
         return this.mediaFolderService.getAllInline();
     }
 
+    @GetMapping("/media-folder/all")
+    public List<MediaFolderDropdownView> getAllForDropdown() {
+        return this.mediaFolderService.getAllForDropdown();
+    }
+
     @GetMapping("/available-folders-to-move-in/{id}")
     public List<MediaFolderDropdownView> getAvailableParents(@PathVariable Long id) {
         return this.mediaFolderService.getAvailableFolders(id);

@@ -29,6 +29,12 @@ public class MediaFolderServiceImpl implements MediaFolderService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<MediaFolderDropdownView> getAllForDropdown() {
+        return this.mediaFolderRepository.getAllBy();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<MediaFolderDropdownView> getAvailableFolders(Long id) {
         return this.mediaFolderRepository.findAllByIdIsNotInAndIdIsNot(this.getChildFoldersIds(id), id);
     }

@@ -11,6 +11,8 @@ public interface MediaFolderService {
 
     List<MediaFolderInlineView> getAllInline();
 
+    List<MediaFolderDropdownView> getAllForDropdown();
+
     List<MediaFolderDropdownView> getAvailableFolders(Long id);
 
     MediaFolder getById(Long id);
