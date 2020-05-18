@@ -3,6 +3,7 @@ package market.service;
 import market.dto.mediaFolder.MediaFolderDto;
 import market.entity.MediaFolder;
 import market.projection.mediaFolder.MediaFolderDropdownView;
+import market.projection.mediaFolder.MediaFolderEditView;
 import market.projection.mediaFolder.MediaFolderInlineView;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface MediaFolderService {
     List<MediaFolderDropdownView> getAvailableFolders(Long id);
 
     MediaFolder getById(Long id);
+
+    MediaFolderEditView getMediaFolderEditViewById(Long id);
 
     MediaFolder create(MediaFolderDto mediaFolderDto);
 

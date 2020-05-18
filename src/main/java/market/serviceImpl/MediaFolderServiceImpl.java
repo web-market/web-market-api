@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import market.dto.mediaFolder.MediaFolderDto;
 import market.entity.MediaFolder;
 import market.projection.mediaFolder.MediaFolderDropdownView;
+import market.projection.mediaFolder.MediaFolderEditView;
 import market.projection.mediaFolder.MediaFolderInlineView;
 import market.repository.MediaFolderRepository;
 import market.service.MediaFolderService;
@@ -43,6 +44,12 @@ public class MediaFolderServiceImpl implements MediaFolderService {
     @Transactional(readOnly = true)
     public MediaFolder getById(Long id) {
         return this.mediaFolderRepository.getById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public MediaFolderEditView getMediaFolderEditViewById(Long id) {
+        return this.mediaFolderRepository.getMediaFolderEditViewById(id);
     }
 
     @Override

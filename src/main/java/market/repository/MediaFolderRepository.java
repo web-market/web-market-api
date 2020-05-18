@@ -2,6 +2,7 @@ package market.repository;
 
 import market.entity.MediaFolder;
 import market.projection.mediaFolder.MediaFolderDropdownView;
+import market.projection.mediaFolder.MediaFolderEditView;
 import market.projection.mediaFolder.MediaFolderInlineView;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -18,6 +19,8 @@ public interface MediaFolderRepository extends JpaRepository<MediaFolder, Long> 
     List<MediaFolderDropdownView> getAllBy();
 
     MediaFolder getById(Long id);
+
+    MediaFolderEditView getMediaFolderEditViewById(Long id);
 
     void deleteAllByIdIn(List<Long> ids);
 

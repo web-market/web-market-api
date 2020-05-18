@@ -3,7 +3,9 @@ package market.controller;
 import lombok.RequiredArgsConstructor;
 import market.dto.mediaFolder.MediaFolderDto;
 import market.entity.MediaFolder;
+import market.projection.category.CategoryEditView;
 import market.projection.mediaFolder.MediaFolderDropdownView;
+import market.projection.mediaFolder.MediaFolderEditView;
 import market.projection.mediaFolder.MediaFolderInlineView;
 import market.service.MediaFolderService;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +39,11 @@ public class MediaFolderController {
     @GetMapping("/available-folders-to-move-in/{id}")
     public List<MediaFolderDropdownView> getAvailableParents(@PathVariable Long id) {
         return this.mediaFolderService.getAvailableFolders(id);
+    }
+
+    @GetMapping("/media-folder/{id}")
+    public MediaFolderEditView getSingleCategory(@PathVariable Long id) {
+        return this.mediaFolderService.getMediaFolderEditViewById(id);
     }
 
     @PostMapping("/media-folder")
