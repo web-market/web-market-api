@@ -1,6 +1,5 @@
 package market.exceptionHandler;
 
-import market.exceptions.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,25 +20,30 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ApiError> handleNotFoundException(EntityNotFoundException ex) {
-        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(), null);
-        return new ResponseEntity<>(apiError, apiError.getHttpStatus());
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
+        return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status,
                                                                   WebRequest request) {
-        ApiError error = new ApiError(HttpStatus.BAD_REQUEST,
-                ex.getMessage(),
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,
+                "Some arguments are missed or invalid.",
                 this.buildErrorResponse(ex.getBindingResult()));
-        return new ResponseEntity<>(error, error.getHttpStatus());
+        return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
-    private List<ErrorObjectInfo> buildErrorResponse(BindingResult result) {
-        return result.getAllErrors()
+    private List<ErrorInfo> buildErrorResponse(BindingResult errorResult) {
+        return errorResult.getAllErrors()
                 .stream()
-                .map(error -> new ErrorObjectInfo(((FieldError) error).getField(), error.getDefaultMessage()))
+                .map(error -> {
+                    FieldError fieldError = ((FieldError) error);
+                    return new ErrorInfo( fieldError.getObjectName(),
+                            fieldError.getField(),
+                            fieldError.getDefaultMessage(),
+                            fieldError.getRejectedValue());
+                })
                 .collect(Collectors.toList());
     }
-
 }

@@ -18,7 +18,7 @@ import java.util.List;
 public class FilterValueServiceImpl implements FilterValueService {
 
     private final FilterValueRepository filterValueRepository;
-    private final FilterRepository filterRepository;
+    private final FilterRepository filterRepository; //change to filter service (loose coupling)
     private final ModelMapper modelMapper;
 
     @Override

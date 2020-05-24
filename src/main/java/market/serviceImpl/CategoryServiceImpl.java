@@ -16,6 +16,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -61,55 +62,48 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public Category create(CategoryDto createCategoryDto) {
         Category newCategory = this.modelMapper.map(createCategoryDto, Category.class);
-        if (createCategoryDto.getParentCategoryId() != null) {
-            Category parentCategory = this.categoryRepository.getById(createCategoryDto.getParentCategoryId());
-            newCategory.setParentCategory(parentCategory);
-        }
+        newCategory.setParentCategory(this.categoryRepository.getById(createCategoryDto.getParentCategoryId()));
         return this.categoryRepository.save(newCategory);
     }
 
     @Override
     @Transactional
-    public Category update(CategoryDto categoryDto) {
-        Category category = modelMapper.map(categoryDto, Category.class);
-        category.setParentCategory(this.categoryRepository.getById(categoryDto.getParentCategoryId()));
+    public Category update(CategoryDto updateCategoryDto) {
+        Category category = modelMapper.map(updateCategoryDto, Category.class);
+        category.setParentCategory(this.categoryRepository.getById(updateCategoryDto.getParentCategoryId()));
         return this.categoryRepository.save(category);
-    }
-
-    @Override
-    @Transactional
-    public void delete(Long id) {
-        this.categoryRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void delete(Long id, Boolean deleteChildren) {
         if (deleteChildren) {
-            List<Long> categoryIdsToDelete = this.getChildCategoriesIds(id);
-            categoryIdsToDelete.add(id);
-            this.categoryRepository.deleteAllByIdIn(categoryIdsToDelete);
+            List<Long> categoriesToDelete = this.getChildCategoriesIds(id);
+            categoriesToDelete.add(id);
+            this.categoryRepository.deleteAllByIdIn(categoriesToDelete);
             return;
         }
-        Category currentCategory = this.categoryRepository.getById(id);
-        if (currentCategory.getParentCategory() != null) {
-            Category newParent = currentCategory.getParentCategory();
-            List<Category> childCategories = this.categoryRepository.getCategoriesByParentCategoryId(id);
+        this.setAnotherParent(id);
+        this.categoryRepository.deleteById(id);
+    }
 
-            childCategories.forEach(childCategory -> {
-                childCategory.setParentCategory(newParent);
-                this.categoryRepository.save(childCategory);
-            });
-        }
-        this.categoryRepository.delete(currentCategory);
+    private void setAnotherParent(Long id) {
+        Category parentCategory = this.categoryRepository.getBySubCategoriesId(id);
+        List<Category> childCategories = this.categoryRepository.getCategoriesByParentCategoryId(id)
+                .stream()
+                .peek(childCategory -> childCategory.setParentCategory(parentCategory))
+                .collect(Collectors.toList());
+
+        this.categoryRepository.saveAll(childCategories);
     }
 
     private List<Long> getChildCategoriesIds(Long id) {
         List<Long> childIds = new ArrayList<>();
-        this.categoryRepository.getAllByParentCategoryId(id).forEach(child -> {
-            childIds.add(child.getId());
-            childIds.addAll(getChildCategoriesIds(child.getId()));
-        });
+        this.categoryRepository.getAllByParentCategoryId(id)
+                .forEach(child -> {
+                    childIds.add(child.getId());
+                    childIds.addAll(getChildCategoriesIds(child.getId()));
+                });
         return childIds;
     }
 }

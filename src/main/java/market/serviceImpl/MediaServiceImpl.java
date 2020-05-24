@@ -38,6 +38,11 @@ public class MediaServiceImpl implements MediaService {
     private final MediaFolderService mediaFolderService;
     private final MediaRepository mediaRepository;
 
+    @Transactional(readOnly = true)
+    public List<Media> getByMediaFolderId(Long id) {
+        return this.mediaRepository.getByMediaFolderId(id);
+    }
+
     @Override
     @Transactional
     public Media createMedia(MediaFolder folder) {

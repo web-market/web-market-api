@@ -38,7 +38,7 @@ public class Media {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "media_category_id")
+    @JoinColumn(name = "media_folder_id")
     @JsonIgnore
     private MediaFolder mediaFolder;
 

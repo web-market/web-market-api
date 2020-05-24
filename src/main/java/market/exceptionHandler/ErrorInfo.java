@@ -4,11 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorObjectInfo {
+public class ErrorInfo {
+
+    private String object;
+
     private String field;
-    private String error;
+
+    private String errorMessage;
+
+    private Object invalidValue;
+
 }

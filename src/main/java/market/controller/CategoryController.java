@@ -3,13 +3,16 @@ package market.controller;
 import lombok.RequiredArgsConstructor;
 import market.dto.category.CategoryDropDto;
 import market.dto.category.CategoryDto;
+import market.dto.transfer.Create;
+import market.dto.transfer.Update;
 import market.entity.Category;
 import market.projection.category.CategoryDropdownView;
 import market.projection.category.CategoryEditView;
 import market.projection.category.CategoryItemView;
 import market.service.CategoryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,42 +37,42 @@ public class CategoryController {
 
 
     @GetMapping("/categories/fill-dropdown")
-    public List<CategoryDropdownView> getAll() {
-        return this.categoryService.getAll();
+    public ResponseEntity<List<CategoryDropdownView>> getAllCategories() {
+        return new ResponseEntity<>(this.categoryService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/root-categories")
-    public List<CategoryItemView> getAllRootCategories() {
-        return this.categoryService.getAllRootCategories();
+    public ResponseEntity<List<CategoryItemView>> getHighLevelCategories() {
+        return new ResponseEntity<>(this.categoryService.getAllRootCategories(), HttpStatus.OK);
     }
 
     @GetMapping("/root-categories/{id}")
-    public List<CategoryItemView> getAllChildrenByParentId(@PathVariable Long id) {
-        return this.categoryService.getAllByParentCategoryId(id);
+    public ResponseEntity<List<CategoryItemView>> getChildrenByParentId(@PathVariable Long id) {
+        return new ResponseEntity<>(this.categoryService.getAllByParentCategoryId(id), HttpStatus.OK);
     }
 
     @GetMapping("/available-parent-categories/{id}")
-    public List<CategoryDropdownView> getAvailableParents(@PathVariable Long id) {
-        return this.categoryService.getAvailableParentCategories(id);
+    public ResponseEntity<List<CategoryDropdownView>> getAvailableParents(@PathVariable Long id) {
+        return new ResponseEntity<>(this.categoryService.getAvailableParentCategories(id), HttpStatus.OK);
     }
 
     @GetMapping("/categories/{id}")
-    public CategoryEditView getSingleCategory(@PathVariable Long id) {
-        return this.categoryService.getById(id);
+    public ResponseEntity<CategoryEditView> getSingleCategory(@PathVariable Long id) {
+        return new ResponseEntity<>(this.categoryService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping("/categories")
-    public Category create(@Valid @RequestBody CategoryDto categoryDto) {
-        return this.categoryService.create(categoryDto);
+    public ResponseEntity<Category> create(@Validated(Create.class) @RequestBody CategoryDto categoryDto) {
+        return new ResponseEntity<>(this.categoryService.create(categoryDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/categories")
-    public Category update(@RequestBody CategoryDto categoryDto)   {
-        return this.categoryService.update(categoryDto);
+    public ResponseEntity<Category> update(@Validated(Update.class) @RequestBody CategoryDto categoryDto)   {
+        return new ResponseEntity<>(this.categoryService.update(categoryDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/categories")
-    public ResponseEntity<String> delete(@RequestBody CategoryDropDto categoryDropDto) {
+    public ResponseEntity<String> delete(@Valid @RequestBody CategoryDropDto categoryDropDto) {
         this.categoryService.delete(categoryDropDto.getId(), categoryDropDto.getDeleteSubCategories());
         return ResponseEntity.ok("deleted successfully");
     }

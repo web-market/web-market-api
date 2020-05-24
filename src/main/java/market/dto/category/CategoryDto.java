@@ -2,25 +2,27 @@ package market.dto.category;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import market.dto.transfer.Create;
+import market.dto.transfer.Update;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
+
 public class CategoryDto {
 
+    @NotNull(groups = {Update.class})
     private Long id;
 
-    @NotNull(message = "{category.invalid.name}")
-    @NotBlank(message = "{category.empty.name}")
+    @NotBlank(message = "{category.empty.name}", groups = {Create.class, Update.class})
     private String name;
 
-//    @Value("${some.key:false}")
+    @NotNull(message = "{category.empty.isActive}", groups = {Create.class, Update.class})
     private Boolean isActive;
 
-    @NotNull
+    @NotNull(message = "{category.empty.sortOrder}", groups = {Create.class, Update.class})
     private Long sortOrder;
 
     private String color;

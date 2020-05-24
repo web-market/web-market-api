@@ -18,16 +18,16 @@ public class FilterValueController {
     private final FilterValueService filterValueService;
 
     @GetMapping
-    public List<FilterValue> getAll() {
+    public List<FilterValue> getAllFilterValues() {
         return this.filterValueService.getAll();
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping("/{id}")
     public FilterValue getById(@PathVariable Long id) {
         return this.filterValueService.findOneById(id);
     }
 
-    @GetMapping(path = "/filter/{id}")
+    @GetMapping("/filter/{id}")
     public List<FilterValue> getAllByFilterId(@PathVariable Long id) {
         return this.filterValueService.getAllByFilterId(id);
     }

@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface MediaService {
 
+    List<Media> getByMediaFolderId(Long id);
+
     Media createMedia(MediaFolder folder);
 
     List<MediaImageStoreDto> store(MediaImageUploadDto mediaImageUploadDto) throws IOException;

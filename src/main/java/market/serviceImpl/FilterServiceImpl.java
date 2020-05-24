@@ -36,9 +36,6 @@ public class FilterServiceImpl implements FilterService {
     @Transactional
     public Filter create(FilterDto filterDto) {
         Filter newFilter = this.modelMapper.map(filterDto, Filter.class);
-        if (newFilter.getSortOrder() == null) {
-            newFilter.setSortOrder(0L);
-        }
         return this.filterRepository.save(newFilter);
     }
 
@@ -46,16 +43,7 @@ public class FilterServiceImpl implements FilterService {
     @Transactional
     public Filter update(FilterDto filterDto) {
         Filter filter = this.modelMapper.map(filterDto, Filter.class);
-        if (filter.getSortOrder() == null) {
-            filter.setSortOrder(0L);
-        }
         return this.filterRepository.save(filter);
-    }
-
-    @Override
-    @Transactional
-    public void delete(Long id) {
-        this.filterRepository.deleteById(id);
     }
 
     @Override

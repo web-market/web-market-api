@@ -13,8 +13,6 @@ public interface FilterService {
 
     FilterEditView findOneById(Long id);
 
-    void delete(Long id);
-
     Filter create(FilterDto filterDto);
 
     Filter update(FilterDto filterDto);
