@@ -18,7 +18,7 @@ public interface MediaService {
 
     MediaImageStoreDto getPreparedImages(List<ImageDto> images, MediaFolder folder);
 
-    List<MediaImageStoreDto> prepareAllImages(MediaImageUploadDto images) throws IOException;
+    List<MediaImageStoreDto> prepareImages(MediaImageUploadDto images) throws IOException;
 
     void removeImages(Long mediaId) throws IOException;
 

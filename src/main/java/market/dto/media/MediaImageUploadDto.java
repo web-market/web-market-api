@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 public class MediaImageUploadDto {
 
-    private Long mediaCategoryId;
+    private Long mediaFolderId;
 
     private MultipartFile[] files;
 

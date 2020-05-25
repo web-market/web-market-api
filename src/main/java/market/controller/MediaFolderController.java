@@ -2,6 +2,8 @@ package market.controller;
 
 import lombok.RequiredArgsConstructor;
 import market.dto.mediaFolder.MediaFolderDto;
+import market.dto.transfer.Create;
+import market.dto.transfer.Update;
 import market.entity.MediaFolder;
 import market.projection.category.CategoryEditView;
 import market.projection.mediaFolder.MediaFolderDropdownView;
@@ -9,6 +11,7 @@ import market.projection.mediaFolder.MediaFolderEditView;
 import market.projection.mediaFolder.MediaFolderInlineView;
 import market.service.MediaFolderService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -47,17 +52,17 @@ public class MediaFolderController {
     }
 
     @PostMapping("/media-folder")
-    public MediaFolder create(@RequestBody MediaFolderDto mediaFolderDto) {
+    public MediaFolder create(@Validated(Create.class) @RequestBody MediaFolderDto mediaFolderDto) {
         return this.mediaFolderService.create(mediaFolderDto);
     }
 
     @PutMapping("/media-folder")
-    public MediaFolder update(@RequestBody MediaFolderDto mediaFolderDto) {
+    public MediaFolder update(@Validated(Update.class) @RequestBody MediaFolderDto mediaFolderDto) {
         return this.mediaFolderService.update(mediaFolderDto);
     }
 
     @DeleteMapping("/media-folder/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
+    public ResponseEntity<String> delete(@Valid @PathVariable Long id) {
         this.mediaFolderService.delete(id);
         return ResponseEntity.ok("media category deleted successfully");
     }

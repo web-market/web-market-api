@@ -55,7 +55,7 @@ public class MediaServiceImpl implements MediaService {
     @Override
     @Transactional
     public List<MediaImageStoreDto> store(MediaImageUploadDto images) throws IOException {
-        List<MediaImageStoreDto> imagesToStore = this.prepareAllImages(images);
+        List<MediaImageStoreDto> imagesToStore = this.prepareImages(images);
         for (MediaImageStoreDto dto : imagesToStore) {
             Path path = Paths.get(UPLOADING_DIR + dto.getMediaId());
             if (Files.notExists(path)) {
@@ -80,8 +80,8 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public List<MediaImageStoreDto> prepareAllImages(MediaImageUploadDto images) throws IOException {
-        MediaFolder mediaFolder = this.mediaFolderService.getById(images.getMediaCategoryId());
+    public List<MediaImageStoreDto> prepareImages(MediaImageUploadDto images) throws IOException {
+        MediaFolder mediaFolder = this.mediaFolderService.getById(images.getMediaFolderId());
         List<MediaImageStoreDto> imagesToStore = new ArrayList<>();
         for (MultipartFile image : images.getFiles()) {
             List<ImageDto> imagesPrepared = this.imageManagementService.getInMentionedResolutions(image,
