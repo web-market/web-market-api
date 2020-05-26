@@ -20,4 +20,5 @@ public interface ProductService {
 
     List<Product> getAllByFilterValues(List<Long> ids);
 
+    List<Product> getAllByNameLike(String name);
 }

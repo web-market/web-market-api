@@ -1,7 +1,6 @@
 package market.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import market.dto.BulkDeleteDto;
 import market.dto.product.ProductDto;
 import market.dto.transfer.Create;
@@ -42,6 +41,11 @@ public class ProductController {
     @GetMapping("/by-filter-values/{ids}")
     public List<Product> getByFilerValueIds(@PathVariable Long[] ids) {
         return this.productService.getAllByFilterValues(Arrays.asList(ids));
+    }
+
+    @GetMapping("/by-name/{name}")
+    public List<Product> getByNameLike(@PathVariable String name) {
+        return this.productService.getAllByNameLike(name);
     }
 
     @PostMapping

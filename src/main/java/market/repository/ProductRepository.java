@@ -14,4 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> getAllByCategoriesIdIn(List<Long> ids);
 
     List<Product> getAllByFilterValuesIdIn(List<Long> ids);
+
+    List<Product> getAllByNameContainingIgnoreCase(String name);
 }

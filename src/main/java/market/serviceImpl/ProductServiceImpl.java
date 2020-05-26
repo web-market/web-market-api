@@ -94,4 +94,9 @@ public class ProductServiceImpl implements ProductService {
         return this.productRepository.getAllByFilterValuesIdIn(ids);
     }
 
+    @Override
+    public List<Product> getAllByNameLike(String name) {
+        return this.productRepository.getAllByNameContainingIgnoreCase(name);
+    }
+
 }
