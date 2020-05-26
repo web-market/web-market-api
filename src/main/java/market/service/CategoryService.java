@@ -12,6 +12,8 @@ public interface CategoryService {
 
     List<CategoryDropdownView> getAll();
 
+    List<Category> getByIdIn(List<Long> ids);
+
     CategoryEditView getById(Long id);
 
     Category create(CategoryDto categoryDto);

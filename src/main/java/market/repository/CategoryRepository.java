@@ -28,6 +28,8 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     //For dtos but just check
     Category getById(Long id);
 
+    List<Category> getAllByIdIn(List<Long> id);
+
     Category getBySubCategoriesId(Long id);
 
     List<Category> getCategoriesByParentCategoryId(Long id);

@@ -2,26 +2,17 @@ package market.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
 @Table(name = "product")
 @Entity
+@ToString(exclude = "manufacturer")
 public class Product {
 
     @Id
@@ -53,15 +44,25 @@ public class Product {
     @Column(name = "is_active", columnDefinition = "boolean default true")
     private boolean isActive;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy="products")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "category_product",
+            joinColumns = {@JoinColumn(name = "product_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")}
+    )
     @JsonIgnore
     private List<Category> categories;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy="products")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "product_filter_value",
+            joinColumns = {@JoinColumn(name = "product_id")},
+            inverseJoinColumns = {@JoinColumn(name = "filter_value_id")}
+    )
     @JsonIgnore
     private List<FilterValue> filterValues;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy="products")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
     @JsonIgnore
     private List<Media> media;
 

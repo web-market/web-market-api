@@ -28,6 +28,11 @@ public class FilterValueServiceImpl implements FilterValueService {
     }
 
     @Override
+    public List<FilterValue> getByIdIn(List<Long> ids) {
+        return this.filterValueRepository.getAllByIdIn(ids);
+    }
+
+    @Override
     @Transactional
     public FilterValue findOneById(Long id) {
         return this.filterValueRepository.findOneById(id);

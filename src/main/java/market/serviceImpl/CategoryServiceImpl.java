@@ -32,6 +32,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Category> getByIdIn(List<Long> ids) {
+        return this.categoryRepository.getAllByIdIn(ids);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<CategoryItemView> getAllByParentCategoryId(Long id) {
         return this.categoryRepository.getAllByParentCategoryIdOrderBySortOrderDesc(id);

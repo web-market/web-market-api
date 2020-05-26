@@ -10,6 +10,8 @@ public interface ManufacturerService {
 
     List<ManufacturerView> getAll();
 
+    Manufacturer findOneById(Long id);
+
     ManufacturerView getOne(Long id);
 
     Manufacturer create(ManufacturerDto manufacturerDto);
