@@ -2,19 +2,15 @@ package market.dto.media;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import market.dto.file.image.ResolutionDto;
 import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
-public class MediaImageUploadDto {
+public class ImageGroupUploadDto {
 
     private Long mediaFolderId;
 
-    private MultipartFile[] files;
+    private MultipartFile[] images;
 
-    private Boolean lowResolution;
-
-    private Boolean mediumResolution;
-
-    private Boolean highResolution;
 }

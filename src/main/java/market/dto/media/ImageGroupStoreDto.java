@@ -1,14 +1,16 @@
 package market.dto.media;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import market.dto.file.image.ImageDto;
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-public class MediaImageStoreDto {
+@Builder
+@Getter
+public class ImageGroupStoreDto {
 
     private Long mediaId;
 

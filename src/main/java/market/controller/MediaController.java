@@ -1,8 +1,11 @@
 package market.controller;
 
 import lombok.RequiredArgsConstructor;
-import market.dto.media.MediaImageUploadDto;
+import lombok.SneakyThrows;
+import market.dto.media.ImageGroupUploadDto;
 import market.entity.Media;
+import market.projection.file.ImageFileView;
+import market.projection.media.MediaView;
 import market.service.MediaService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +27,22 @@ public class MediaController {
 
     private final MediaService mediaService;
 
-    @GetMapping("/media/folder/{id}")
-    public List<Media> getFilesByFolderId(@PathVariable Long id) {
-        return null;
+    @GetMapping("/media/media-folder/{id}")
+    public List<MediaView> getImagesByMediaFolderId(@PathVariable Long id) {
+        return this.mediaService.getByMediaFolderId(id);
     }
 
+    @GetMapping("/media/{id}")
+    public MediaView getImagesByMediaId(@PathVariable Long id) {
+        return this.mediaService.getById(id);
+    }
+
+    @SneakyThrows(IOException.class)
     @PostMapping(value = "/media", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public void upload(@ModelAttribute MediaImageUploadDto mediaImageUploadDto) throws IOException {
-        this.mediaService.store(mediaImageUploadDto);
+    public ResponseEntity<String> upload(@ModelAttribute ImageGroupUploadDto imageGroupUploadDto) {
+        this.mediaService.store(imageGroupUploadDto);
+        return ResponseEntity.ok("media with images uploaded successfully");
+
     }
 
 

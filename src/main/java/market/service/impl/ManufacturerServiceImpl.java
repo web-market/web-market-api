@@ -1,4 +1,4 @@
-package market.serviceImpl;
+package market.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import market.dto.manufacturer.ManufacturerDto;
