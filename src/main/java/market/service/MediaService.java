@@ -1,24 +1,22 @@
 package market.service;
 
-import market.dto.file.image.ImageDto;
-import market.dto.media.MediaImageStoreDto;
-import market.dto.media.MediaImageUploadDto;
+import market.dto.media.ImageGroupUploadDto;
 import market.entity.Media;
-import market.entity.MediaFolder;
+import market.projection.file.ImageFileView;
+import market.projection.media.MediaView;
+
 import java.io.IOException;
 import java.util.List;
 
 public interface MediaService {
 
-    List<Media> getByMediaFolderId(Long id);
+    List<MediaView> getByMediaFolderId(Long id);
 
-    Media createMedia(MediaFolder folder);
+    MediaView getById(Long id);
 
-    List<MediaImageStoreDto> store(MediaImageUploadDto mediaImageUploadDto) throws IOException;
+    Media createMedia(Long mediaFolderId);
 
-    MediaImageStoreDto getPreparedImages(List<ImageDto> images, MediaFolder folder);
-
-    List<MediaImageStoreDto> prepareImages(MediaImageUploadDto images) throws IOException;
+    void store(ImageGroupUploadDto imageGroupUploadDto) throws IOException;
 
     void removeImages(Long mediaId) throws IOException;
 

@@ -3,10 +3,15 @@ package market.service;
 import market.dto.file.image.ImageDto;
 import market.entity.File;
 import market.entity.Media;
+import market.projection.file.ImageFileView;
+
+import java.util.List;
 
 public interface FileService {
 
-    File save(ImageDto image, String pathToImage, Media media);
+    List<ImageFileView> getByMediaId(Long mediaId);
+
+    File saveImage(ImageDto image, String pathToImage, Media media);
 
     void deleteByMediaId(Long id);
 }
