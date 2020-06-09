@@ -14,8 +14,6 @@ public class FileManagementUtils {
 
     @SneakyThrows(IOException.class)
     public Path createDirectoryIfNotExist(Path path) {
-        if (true)
-            throw new IOException();
         return Files.notExists(path) ? Files.createDirectory(path) : path;
     }
 
