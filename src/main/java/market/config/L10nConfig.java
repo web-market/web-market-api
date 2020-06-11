@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 @Configuration
-@ComponentScan(basePackages = "market.config")
+//@ComponentScan(basePackages = "market.config")
 public class L10nConfig {
 
     @Bean

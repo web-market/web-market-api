@@ -11,8 +11,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = "market")
+//@EnableWebMvc
+//@ComponentScan(basePackages = "market")
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private final static long MAX_AGE_SECS = 3600;

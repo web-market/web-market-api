@@ -24,7 +24,7 @@ import java.util.Properties;
         @PropertySource("classpath:hikariCP.properties"),
         @PropertySource("classpath:hibernate.properties")
 })
-@ComponentScan(basePackages = "market.config")
+//@ComponentScan(basePackages = "market.config")
 public class DatabaseConfig {
 
     @Value("${database.driver}")

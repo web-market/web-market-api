@@ -9,9 +9,7 @@ import market.entity.Filter;
 import market.projection.filter.FilterEditView;
 import market.projection.filter.FilterView;
 import market.service.FilterService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+
 
 import javax.validation.Valid;
 import java.util.List;

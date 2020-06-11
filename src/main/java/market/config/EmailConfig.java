@@ -12,7 +12,7 @@ import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:mailing.properties")
-@ComponentScan(basePackages = "market.config")
+//@ComponentScan(basePackages = "market.config")
 public class EmailConfig {
 
     @Value("${mail.host}")

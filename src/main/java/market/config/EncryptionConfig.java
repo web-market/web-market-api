@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@ComponentScan(basePackages = "market.config")
+//@ComponentScan(basePackages = "market.config")
 public class EncryptionConfig {
 
     @Bean
