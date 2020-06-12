@@ -2,7 +2,6 @@ package market.service;
 
 import market.dto.media.ImageGroupUploadDto;
 import market.entity.Media;
-import market.projection.file.ImageFileView;
 import market.projection.media.MediaView;
 
 import java.io.IOException;

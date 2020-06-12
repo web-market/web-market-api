@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
-
 public class CategoryDto {
 
     @NotNull(groups = {Update.class})

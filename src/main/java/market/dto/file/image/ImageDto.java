@@ -2,20 +2,18 @@ package market.dto.file.image;
 
 import javaxt.io.Image;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Builder
 @Getter
 public class ImageDto {
 
-    private String name;
+    private final String name;
 
-    private String extension;
+    private final String extension;
 
-    private String size;
+    private final String size;
 
-    private Image image;
+    private final Image image;
 
 }

@@ -3,8 +3,6 @@ package market.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import market.dto.media.ImageGroupUploadDto;
-import market.entity.Media;
-import market.projection.file.ImageFileView;
 import market.projection.media.MediaView;
 import market.service.MediaService;
 import org.springframework.http.MediaType;
@@ -44,7 +42,6 @@ public class MediaController {
         return ResponseEntity.ok("media with images uploaded successfully");
 
     }
-
 
     @DeleteMapping("/media/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) throws IOException {
