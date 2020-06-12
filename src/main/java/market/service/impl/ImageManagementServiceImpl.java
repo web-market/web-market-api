@@ -2,7 +2,6 @@ package market.service.impl;
 
 import javaxt.io.Image;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import market.dto.file.image.ImageDto;
 import market.dto.file.image.ResolutionDto;
 import market.entity.ImageSize;
@@ -14,11 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class ManufacturerDto {
 
-
     @NotNull(groups = {Update.class})
     private Long id;
 

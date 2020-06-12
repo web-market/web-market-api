@@ -5,7 +5,6 @@ import market.dto.mediaFolder.MediaFolderDto;
 import market.dto.transfer.Create;
 import market.dto.transfer.Update;
 import market.entity.MediaFolder;
-import market.projection.category.CategoryEditView;
 import market.projection.mediaFolder.MediaFolderDropdownView;
 import market.projection.mediaFolder.MediaFolderEditView;
 import market.projection.mediaFolder.MediaFolderInlineView;
