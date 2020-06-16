@@ -27,7 +27,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(IOException.class)
     public ResponseEntity<ApiError> handleIOException(IOException ex) {
-        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, "IOException");
+        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR,
+                "Picture can not be saved due to some error.");
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
@@ -46,7 +47,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .stream()
                 .map(error -> {
                     FieldError fieldError = ((FieldError) error);
-                    return new ErrorInfo( fieldError.getObjectName(),
+                    return new ErrorInfo(fieldError.getObjectName(),
                             fieldError.getField(),
                             fieldError.getDefaultMessage(),
                             fieldError.getRejectedValue());

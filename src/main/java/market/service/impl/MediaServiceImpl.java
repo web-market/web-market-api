@@ -16,7 +16,6 @@ import market.utility.FileManagementUtils;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -24,8 +23,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,13 +58,12 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-//    @SneakyThrows(IOException.class)
     @Transactional
-    public void store(ImageGroupUploadDto uploads) throws IOException {
-        for (ImageGroupStoreDto dto : this.prepareToStore(uploads)) {
+    public void store(ImageGroupUploadDto uploads) {
+        this.prepareToStore(uploads).forEach(dto -> {
             Path path = FileManagementUtils.createDirectoryIfNotExist(Paths.get(UPLOADING_DIR + dto.getMediaId()));
             this.saveImageGroup(dto.getImages(), path, dto.getMediaId());
-        }
+        });
     }
 
     @Override
@@ -75,17 +74,13 @@ public class MediaServiceImpl implements MediaService {
         this.fileService.deleteByMediaId(mediaId);
     }
 
-    //    @SneakyThrows(IOException.class)
-    private List<ImageGroupStoreDto> prepareToStore(ImageGroupUploadDto uploads) throws IOException {
-        List<ImageGroupStoreDto> list = new ArrayList<>();
-        for (MultipartFile image : uploads.getImages()) {
-            ImageGroupStoreDto build = ImageGroupStoreDto.builder()
-                    .mediaId(this.createMedia(uploads.getMediaFolderId()).getId())
-                    .images(this.imageGroupManagementService.getPreparedGroup(image))
-                    .build();
-            list.add(build);
-        }
-        return list;
+    private List<ImageGroupStoreDto> prepareToStore(ImageGroupUploadDto uploads) {
+        return Arrays.stream(uploads.getImages())
+                .map(image -> ImageGroupStoreDto.builder()
+                        .mediaId(this.createMedia(uploads.getMediaFolderId()).getId())
+                        .images(this.imageGroupManagementService.getPreparedGroup(image))
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @SneakyThrows(IOException.class)
