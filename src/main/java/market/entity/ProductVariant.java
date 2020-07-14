@@ -2,7 +2,6 @@ package market.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import javax.persistence.Column;
@@ -21,46 +20,43 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Data
-@ToString(exclude = "subCategories")
-@Table(name = "category")
+@Table(name = "product_variant")
 @Entity
-public class Category {
+public class ProductVariant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_sequence")
-    @SequenceGenerator(name = "category_sequence", sequenceName = "category_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_variant_sequence")
+    @SequenceGenerator(name = "product_variant_sequence", sequenceName = "product_variant_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
-
-    @Column(name = "sort_order", columnDefinition = "bigint default 0")
-    private Long sortOrder;
-
-    @Column(name = "color")
-    private String color;
+    @Column(name = "description")
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "parent_category_id")
+    @JoinColumn(name = "raw_product_id")
     @JsonIgnore
-    private Category parentCategory;
+    private RawProduct rawProduct;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentCategory")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productVariant")
     @Fetch(FetchMode.JOIN)
     @JsonIgnore
-    private List<Category> subCategories;
+    private List<StoreProductVariantAudit> storeProductVariantAudits;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "productVariants")
+    @JsonIgnore
+    private List<Media> media;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "category_product",
-            joinColumns = {@JoinColumn(name = "category_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_id")}
+            name = "product_variant_filter_value",
+            joinColumns = {@JoinColumn(name = "product_variant_id")},
+            inverseJoinColumns = {@JoinColumn(name = "filter_value_id")}
     )
     @JsonIgnore
-    private List<UIProduct> uiProducts;
+    private List<FilterValue> filterValues;
 
 }

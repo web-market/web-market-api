@@ -2,9 +2,9 @@ package market.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,32 +17,28 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Data
-@ToString(exclude = "media")
-@Table(name = "file")
+@Table(name = "store_product_variant_audit")
 @Entity
-public class File {
+public class StoreProductVariantAudit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "file_sequence")
-    @SequenceGenerator(name = "file_sequence", sequenceName = "file_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "store_product_variant_audit_sequence")
+    @SequenceGenerator(name = "store_product_variant_audit_sequence", sequenceName = "store_product_variant_audit_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "format")
-    private String format;
-
-    @Column(name = "size")
-    private String size;
-
-    @Column(name = "path")
-    private String path;
+    @Column(name = "product_variant_quantity")
+    private Long productVariantQuantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "media_id")
+    @JoinColumn(name = "store_id")
     @JsonIgnore
-    private Media media;
+    private Store store;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "product_variant_Id")
+    @JsonIgnore
+    private ProductVariant productVariant;
 
 }

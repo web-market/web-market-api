@@ -16,23 +16,21 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Data
-@Table(name = "manufacturer")
+@Table(name = "store")
 @Entity
-public class Manufacturer {
+public class Store {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "manufacturer_sequence")
-    @SequenceGenerator(name = "manufacturer_sequence", sequenceName = "manufacturer_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "store_sequence")
+    @SequenceGenerator(name = "store_sequence", sequenceName = "store_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
-    private String description;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manufacturer")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
     @Fetch(FetchMode.JOIN)
     @JsonIgnore
-    private List<RawProduct> rawProducts;
+    private List<StoreProductVariantAudit> storeProductVariantAudits;
+
 }
