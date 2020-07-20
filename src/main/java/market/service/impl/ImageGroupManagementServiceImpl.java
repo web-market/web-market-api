@@ -26,7 +26,7 @@ public class ImageGroupManagementServiceImpl implements ImageGroupManagementServ
                     return ImageDto.builder()
                             .name(newName)
                             .extension(FilenameUtils.getExtension(originalName))
-                            .size(String.valueOf(image.getExifTags().size()))
+                            .size(image.getByteArray().length)
                             .image(image)
                             .build();
                 }).collect(Collectors.toList());

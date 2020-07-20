@@ -34,7 +34,7 @@ public class File {
     private String format;
 
     @Column(name = "size")
-    private String size;
+    private Integer size;
 
     @Column(name = "path")
     private String path;

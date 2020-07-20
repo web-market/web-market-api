@@ -63,7 +63,7 @@ public class ImageManagementServiceImpl implements ImageManagementService {
         return ImageDto.builder()
                 .name(FileManagementUtils.createImageName(originalName, resizedImage.getWidth(), resizedImage.getHeight()))
                 .extension(FilenameUtils.getExtension(originalName))
-                .size(String.valueOf(resizedImage.getExifTags().size()))
+                .size(resizedImage.getByteArray().length)
                 .image(resizedImage)
                 .build();
     }

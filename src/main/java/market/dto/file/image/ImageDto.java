@@ -12,7 +12,7 @@ public class ImageDto {
 
     private final String extension;
 
-    private final String size;
+    private final Integer size;
 
     private final Image image;
 

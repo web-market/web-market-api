@@ -17,11 +17,13 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +33,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MediaServiceImpl implements MediaService {
 
-    public static final String UPLOADING_DIR = "D:/uploads/";
+    public static final String UPLOADING_DIR = "/uploads/";
 
     private final FileService fileService;
     private final ImageGroupManagementService imageGroupManagementService;
@@ -86,9 +88,10 @@ public class MediaServiceImpl implements MediaService {
     @SneakyThrows(IOException.class)
     private void saveImageGroup(List<ImageDto> images, Path path, Long mediaId) {
         for (ImageDto image : images) {
-            String pathToImage = FileManagementUtils.generatePathToImage(path, image.getName());
-            ImageIO.write(image.getImage().getBufferedImage(), image.getExtension(), new File(pathToImage));
-            this.fileService.saveImage(image, pathToImage, this.mediaRepository.getById(mediaId));
+            Path pathToImage = FileManagementUtils.generatePathToImage(path, image.getName());
+            Files.copy(new ByteArrayInputStream(image.getImage().getByteArray()),
+                    pathToImage, StandardCopyOption.REPLACE_EXISTING);
+            this.fileService.saveImage(image, pathToImage.toString(), this.mediaRepository.getById(mediaId));
         }
     }
 }

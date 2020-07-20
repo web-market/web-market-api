@@ -4,7 +4,7 @@ import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.io.FilenameUtils;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,11 +28,7 @@ public class FileManagementUtils {
                 .toString();
     }
 
-    public String generatePathToImage(Path path, String imageName) {
-        return new StringBuilder()
-                .append(path)
-                .append(File.separator)
-                .append(imageName)
-                .toString();
+    public Path generatePathToImage(Path path, String imageName) {
+        return path.resolve(imageName);
     }
 }
