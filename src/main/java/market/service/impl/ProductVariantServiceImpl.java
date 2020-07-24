@@ -2,9 +2,10 @@ package market.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import market.dto.productVariant.ProductVariantDto;
+import market.entity.FilterValue;
 import market.entity.ProductVariant;
-import market.entity.UIProduct;
 import market.repository.ProductVariantRepository;
+import market.service.FilterValueService;
 import market.service.ProductVariantService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ProductVariantServiceImpl implements ProductVariantService {
 
     private final ProductVariantRepository productVariantRepository;
+    private final FilterValueService filterValueService;
     private final ModelMapper modelMapper;
 
     @Override
@@ -41,6 +43,10 @@ public class ProductVariantServiceImpl implements ProductVariantService {
     @Transactional
     public ProductVariant create(ProductVariantDto productVariantDto) {
         ProductVariant newProductVariant = this.modelMapper.map(productVariantDto, ProductVariant.class);
+        if (productVariantDto.getFilterValueIds() != null) {
+            List<FilterValue> filterValues = this.filterValueService.getByIdIn(productVariantDto.getFilterValueIds());
+            newProductVariant.setFilterValues(filterValues);
+        }
         return this.productVariantRepository.save(newProductVariant);
     }
 
@@ -48,6 +54,10 @@ public class ProductVariantServiceImpl implements ProductVariantService {
     @Transactional
     public ProductVariant update(ProductVariantDto productVariantDto) {
         ProductVariant productVariant = this.modelMapper.map(productVariantDto, ProductVariant.class);
+        if (productVariantDto.getFilterValueIds() != null) {
+            List<FilterValue> filterValues = this.filterValueService.getByIdIn(productVariantDto.getFilterValueIds());
+            productVariant.setFilterValues(filterValues);
+        }
         return this.productVariantRepository.save(productVariant);
     }
 

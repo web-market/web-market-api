@@ -45,10 +45,6 @@ public class UIProductServiceImpl implements UIProductService {
 //            List<Category> categories = this.categoryService.getByIdIn(UIProductDto.getCategoryIds());
 //            newUIProduct.setCategories(categories);
 //        }
-//        if (UIProductDto.getFilterValueIds() != null) {
-//            List<FilterValue> filterValues = this.filterValueService.getByIdIn(UIProductDto.getFilterValueIds());
-//            newUIProduct.setFilterValues(filterValues);
-//        }
         return this.UIProductRepository.save(newUIProduct);
     }
 
@@ -59,10 +55,6 @@ public class UIProductServiceImpl implements UIProductService {
 //        if (UIProductDto.getCategoryIds() != null) {
 //            List<Category> categories = this.categoryService.getByIdIn(UIProductDto.getCategoryIds());
 //            UIProduct.setCategories(categories);
-//        }
-//        if (UIProductDto.getFilterValueIds() != null) {
-//            List<FilterValue> filterValues = this.filterValueService.getByIdIn(UIProductDto.getFilterValueIds());
-//            UIProduct.setFilterValues(filterValues);
 //        }
         return this.UIProductRepository.save(UIProduct);
     }
