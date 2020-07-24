@@ -85,11 +85,6 @@ public class UIProductServiceImpl implements UIProductService {
 //    public List<UIProduct> getAllByCategories(List<Long> ids) {
 //        return this.UIProductRepository.getAllByCategoriesIdIn(ids);
 //    }
-//
-//    @Override
-//    public List<UIProduct> getAllByFilterValues(List<Long> ids) {
-//        return this.UIProductRepository.getAllByFilterValuesIdIn(ids);
-//    }
 
     @Override
     public List<UIProduct> getAllByNameLike(String name) {

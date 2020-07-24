@@ -18,8 +18,6 @@ public interface UIProductService {
     void bulkDelete(List<Long> ids);
 
 //    List<UIProduct> getAllByCategories(List<Long> ids);
-//
-//    List<UIProduct> getAllByFilterValues(List<Long> ids);
 
     List<UIProduct> getAllByNameLike(String name);
 }

@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,11 @@ public class ProductVariantController {
     @GetMapping("/{id}")
     public ProductVariant getById(@PathVariable Long id) {
         return this.productVariantService.findOneById(id);
+    }
+
+    @GetMapping("/by-filter-values/{ids}")
+    public List<ProductVariant> getByFilerValueIds(@PathVariable Long[] ids) {
+        return this.productVariantService.getAllByFilterValues(Arrays.asList(ids));
     }
 
     @PostMapping

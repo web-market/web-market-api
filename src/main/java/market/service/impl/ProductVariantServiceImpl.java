@@ -3,6 +3,7 @@ package market.service.impl;
 import lombok.RequiredArgsConstructor;
 import market.dto.productVariant.ProductVariantDto;
 import market.entity.ProductVariant;
+import market.entity.UIProduct;
 import market.repository.ProductVariantRepository;
 import market.service.ProductVariantService;
 import org.modelmapper.ModelMapper;
@@ -29,6 +30,11 @@ public class ProductVariantServiceImpl implements ProductVariantService {
     @Transactional(readOnly = true)
     public ProductVariant findOneById(Long id) {
         return this.productVariantRepository.findOneById(id);
+    }
+
+    @Override
+    public List<ProductVariant> getAllByFilterValues(List<Long> ids) {
+        return this.productVariantRepository.getAllByFilterValuesIdIn(ids);
     }
 
     @Override

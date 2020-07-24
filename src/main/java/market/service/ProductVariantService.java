@@ -1,7 +1,6 @@
 package market.service;
 
 import market.dto.productVariant.ProductVariantDto;
-import market.dto.uiProduct.UIProductDto;
 import market.entity.ProductVariant;
 import market.entity.UIProduct;
 
@@ -12,6 +11,8 @@ public interface ProductVariantService {
     List<ProductVariant> getAll();
 
     ProductVariant findOneById(Long id);
+
+    List<ProductVariant> getAllByFilterValues(List<Long> ids);
 
     ProductVariant create(ProductVariantDto productVariantDto);
 

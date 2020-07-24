@@ -10,4 +10,6 @@ public interface ProductVariantRepository extends JpaRepository<ProductVariant, 
     ProductVariant findOneById(Long id);
 
     void deleteAllByIdIn(List<Long> ids);
+
+    List<ProductVariant> getAllByFilterValuesIdIn(List<Long> ids);
 }
