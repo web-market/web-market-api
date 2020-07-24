@@ -41,10 +41,6 @@ public class UIProductServiceImpl implements UIProductService {
     @Transactional
     public UIProduct create(UIProductDto UIProductDto) {
         UIProduct newUIProduct = this.modelMapper.map(UIProductDto, UIProduct.class);
-//        if (UIProductDto.getManufacturerId() != null) {
-//            Manufacturer manufacturer = this.manufacturerService.findOneById(UIProductDto.getManufacturerId());
-//            newUIProduct.setManufacturer(manufacturer);
-//        }
 //        if (UIProductDto.getCategoryIds() != null) {
 //            List<Category> categories = this.categoryService.getByIdIn(UIProductDto.getCategoryIds());
 //            newUIProduct.setCategories(categories);
@@ -60,10 +56,6 @@ public class UIProductServiceImpl implements UIProductService {
     @Transactional
     public UIProduct update(UIProductDto UIProductDto) {
         UIProduct UIProduct = this.modelMapper.map(UIProductDto, UIProduct.class);
-//        if (UIProductDto.getManufacturerId() != null) {
-//            Manufacturer manufacturer = this.manufacturerService.findOneById(UIProductDto.getManufacturerId());
-//            UIProduct.setManufacturer(manufacturer);
-//        }
 //        if (UIProductDto.getCategoryIds() != null) {
 //            List<Category> categories = this.categoryService.getByIdIn(UIProductDto.getCategoryIds());
 //            UIProduct.setCategories(categories);

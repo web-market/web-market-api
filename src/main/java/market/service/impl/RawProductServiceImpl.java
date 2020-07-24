@@ -2,8 +2,10 @@ package market.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import market.dto.rawProduct.RawProductDto;
+import market.entity.Manufacturer;
 import market.entity.RawProduct;
 import market.repository.RawProductRepository;
+import market.service.ManufacturerService;
 import market.service.RawProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.List;
 public class RawProductServiceImpl implements RawProductService {
 
     private final RawProductRepository rawProductRepository;
+    private final ManufacturerService manufacturerService;
     private final ModelMapper modelMapper;
 
     @Override
@@ -35,14 +38,22 @@ public class RawProductServiceImpl implements RawProductService {
     @Transactional
     public RawProduct create(RawProductDto rawProductDto) {
         RawProduct newRawProduct = this.modelMapper.map(rawProductDto, RawProduct.class);
+        if (rawProductDto.getManufacturerId() != null) {
+            Manufacturer manufacturer = this.manufacturerService.findOneById(rawProductDto.getManufacturerId());
+            newRawProduct.setManufacturer(manufacturer);
+        }
         return this.rawProductRepository.save(newRawProduct);
     }
 
     @Override
     @Transactional
     public RawProduct update(RawProductDto rawProductDto) {
-        RawProduct RawProduct = this.modelMapper.map(rawProductDto, RawProduct.class);
-        return this.rawProductRepository.save(RawProduct);
+        RawProduct rawProduct = this.modelMapper.map(rawProductDto, RawProduct.class);
+        if (rawProductDto.getManufacturerId() != null) {
+            Manufacturer manufacturer = this.manufacturerService.findOneById(rawProductDto.getManufacturerId());
+            rawProduct.setManufacturer(manufacturer);
+        }
+        return this.rawProductRepository.save(rawProduct);
     }
 
     @Override
