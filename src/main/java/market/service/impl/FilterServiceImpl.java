@@ -22,14 +22,19 @@ public class FilterServiceImpl implements FilterService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<FilterView> getAll() {
+    public List<FilterView> getFilters() {
         return this.filterRepository.findAllByOrderBySortOrderAsc();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public FilterEditView findOneById(Long id) {
+    public FilterEditView getFilter(Long id) {
         return this.filterRepository.findOneById(id);
+    }
+
+    @Override
+    public Filter getFullFilter(Long id) {
+        return this.filterRepository.getById(id);
     }
 
     @Override
@@ -48,7 +53,7 @@ public class FilterServiceImpl implements FilterService {
 
     @Override
     @Transactional
-    public void bulkDelete(List<Long> ids) {
+    public void deleteFilters(List<Long> ids) {
         this.filterRepository.deleteAllByIdIn(ids);
     }
 }

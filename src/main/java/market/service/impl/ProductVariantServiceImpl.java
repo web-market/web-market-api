@@ -2,7 +2,6 @@ package market.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import market.dto.productVariant.ProductVariantDto;
-import market.entity.FilterValue;
 import market.entity.ProductVariant;
 import market.repository.ProductVariantRepository;
 import market.service.FilterValueService;
@@ -18,35 +17,33 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductVariantServiceImpl implements ProductVariantService {
 
-    private final ProductVariantRepository productVariantRepository;
     private final FilterValueService filterValueService;
+    private final ProductVariantRepository productVariantRepository;
     private final ModelMapper modelMapper;
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
-    public List<ProductVariant> getAll() {
+    public List<ProductVariant> getProductVariants() {
         return this.productVariantRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ProductVariant findOneById(Long id) {
-        return this.productVariantRepository.findOneById(id);
+    public List<ProductVariant> getProductVariantsByFilterValues(List<Long> filterValueIds) {
+        return this.productVariantRepository.getAllByFilterValuesIdIn(filterValueIds);
     }
 
     @Override
-    public List<ProductVariant> getAllByFilterValues(List<Long> ids) {
-        return this.productVariantRepository.getAllByFilterValuesIdIn(ids);
+    @Transactional(readOnly = true)
+    public ProductVariant getProductVariant(Long id) {
+        return this.productVariantRepository.findOneById(id);
     }
 
     @Override
     @Transactional
     public ProductVariant create(ProductVariantDto productVariantDto) {
         ProductVariant newProductVariant = this.modelMapper.map(productVariantDto, ProductVariant.class);
-        if (productVariantDto.getFilterValueIds() != null) {
-            List<FilterValue> filterValues = this.filterValueService.getByIdIn(productVariantDto.getFilterValueIds());
-            newProductVariant.setFilterValues(filterValues);
-        }
+        newProductVariant.setFilterValues(this.filterValueService.getFullMentionedFilterValues(productVariantDto.getFilterValueIds()));
         return this.productVariantRepository.save(newProductVariant);
     }
 
@@ -54,10 +51,7 @@ public class ProductVariantServiceImpl implements ProductVariantService {
     @Transactional
     public ProductVariant update(ProductVariantDto productVariantDto) {
         ProductVariant productVariant = this.modelMapper.map(productVariantDto, ProductVariant.class);
-        if (productVariantDto.getFilterValueIds() != null) {
-            List<FilterValue> filterValues = this.filterValueService.getByIdIn(productVariantDto.getFilterValueIds());
-            productVariant.setFilterValues(filterValues);
-        }
+        productVariant.setFilterValues(this.filterValueService.getFullMentionedFilterValues(productVariantDto.getFilterValueIds()));
         return this.productVariantRepository.save(productVariant);
     }
 

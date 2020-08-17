@@ -21,19 +21,20 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ManufacturerView> getAll() {
+    public List<ManufacturerView> getManufacturers() {
         return this.manufacturerRepository.findAllBy();
     }
 
     @Override
-    public Manufacturer findOneById(Long id) {
-        return this.manufacturerRepository.findOneById(id);
+    @Transactional(readOnly = true)
+    public ManufacturerView getManufacturer(Long id) {
+        return this.manufacturerRepository.getById(id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ManufacturerView getOne(Long id) {
-        return this.manufacturerRepository.getById(id);
+    public Manufacturer getFullManufacturer(Long id) {
+        return this.manufacturerRepository.findOneById(id);
     }
 
     @Override

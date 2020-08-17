@@ -8,11 +8,13 @@ import java.util.List;
 
 public interface MediaRepository extends JpaRepository<Media, Long> {
 
-    Media getById(Long id);
-
+    //Projections
     List<MediaView> findAllByMediaFolderId(Long id);
 
     MediaView findMediaViewById(Long id);
+
+    //DTOs
+    Media getById(Long id);
 
     void deleteById(Long id);
 

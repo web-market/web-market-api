@@ -9,14 +9,16 @@ import java.util.List;
 
 public interface MediaService {
 
-    List<MediaView> getByMediaFolderId(Long id);
+    //Projections
+    List<MediaView> getMediaByFolder(Long mediaFolderId);
 
-    MediaView getById(Long id);
+    MediaView getMedia(Long id);
 
-    Media createMedia(Long mediaFolderId);
+    //DTOs
+    Media create(Long mediaFolderId);
 
-    void store(ImageGroupUploadDto imageGroupUploadDto) throws IOException;
+    void storeImages(ImageGroupUploadDto imageGroupUploadDto) throws IOException;
 
-    void removeImages(Long mediaId) throws IOException;
+    void deleteFiles(Long mediaId) throws IOException;
 
 }

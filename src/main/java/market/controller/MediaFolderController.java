@@ -32,22 +32,22 @@ public class MediaFolderController {
 
     @GetMapping("/media-folder-inline")
     public List<MediaFolderInlineView> getAllMediaCategories() {
-        return this.mediaFolderService.getAllInline();
+        return this.mediaFolderService.getFoldersInline();
     }
 
     @GetMapping("/media-folder/all")
     public List<MediaFolderDropdownView> getAllForDropdown() {
-        return this.mediaFolderService.getAllForDropdown();
+        return this.mediaFolderService.getFolders();
     }
 
     @GetMapping("/available-folders-to-move-in/{id}")
     public List<MediaFolderDropdownView> getAvailableParents(@PathVariable Long id) {
-        return this.mediaFolderService.getAvailableFolders(id);
+        return this.mediaFolderService.getAllowedParents(id);
     }
 
     @GetMapping("/media-folder/{id}")
     public MediaFolderEditView getSingleCategory(@PathVariable Long id) {
-        return this.mediaFolderService.getMediaFolderEditViewById(id);
+        return this.mediaFolderService.getFolderToEdit(id);
     }
 
     @PostMapping("/media-folder")

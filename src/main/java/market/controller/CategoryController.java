@@ -38,27 +38,27 @@ public class CategoryController {
 
     @GetMapping("/categories/fill-dropdown")
     public ResponseEntity<List<CategoryDropdownView>> getAllCategories() {
-        return new ResponseEntity<>(this.categoryService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(this.categoryService.getCategories(), HttpStatus.OK);
     }
 
     @GetMapping("/root-categories")
     public ResponseEntity<List<CategoryItemView>> getHighLevelCategories() {
-        return new ResponseEntity<>(this.categoryService.getAllRootCategories(), HttpStatus.OK);
+        return new ResponseEntity<>(this.categoryService.getFirstLevelCategories(), HttpStatus.OK);
     }
 
     @GetMapping("/root-categories/{id}")
     public ResponseEntity<List<CategoryItemView>> getChildrenByParentId(@PathVariable Long id) {
-        return new ResponseEntity<>(this.categoryService.getAllByParentCategoryId(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.categoryService.getAllByParent(id), HttpStatus.OK);
     }
 
     @GetMapping("/available-parent-categories/{id}")
     public ResponseEntity<List<CategoryDropdownView>> getAvailableParents(@PathVariable Long id) {
-        return new ResponseEntity<>(this.categoryService.getAvailableParentCategories(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.categoryService.getAllowedParents(id), HttpStatus.OK);
     }
 
     @GetMapping("/categories/{id}")
     public ResponseEntity<CategoryEditView> getSingleCategory(@PathVariable Long id) {
-        return new ResponseEntity<>(this.categoryService.getById(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.categoryService.getCategory(id), HttpStatus.OK);
     }
 
     @PostMapping("/categories")

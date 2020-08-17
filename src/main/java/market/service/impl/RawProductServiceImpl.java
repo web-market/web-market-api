@@ -18,8 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RawProductServiceImpl implements RawProductService {
 
-    private final RawProductRepository rawProductRepository;
     private final ManufacturerService manufacturerService;
+    private final RawProductRepository rawProductRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -39,7 +39,7 @@ public class RawProductServiceImpl implements RawProductService {
     public RawProduct create(RawProductDto rawProductDto) {
         RawProduct newRawProduct = this.modelMapper.map(rawProductDto, RawProduct.class);
         if (rawProductDto.getManufacturerId() != null) {
-            Manufacturer manufacturer = this.manufacturerService.findOneById(rawProductDto.getManufacturerId());
+            Manufacturer manufacturer = this.manufacturerService.getFullManufacturer(rawProductDto.getManufacturerId());
             newRawProduct.setManufacturer(manufacturer);
         }
         return this.rawProductRepository.save(newRawProduct);
@@ -50,7 +50,7 @@ public class RawProductServiceImpl implements RawProductService {
     public RawProduct update(RawProductDto rawProductDto) {
         RawProduct rawProduct = this.modelMapper.map(rawProductDto, RawProduct.class);
         if (rawProductDto.getManufacturerId() != null) {
-            Manufacturer manufacturer = this.manufacturerService.findOneById(rawProductDto.getManufacturerId());
+            Manufacturer manufacturer = this.manufacturerService.getFullManufacturer(rawProductDto.getManufacturerId());
             rawProduct.setManufacturer(manufacturer);
         }
         return this.rawProductRepository.save(rawProduct);

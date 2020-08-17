@@ -13,25 +13,25 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     //Projections
     List<CategoryDropdownView> findAllBy();
 
-    List<CategoryDropdownView> getAllByParentCategoryId(Long id);
+    List<CategoryDropdownView> findAllByIdIsNotIn(List<Long> id);
 
-    List<CategoryItemView> getAllByParentCategoryIdOrderBySortOrderDesc(Long id);
+    List<CategoryDropdownView> getAllByParentCategoryId(Long id);
 
     List<CategoryItemView> getAllByParentCategoryIdIsNull();
 
+    List<CategoryItemView> getAllByParentCategoryIdOrderBySortOrderDesc(Long id);
+
     CategoryEditView getCategoryEditViewById(Long id);
 
-    List<CategoryDropdownView> findAllByIdIsNotIn(List<Long> id);
-
-    void deleteAllByIdIn(List<Long> ids);
-
-    //For dtos but just check
+    //DTOs
     Category getById(Long id);
-
-    List<Category> getAllByIdIn(List<Long> id);
 
     Category getBySubCategoriesId(Long id);
 
+    List<Category> getAllByIdIn(List<Long> id);
+
     List<Category> getCategoriesByParentCategoryId(Long id);
+
+    void deleteAllByIdIn(List<Long> ids);
 
 }

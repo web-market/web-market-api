@@ -24,35 +24,35 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/filters")
+@RequestMapping(path = "/filter-management")
 @RequiredArgsConstructor
 public class FilterController {
 
     private final FilterService filterService;
 
-    @GetMapping
+    @GetMapping("/filters")
     public List<FilterView> getAllFilters() {
-        return this.filterService.getAll();
+        return this.filterService.getFilters();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/filter/{id}")
     public FilterEditView getById(@PathVariable Long id) {
-        return this.filterService.findOneById(id);
+        return this.filterService.getFilter(id);
     }
 
-    @PostMapping
+    @PostMapping("/filters")
     public Filter create(@Validated(Create.class) @RequestBody FilterDto filterDto) {
         return this.filterService.create(filterDto);
     }
 
-    @PutMapping
+    @PutMapping("/filters")
     public Filter update(@Validated(Update.class) @RequestBody FilterDto filterDto)   {
         return this.filterService.update(filterDto);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/filters")
     public ResponseEntity<String> delete(@Valid @RequestBody BulkDeleteDto bulkDeleteDto) {
-        this.filterService.bulkDelete(bulkDeleteDto.getIds());
+        this.filterService.deleteFilters(bulkDeleteDto.getIds());
         return ResponseEntity.ok("deleted successfully");
     }
 }

@@ -24,17 +24,17 @@ public class ProductVariantController {
 
     @GetMapping
     public List<ProductVariant> getAll() {
-        return this.productVariantService.getAll();
+        return this.productVariantService.getProductVariants();
     }
 
     @GetMapping("/{id}")
     public ProductVariant getById(@PathVariable Long id) {
-        return this.productVariantService.findOneById(id);
+        return this.productVariantService.getProductVariant(id);
     }
 
     @GetMapping("/by-filter-values/{ids}")
     public List<ProductVariant> getByFilerValueIds(@PathVariable Long[] ids) {
-        return this.productVariantService.getAllByFilterValues(Arrays.asList(ids));
+        return this.productVariantService.getProductVariantsByFilterValues(Arrays.asList(ids));
     }
 
     @PostMapping

@@ -10,22 +10,24 @@ import java.util.List;
 
 public interface CategoryService {
 
-    List<CategoryDropdownView> getAll();
+    //Projections
+    List<CategoryDropdownView> getCategories();
 
-    List<Category> getByIdIn(List<Long> ids);
+    List<CategoryItemView> getFirstLevelCategories();
 
-    CategoryEditView getById(Long id);
+    List<CategoryItemView> getAllByParent(Long id);
+
+    List<CategoryDropdownView> getAllowedParents(Long id);
+
+    CategoryEditView getCategory(Long id);
+
+    //DTOs
+    //Not sure for what we need this method
+    List<Category> getMentionedCategories(List<Long> ids);
 
     Category create(CategoryDto categoryDto);
 
     Category update(CategoryDto categoryDto);
 
-    List<CategoryItemView> getAllByParentCategoryId(Long id);
-
-    List<CategoryItemView> getAllRootCategories();
-
-    List<CategoryDropdownView> getAvailableParentCategories(Long id);
-
     void delete(Long id, Boolean deleteChildren);
-
 }

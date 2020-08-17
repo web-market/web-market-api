@@ -8,6 +8,8 @@ import market.repository.StoreRepository;
 import market.service.StoreService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -18,33 +20,39 @@ public class StoreServiceImpl implements StoreService {
     private final ModelMapper modelMapper;
 
     @Override
-    public List<StoreView> getAll() {
+    @Transactional(readOnly = true)
+    public List<StoreView> getStores() {
         return this.storeRepository.findAllBy();
     }
 
     @Override
-    public StoreView getById(Long id) {
+    @Transactional(readOnly = true)
+    public StoreView getStore(Long id) {
         return this.storeRepository.getById(id);
     }
 
     @Override
+    @Transactional
     public Store create(StoreDto storeDto) {
         Store store = this.modelMapper.map(storeDto, Store.class);
         return this.storeRepository.save(store);
     }
 
     @Override
+    @Transactional
     public Store update(StoreDto storeDto) {
         Store store = this.modelMapper.map(storeDto, Store.class);
         return this.storeRepository.save(store);
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         this.storeRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void bulkDelete(List<Long> ids) {
         this.storeRepository.deleteAllByIdIn(ids);
     }

@@ -19,47 +19,44 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MediaFolderServiceImpl implements MediaFolderService {
 
-    private final ModelMapper modelMapper;
     private final MediaFolderRepository mediaFolderRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     @Transactional(readOnly = true)
-    public List<MediaFolderInlineView> getAllInline() {
+    public List<MediaFolderInlineView> getFoldersInline() {
         return this.mediaFolderRepository.findAllBy();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<MediaFolderDropdownView> getAllForDropdown() {
+    public List<MediaFolderDropdownView> getFolders() {
         return this.mediaFolderRepository.getAllBy();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<MediaFolderDropdownView> getAvailableFolders(Long id) {
+    public List<MediaFolderDropdownView> getAllowedParents(Long id) {
         return this.mediaFolderRepository.findAllByIdIsNotInAndIdIsNot(this.getChildFoldersIds(id), id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public MediaFolder getById(Long id) {
-        return this.mediaFolderRepository.getById(id);
+    public MediaFolderEditView getFolderToEdit(Long id) {
+        return this.mediaFolderRepository.getMediaFolderEditViewById(id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public MediaFolderEditView getMediaFolderEditViewById(Long id) {
-        return this.mediaFolderRepository.getMediaFolderEditViewById(id);
+    public MediaFolder getFolder(Long id) {
+        return this.mediaFolderRepository.getById(id);
     }
 
     @Override
     @Transactional
     public MediaFolder create(MediaFolderDto mediaFolderDto) {
         MediaFolder newFolder = this.modelMapper.map(mediaFolderDto, MediaFolder.class);
-        if (mediaFolderDto.getParentFolderId() != null) {
-            MediaFolder parentFolder = this.mediaFolderRepository.getById(mediaFolderDto.getParentFolderId());
-            newFolder.setParentFolder(parentFolder);
-        }
+        newFolder.setParentFolder(this.mediaFolderRepository.getById(mediaFolderDto.getParentFolderId()));
         return this.mediaFolderRepository.save(newFolder);
     }
 
@@ -78,6 +75,7 @@ public class MediaFolderServiceImpl implements MediaFolderService {
     }
 
 
+    //TODO: Add proper functionality to this method
     @Override
     public void delete(Long id, Boolean deleteContent) {
 

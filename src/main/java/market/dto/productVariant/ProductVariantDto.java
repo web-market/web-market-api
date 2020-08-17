@@ -12,12 +12,13 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductVariantDto {
 
+    @NotNull(groups = {Update.class})
     private Long id;
 
-    @NotNull
+    @NotNull(groups = {Create.class, Update.class})
     private String name;
 
-    @NotNull
+    @NotNull(groups = {Create.class, Update.class})
     private String description;
 
     @NotNull(groups = {Create.class, Update.class})

@@ -31,12 +31,12 @@ public class StoreController {
 
     @GetMapping("/stores")
     public ResponseEntity<List<StoreView>> getAllStores() {
-        return new ResponseEntity<>(this.storeService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(this.storeService.getStores(), HttpStatus.OK);
     }
 
     @GetMapping("/stores/{id}")
     public ResponseEntity<StoreView> getStore(@PathVariable Long id) {
-        return new ResponseEntity<>(this.storeService.getById(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.storeService.getStore(id), HttpStatus.OK);
     }
 
     @PostMapping("/stores")

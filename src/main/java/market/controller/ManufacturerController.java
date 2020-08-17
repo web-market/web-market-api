@@ -31,12 +31,12 @@ public class ManufacturerController {
 
     @GetMapping("/manufacturers")
     public List<ManufacturerView> getAll() {
-        return this.manufacturerService.getAll();
+        return this.manufacturerService.getManufacturers();
     }
 
     @GetMapping("/manufacturers/{id}")
     public ManufacturerView getOne(@PathVariable Long id) {
-        return this.manufacturerService.getOne(id);
+        return this.manufacturerService.getManufacturer(id);
     }
 
     @PostMapping("/manufacturers")

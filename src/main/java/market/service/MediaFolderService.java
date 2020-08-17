@@ -10,15 +10,17 @@ import java.util.List;
 
 public interface MediaFolderService {
 
-    List<MediaFolderInlineView> getAllInline();
+    //Projections
+    List<MediaFolderInlineView> getFoldersInline();
 
-    List<MediaFolderDropdownView> getAllForDropdown();
+    List<MediaFolderDropdownView> getFolders();
 
-    List<MediaFolderDropdownView> getAvailableFolders(Long id);
+    List<MediaFolderDropdownView> getAllowedParents(Long id);
 
-    MediaFolder getById(Long id);
+    MediaFolderEditView getFolderToEdit(Long id);
 
-    MediaFolderEditView getMediaFolderEditViewById(Long id);
+    //DTOs
+    MediaFolder getFolder(Long id);
 
     MediaFolder create(MediaFolderDto mediaFolderDto);
 

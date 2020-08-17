@@ -1,43 +1,34 @@
 package market.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import market.dto.file.image.ImageDto;
-import market.entity.File;
-import market.entity.Media;
-import market.projection.file.ImageFileView;
+import lombok.SneakyThrows;
 import market.repository.FileRepository;
 import market.service.FileService;
+import org.apache.commons.io.FileUtils;
+import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
 
     private final FileRepository fileRepository;
+    private final MultipartProperties fileUploadProperties;
 
+    @SneakyThrows(IOException.class)
     @Override
-    public List<ImageFileView> getByMediaId(Long mediaId) {
-        return this.fileRepository.findAllByMediaId(mediaId);
+    public void removeFilesFromFolder(Long mediaId) {
+        FileUtils.deleteDirectory(new File(fileUploadProperties.getLocation() + mediaId));
     }
 
     @Override
     @Transactional
-    public File saveImage(ImageDto image, Media media) {
-        File imageToStore = new File();
-        imageToStore.setName(image.getName());
-        imageToStore.setFormat(image.getExtension());
-        imageToStore.setPath(image.getPath());
-        imageToStore.setSize(image.getSize());
-        imageToStore.setMedia(media);
-        return this.fileRepository.save(imageToStore);
+    public void deleteFilesByMedia(Long mediaId) {
+        this.fileRepository.deleteAllByMediaId(mediaId);
     }
 
-    @Override
-    @Transactional
-    public void deleteByMediaId(Long id) {
-        this.fileRepository.deleteAllByMediaId(id);
-    }
 }

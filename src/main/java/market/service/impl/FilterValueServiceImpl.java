@@ -2,10 +2,10 @@ package market.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import market.dto.filterValue.FilterValueDto;
-import market.entity.Filter;
 import market.entity.FilterValue;
-import market.repository.FilterRepository;
+import market.projection.filterValue.FilterValueView;
 import market.repository.FilterValueRepository;
+import market.service.FilterService;
 import market.service.FilterValueService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,44 +17,44 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FilterValueServiceImpl implements FilterValueService {
 
+    private final FilterService filterService;
     private final FilterValueRepository filterValueRepository;
-    private final FilterRepository filterRepository; //change to filter service (loose coupling)
     private final ModelMapper modelMapper;
 
     @Override
     @Transactional(readOnly = true)
-    public List<FilterValue> getAll() {
-        return this.filterValueRepository.findAllByOrderBySortOrderAsc();
-    }
-
-    @Override
-    public List<FilterValue> getByIdIn(List<Long> ids) {
-        return this.filterValueRepository.getAllByIdIn(ids);
-    }
-
-    @Override
-    @Transactional
-    public FilterValue findOneById(Long id) {
-        return this.filterValueRepository.findOneById(id);
+    public List<FilterValueView> getFilterValues() {
+        return this.filterValueRepository.getAllByOrderBySortOrderDesc();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<FilterValue> getAllByFilterId(Long filterId) {
-        return filterValueRepository.findAllByFilterIdOrderBySortOrderAsc(filterId);
+    public List<FilterValueView> getAllByFilter(Long filterId) {
+        return filterValueRepository.getAllByFilterIdOrderBySortOrderDesc(filterId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<FilterValueView> getMentionedFilterValues(List<Long> ids) {
+        return this.filterValueRepository.getAllByIdIn(ids);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public FilterValueView getFilterValue(Long id) {
+        return this.filterValueRepository.getById(id);
+    }
+
+    @Override
+    public List<FilterValue> getFullMentionedFilterValues(List<Long> ids) {
+        return this.filterValueRepository.findAllByIdIn(ids);
     }
 
     @Override
     @Transactional
     public FilterValue create(FilterValueDto filterValueDto) {
         FilterValue newFilterValue = this.modelMapper.map(filterValueDto, FilterValue.class);
-        if (filterValueDto.getFilterId() != null) {
-            Filter filter = this.filterRepository.getById(filterValueDto.getFilterId());
-            newFilterValue.setFilter(filter);
-        }
-        if (newFilterValue.getSortOrder() == null) {
-            newFilterValue.setSortOrder(0L);
-        }
+        newFilterValue.setFilter(this.filterService.getFullFilter(filterValueDto.getFilterId()));
         return this.filterValueRepository.save(newFilterValue);
     }
 
@@ -62,9 +62,6 @@ public class FilterValueServiceImpl implements FilterValueService {
     @Transactional
     public FilterValue update(FilterValueDto filterValueDto) {
         FilterValue filterValue = this.modelMapper.map(filterValueDto, FilterValue.class);
-        if (filterValue.getSortOrder() == null) {
-            filterValue.setSortOrder(0L);
-        }
         return this.filterValueRepository.save(filterValue);
     }
 

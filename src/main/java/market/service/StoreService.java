@@ -8,10 +8,12 @@ import java.util.List;
 
 public interface StoreService {
 
-    List<StoreView> getAll();
+    //Projections
+    List<StoreView> getStores();
 
-    StoreView getById(Long id);
+    StoreView getStore(Long id);
 
+    //DTOs
     Store create(StoreDto storeDto);
 
     Store update(StoreDto storeDto);

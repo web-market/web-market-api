@@ -1,20 +1,24 @@
 package market.repository;
 
-import market.entity.Category;
 import market.entity.FilterValue;
+import market.projection.filterValue.FilterValueView;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface FilterValueRepository extends JpaRepository<FilterValue, Long> {
 
-    List<FilterValue> findAllByOrderBySortOrderAsc();
+    //Projections
+    List<FilterValueView> getAllByOrderBySortOrderDesc();
 
-    List<FilterValue> getAllByIdIn(List<Long> id);
+    List<FilterValueView> getAllByIdIn(List<Long> id);
 
-    FilterValue findOneById(Long id);
+    List<FilterValueView> getAllByFilterIdOrderBySortOrderDesc(Long filterId);
 
-    List<FilterValue> findAllByFilterIdOrderBySortOrderAsc(Long filterId);
+    //DTOs
+    List<FilterValue> findAllByIdIn(List<Long> id);
+
+    FilterValueView getById(Long id);
 
     void deleteAllByIdIn(List<Long> ids);
 }

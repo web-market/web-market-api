@@ -27,25 +27,25 @@ public class MediaController {
 
     @GetMapping("/media/media-folder/{id}")
     public List<MediaView> getImagesByMediaFolderId(@PathVariable Long id) {
-        return this.mediaService.getByMediaFolderId(id);
+        return this.mediaService.getMediaByFolder(id);
     }
 
     @GetMapping("/media/{id}")
     public MediaView getImagesByMediaId(@PathVariable Long id) {
-        return this.mediaService.getById(id);
+        return this.mediaService.getMedia(id);
     }
 
     @SneakyThrows(IOException.class)
     @PostMapping(value = "/media", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<String> upload(@ModelAttribute ImageGroupUploadDto imageGroupUploadDto) {
-        this.mediaService.store(imageGroupUploadDto);
+        this.mediaService.storeImages(imageGroupUploadDto);
         return ResponseEntity.ok("media with images uploaded successfully");
 
     }
 
     @DeleteMapping("/media/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) throws IOException { 
-        this.mediaService.removeImages(id);
+        this.mediaService.deleteFiles(id);
         return ResponseEntity.ok("media with images deleted successfully");
     }
 

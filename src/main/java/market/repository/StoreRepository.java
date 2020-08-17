@@ -13,6 +13,7 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 
     StoreView getById(Long id);
 
+    //DTOs
     void deleteAllByIdIn(List<Long> ids);
 
 }

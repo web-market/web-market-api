@@ -25,6 +25,16 @@ public class UIProductServiceImpl implements UIProductService {
     private final UIProductRepository UIProductRepository;
     private final ModelMapper modelMapper;
 
+//    @Override
+//    public List<UIProduct> getAllByCategories(List<Long> ids) {
+//        return this.UIProductRepository.getAllByCategoriesIdIn(ids);
+//    }
+
+    @Override
+    public List<UIProduct> getAllByNameLike(String name) {
+        return this.UIProductRepository.getAllByNameContainingIgnoreCase(name);
+    }
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<UIProduct> getAll() {
@@ -63,16 +73,6 @@ public class UIProductServiceImpl implements UIProductService {
     @Transactional
     public void bulkDelete(List<Long> ids) {
         this.UIProductRepository.deleteAllByIdIn(ids);
-    }
-
-//    @Override
-//    public List<UIProduct> getAllByCategories(List<Long> ids) {
-//        return this.UIProductRepository.getAllByCategoriesIdIn(ids);
-//    }
-
-    @Override
-    public List<UIProduct> getAllByNameLike(String name) {
-        return this.UIProductRepository.getAllByNameContainingIgnoreCase(name);
     }
 
 }

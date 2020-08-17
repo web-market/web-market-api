@@ -10,17 +10,19 @@ import java.util.List;
 
 public interface MediaFolderRepository extends JpaRepository<MediaFolder, Long> {
 
+    //Projections
     List<MediaFolderInlineView> findAllBy();
-
-    List<MediaFolder> getAllByParentFolderId(Long id);
-
-    List<MediaFolderDropdownView> findAllByIdIsNotInAndIdIsNot(List<Long> ids, Long currentId);
 
     List<MediaFolderDropdownView> getAllBy();
 
-    MediaFolder getById(Long id);
+    List<MediaFolderDropdownView> findAllByIdIsNotInAndIdIsNot(List<Long> ids, Long currentId);
 
     MediaFolderEditView getMediaFolderEditViewById(Long id);
+
+    //DTOs
+    List<MediaFolder> getAllByParentFolderId(Long id);
+
+    MediaFolder getById(Long id);
 
     void deleteAllByIdIn(List<Long> ids);
 

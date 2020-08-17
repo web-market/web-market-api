@@ -9,11 +9,13 @@ import java.util.List;
 
 public interface FilterRepository extends JpaRepository<Filter, Long> {
 
-    Filter getById(Long id);
+    //Projections
+    List<FilterView> findAllByOrderBySortOrderAsc();
 
     FilterEditView findOneById(Long id);
 
-    List<FilterView> findAllByOrderBySortOrderAsc();
+    //DTOs
+    Filter getById(Long id);
 
     void deleteAllByIdIn(List<Long> ids);
 }

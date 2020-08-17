@@ -6,6 +6,7 @@ import market.dto.filterValue.FilterValueDto;
 import market.dto.transfer.Create;
 import market.dto.transfer.Update;
 import market.entity.FilterValue;
+import market.projection.filterValue.FilterValueView;
 import market.service.FilterValueService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,38 +16,38 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/filter-values")
+@RequestMapping(path = "/filter-value-management")
 @RequiredArgsConstructor
 public class FilterValueController {
 
     private final FilterValueService filterValueService;
 
-    @GetMapping
-    public List<FilterValue> getAllFilterValues() {
-        return this.filterValueService.getAll();
+    @GetMapping("/filter-values")
+    public List<FilterValueView> getAllFilterValues() {
+        return this.filterValueService.getFilterValues();
     }
 
-    @GetMapping("/{id}")
-    public FilterValue getById(@PathVariable Long id) {
-        return this.filterValueService.findOneById(id);
+    @GetMapping("/filter-values/filter/{id}")
+    public List<FilterValueView> getAllByFilterId(@PathVariable Long id) {
+        return this.filterValueService.getAllByFilter(id);
     }
 
-    @GetMapping("/filter/{id}")
-    public List<FilterValue> getAllByFilterId(@PathVariable Long id) {
-        return this.filterValueService.getAllByFilterId(id);
+    @GetMapping("/filter-value/{id}")
+    public FilterValueView getById(@PathVariable Long id) {
+        return this.filterValueService.getFilterValue(id);
     }
 
-    @PostMapping
+    @PostMapping("/filter-values")
     public FilterValue create(@Validated(Create.class) @RequestBody FilterValueDto filterValueDto) {
         return this.filterValueService.create(filterValueDto);
     }
 
-    @PutMapping
+    @PutMapping("/filter-values")
     public FilterValue update(@Validated(Update.class) @RequestBody FilterValueDto filterValueDto) {
         return this.filterValueService.update(filterValueDto);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/filter-values")
     public ResponseEntity<String> delete(@Valid @RequestBody BulkDeleteDto bulkDeleteDto) {
         this.filterValueService.bulkDelete(bulkDeleteDto.getIds());
         return ResponseEntity.ok("deleted successfully");

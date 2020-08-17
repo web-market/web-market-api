@@ -27,40 +27,41 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<CategoryDropdownView> getAll() {
+    public List<CategoryDropdownView> getCategories() {
         return this.categoryRepository.findAllBy();
     }
 
     @Override
-    public List<Category> getByIdIn(List<Long> ids) {
-        return this.categoryRepository.getAllByIdIn(ids);
-    }
-
-    @Override
     @Transactional(readOnly = true)
-    public List<CategoryItemView> getAllByParentCategoryId(Long id) {
-        return this.categoryRepository.getAllByParentCategoryIdOrderBySortOrderDesc(id);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<CategoryItemView> getAllRootCategories() {
+    public List<CategoryItemView> getFirstLevelCategories() {
         return this.categoryRepository.getAllByParentCategoryIdIsNull();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public CategoryEditView getById(Long id) {
+    public List<CategoryItemView> getAllByParent(Long id) {
+        return this.categoryRepository.getAllByParentCategoryIdOrderBySortOrderDesc(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CategoryDropdownView> getAllowedParents(Long id) {
+        List<Long> childIdsWithCurrentId = this.getChildCategoriesIds(id);
+        childIdsWithCurrentId.add(id);
+        return this.categoryRepository.findAllByIdIsNotIn(childIdsWithCurrentId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public CategoryEditView getCategory(Long id) {
         return Optional.ofNullable(this.categoryRepository.getCategoryEditViewById(id))
                 .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<CategoryDropdownView> getAvailableParentCategories(Long id) {
-        List<Long> childIdsWithCurrentId = this.getChildCategoriesIds(id);
-        childIdsWithCurrentId.add(id);
-        return this.categoryRepository.findAllByIdIsNotIn(childIdsWithCurrentId);
+    public List<Category> getMentionedCategories(List<Long> ids) {
+        return this.categoryRepository.getAllByIdIn(ids);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public Category update(CategoryDto updateCategoryDto) {
-        Category category = modelMapper.map(updateCategoryDto, Category.class);
+        Category category = this.modelMapper.map(updateCategoryDto, Category.class);
         category.setParentCategory(this.categoryRepository.getById(updateCategoryDto.getParentCategoryId()));
         return this.categoryRepository.save(category);
     }

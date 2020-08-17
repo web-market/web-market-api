@@ -2,18 +2,18 @@ package market.service;
 
 import market.dto.productVariant.ProductVariantDto;
 import market.entity.ProductVariant;
-import market.entity.UIProduct;
 
 import java.util.List;
 
 public interface ProductVariantService {
 
-    List<ProductVariant> getAll();
+    List<ProductVariant> getProductVariants();
 
-    ProductVariant findOneById(Long id);
+    List<ProductVariant> getProductVariantsByFilterValues(List<Long> filterValueIds);
 
-    List<ProductVariant> getAllByFilterValues(List<Long> ids);
+    ProductVariant getProductVariant(Long id);
 
+    //DTOs
     ProductVariant create(ProductVariantDto productVariantDto);
 
     ProductVariant update(ProductVariantDto productVariantDto);

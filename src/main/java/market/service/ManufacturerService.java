@@ -8,11 +8,13 @@ import java.util.List;
 
 public interface ManufacturerService {
 
-    List<ManufacturerView> getAll();
+    //Projections
+    List<ManufacturerView> getManufacturers();
 
-    Manufacturer findOneById(Long id);
+    ManufacturerView getManufacturer(Long id);
 
-    ManufacturerView getOne(Long id);
+    //DTOs
+    Manufacturer getFullManufacturer(Long id);
 
     Manufacturer create(ManufacturerDto manufacturerDto);
 

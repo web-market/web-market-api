@@ -9,13 +9,17 @@ import java.util.List;
 
 public interface FilterService {
 
-    List<FilterView> getAll();
+    //Projections
+    List<FilterView> getFilters();
 
-    FilterEditView findOneById(Long id);
+    FilterEditView getFilter(Long id);
+
+    //DTOs
+    Filter getFullFilter(Long id);
 
     Filter create(FilterDto filterDto);
 
     Filter update(FilterDto filterDto);
 
-    void bulkDelete(List<Long> ids);
+    void deleteFilters(List<Long> ids);
 }
