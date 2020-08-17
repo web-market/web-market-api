@@ -20,7 +20,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-
     <dependencies>
         <!-- Spring Boot data rest-->
         <dependency>
@@ -130,26 +129,13 @@
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
         </dependency>
-        <!-- Image processing  -->
+        <!-- Image processing -->
         <dependency>
-            <groupId>javaxt</groupId>
-            <artifactId>javaxt-core</artifactId>
-            <version>1.7.8</version>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.11</version>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>jspresso-repository</id>
-            <url>http://repository.jspresso.org/maven2</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <build>
         <plugins>

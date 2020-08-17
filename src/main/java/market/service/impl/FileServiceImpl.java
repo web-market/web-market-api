@@ -25,11 +25,11 @@ public class FileServiceImpl implements FileService {
 
     @Override
     @Transactional
-    public File saveImage(ImageDto image, String pathToImage, Media media) {
+    public File saveImage(ImageDto image, Media media) {
         File imageToStore = new File();
         imageToStore.setName(image.getName());
         imageToStore.setFormat(image.getExtension());
-        imageToStore.setPath(pathToImage);
+        imageToStore.setPath(image.getPath());
         imageToStore.setSize(image.getSize());
         imageToStore.setMedia(media);
         return this.fileRepository.save(imageToStore);

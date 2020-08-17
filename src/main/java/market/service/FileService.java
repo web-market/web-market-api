@@ -11,7 +11,7 @@ public interface FileService {
 
     List<ImageFileView> getByMediaId(Long mediaId);
 
-    File saveImage(ImageDto image, String pathToImage, Media media);
+    File saveImage(ImageDto image, Media media);
 
     void deleteByMediaId(Long id);
 }

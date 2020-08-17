@@ -3,8 +3,6 @@ package market.utility;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.io.FilenameUtils;
-
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,8 +18,9 @@ public class FileManagementUtils {
     public String createImageName(String originalName, int width, int height) {
         return new StringBuilder()
                 .append(FilenameUtils.getBaseName(originalName))
+                .append("_w")
                 .append(width)
-                .append("_")
+                .append("_h")
                 .append(height)
                 .append(".")
                 .append(FilenameUtils.getExtension(originalName))

@@ -44,7 +44,7 @@ public class MediaController {
     }
 
     @DeleteMapping("/media/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws IOException {
+    public ResponseEntity<String> delete(@PathVariable Long id) throws IOException { 
         this.mediaService.removeImages(id);
         return ResponseEntity.ok("media with images deleted successfully");
     }

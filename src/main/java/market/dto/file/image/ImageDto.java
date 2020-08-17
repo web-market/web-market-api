@@ -1,6 +1,5 @@
 package market.dto.file.image;
 
-import javaxt.io.Image;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -14,6 +13,6 @@ public class ImageDto {
 
     private final Integer size;
 
-    private final Image image;
+    private final String path;
 
 }
