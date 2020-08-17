@@ -12,8 +12,6 @@ public interface UIProductRepository extends JpaRepository<UIProduct, Long> {
     void deleteAllByIdIn(List<Long> ids);
 
 //    List<UIProduct> getAllByCategoriesIdIn(List<Long> ids);
-//
-//    List<UIProduct> getAllByFilterValuesIdIn(List<Long> ids);
 
     List<UIProduct> getAllByNameContainingIgnoreCase(String name);
 }

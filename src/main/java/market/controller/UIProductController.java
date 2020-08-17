@@ -42,10 +42,6 @@ public class UIProductController {
 //        return this.UIProductService.getAllByCategories(Arrays.asList(ids));
 //    }
 //
-//    @GetMapping("/by-filter-values/{ids}")
-//    public List<UIProduct> getByFilerValueIds(@PathVariable Long[] ids) {
-//        return this.UIProductService.getAllByFilterValues(Arrays.asList(ids));
-//    }
 
     @GetMapping("/by-name/{name}")
     public List<UIProduct> getByNameLike(@PathVariable String name) {

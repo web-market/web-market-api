@@ -41,17 +41,9 @@ public class UIProductServiceImpl implements UIProductService {
     @Transactional
     public UIProduct create(UIProductDto UIProductDto) {
         UIProduct newUIProduct = this.modelMapper.map(UIProductDto, UIProduct.class);
-//        if (UIProductDto.getManufacturerId() != null) {
-//            Manufacturer manufacturer = this.manufacturerService.findOneById(UIProductDto.getManufacturerId());
-//            newUIProduct.setManufacturer(manufacturer);
-//        }
 //        if (UIProductDto.getCategoryIds() != null) {
 //            List<Category> categories = this.categoryService.getByIdIn(UIProductDto.getCategoryIds());
 //            newUIProduct.setCategories(categories);
-//        }
-//        if (UIProductDto.getFilterValueIds() != null) {
-//            List<FilterValue> filterValues = this.filterValueService.getByIdIn(UIProductDto.getFilterValueIds());
-//            newUIProduct.setFilterValues(filterValues);
 //        }
         return this.UIProductRepository.save(newUIProduct);
     }
@@ -60,17 +52,9 @@ public class UIProductServiceImpl implements UIProductService {
     @Transactional
     public UIProduct update(UIProductDto UIProductDto) {
         UIProduct UIProduct = this.modelMapper.map(UIProductDto, UIProduct.class);
-//        if (UIProductDto.getManufacturerId() != null) {
-//            Manufacturer manufacturer = this.manufacturerService.findOneById(UIProductDto.getManufacturerId());
-//            UIProduct.setManufacturer(manufacturer);
-//        }
 //        if (UIProductDto.getCategoryIds() != null) {
 //            List<Category> categories = this.categoryService.getByIdIn(UIProductDto.getCategoryIds());
 //            UIProduct.setCategories(categories);
-//        }
-//        if (UIProductDto.getFilterValueIds() != null) {
-//            List<FilterValue> filterValues = this.filterValueService.getByIdIn(UIProductDto.getFilterValueIds());
-//            UIProduct.setFilterValues(filterValues);
 //        }
         return this.UIProductRepository.save(UIProduct);
     }
@@ -84,11 +68,6 @@ public class UIProductServiceImpl implements UIProductService {
 //    @Override
 //    public List<UIProduct> getAllByCategories(List<Long> ids) {
 //        return this.UIProductRepository.getAllByCategoriesIdIn(ids);
-//    }
-//
-//    @Override
-//    public List<UIProduct> getAllByFilterValues(List<Long> ids) {
-//        return this.UIProductRepository.getAllByFilterValuesIdIn(ids);
 //    }
 
     @Override
