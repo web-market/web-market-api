@@ -8,6 +8,7 @@ import market.dto.transfer.Update;
 import market.entity.Manufacturer;
 import market.projection.manufacturer.ManufacturerView;
 import market.service.ManufacturerService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,23 +31,23 @@ public class ManufacturerController {
     private final ManufacturerService manufacturerService;
 
     @GetMapping("/manufacturers")
-    public List<ManufacturerView> getAll() {
-        return this.manufacturerService.getManufacturers();
+    public ResponseEntity<List<ManufacturerView>> getAll() {
+        return new ResponseEntity<>(this.manufacturerService.getManufacturers(), HttpStatus.OK);
     }
 
     @GetMapping("/manufacturers/{id}")
-    public ManufacturerView getOne(@PathVariable Long id) {
-        return this.manufacturerService.getManufacturer(id);
+    public ResponseEntity<ManufacturerView> getOne(@PathVariable Long id) {
+        return new ResponseEntity<>(this.manufacturerService.getManufacturer(id), HttpStatus.OK);
     }
 
     @PostMapping("/manufacturers")
-    public Manufacturer create(@Validated(Create.class) @RequestBody ManufacturerDto manufacturerDto) {
-        return this.manufacturerService.create(manufacturerDto);
+    public ResponseEntity<Manufacturer> create(@Validated(Create.class) @RequestBody ManufacturerDto manufacturerDto) {
+        return new ResponseEntity<>(this.manufacturerService.create(manufacturerDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/manufacturers")
-    public Manufacturer update(@Validated(Update.class) @RequestBody ManufacturerDto manufacturerDto)   {
-        return this.manufacturerService.update(manufacturerDto);
+    public ResponseEntity<Manufacturer> update(@Validated(Update.class) @RequestBody ManufacturerDto manufacturerDto)   {
+        return new ResponseEntity<>(this.manufacturerService.update(manufacturerDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/manufacturers")

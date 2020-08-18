@@ -31,7 +31,7 @@ public class MediaFolderServiceImpl implements MediaFolderService {
     @Override
     @Transactional(readOnly = true)
     public List<MediaFolderDropdownView> getFolders() {
-        return this.mediaFolderRepository.getAllBy();
+        return this.mediaFolderRepository.findAllMediaFolderDropdownViewBy();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MediaFolderServiceImpl implements MediaFolderService {
     @Override
     @Transactional(readOnly = true)
     public MediaFolderEditView getFolderToEdit(Long id) {
-        return this.mediaFolderRepository.getMediaFolderEditViewById(id);
+        return this.mediaFolderRepository.findMediaFolderEditViewById(id);
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
     //Projections
     List<StoreView> findAllBy();
 
-    StoreView getById(Long id);
+    StoreView findOneById(Long id);
 
     //DTOs
     void deleteAllByIdIn(List<Long> ids);

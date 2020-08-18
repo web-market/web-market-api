@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
+//TODO: refactor by adding use of projections here
 public interface ProductVariantRepository extends JpaRepository<ProductVariant, Long> {
 
     List<ProductVariant> getAllByFilterValuesIdIn(List<Long> ids);

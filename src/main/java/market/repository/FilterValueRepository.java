@@ -9,14 +9,14 @@ import java.util.List;
 public interface FilterValueRepository extends JpaRepository<FilterValue, Long> {
 
     //Projections
-    List<FilterValueView> getAllByOrderBySortOrderDesc();
+    List<FilterValueView> findAllByOrderBySortOrderDesc();
 
-    List<FilterValueView> getAllByIdIn(List<Long> id);
+    List<FilterValueView> findAllByIdIn(List<Long> id);
 
-    List<FilterValueView> getAllByFilterIdOrderBySortOrderDesc(Long filterId);
+    List<FilterValueView> findAllByFilterIdOrderBySortOrderDesc(Long filterId);
 
     //DTOs
-    List<FilterValue> findAllByIdIn(List<Long> id);
+    List<FilterValue> getAllByIdIn(List<Long> id);
 
     FilterValueView getById(Long id);
 

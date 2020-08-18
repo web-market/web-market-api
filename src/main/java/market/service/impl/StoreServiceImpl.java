@@ -28,7 +28,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     @Transactional(readOnly = true)
     public StoreView getStore(Long id) {
-        return this.storeRepository.getById(id);
+        return this.storeRepository.findOneById(id);
     }
 
     @Override

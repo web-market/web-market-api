@@ -13,11 +13,11 @@ public interface MediaFolderRepository extends JpaRepository<MediaFolder, Long> 
     //Projections
     List<MediaFolderInlineView> findAllBy();
 
-    List<MediaFolderDropdownView> getAllBy();
+    List<MediaFolderDropdownView> findAllMediaFolderDropdownViewBy();
 
     List<MediaFolderDropdownView> findAllByIdIsNotInAndIdIsNot(List<Long> ids, Long currentId);
 
-    MediaFolderEditView getMediaFolderEditViewById(Long id);
+    MediaFolderEditView findMediaFolderEditViewById(Long id);
 
     //DTOs
     List<MediaFolder> getAllByParentFolderId(Long id);

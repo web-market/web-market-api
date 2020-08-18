@@ -34,13 +34,13 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional(readOnly = true)
     public List<CategoryItemView> getFirstLevelCategories() {
-        return this.categoryRepository.getAllByParentCategoryIdIsNull();
+        return this.categoryRepository.findAllByParentCategoryIdIsNull();
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CategoryItemView> getAllByParent(Long id) {
-        return this.categoryRepository.getAllByParentCategoryIdOrderBySortOrderDesc(id);
+        return this.categoryRepository.findAllByParentCategoryIdOrderBySortOrderDesc(id);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional(readOnly = true)
     public CategoryEditView getCategory(Long id) {
-        return Optional.ofNullable(this.categoryRepository.getCategoryEditViewById(id))
+        return Optional.ofNullable(this.categoryRepository.findCategoryEditViewById(id))
                 .orElseThrow(EntityNotFoundException::new);
     }
 
@@ -105,7 +105,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     private List<Long> getChildCategoriesIds(Long id) {
         List<Long> childIds = new ArrayList<>();
-        this.categoryRepository.getAllByParentCategoryId(id)
+        this.categoryRepository.findAllByParentCategoryId(id)
                 .forEach(child -> {
                     childIds.add(child.getId());
                     childIds.addAll(getChildCategoriesIds(child.getId()));

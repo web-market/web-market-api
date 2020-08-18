@@ -9,6 +9,7 @@ import market.entity.Filter;
 import market.projection.filter.FilterEditView;
 import market.projection.filter.FilterView;
 import market.service.FilterService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,23 +32,23 @@ public class FilterController {
     private final FilterService filterService;
 
     @GetMapping("/filters")
-    public List<FilterView> getAllFilters() {
-        return this.filterService.getFilters();
+    public ResponseEntity<List<FilterView>> getAllFilters() {
+        return new ResponseEntity<>(this.filterService.getFilters(), HttpStatus.OK);
     }
 
     @GetMapping("/filter/{id}")
-    public FilterEditView getById(@PathVariable Long id) {
-        return this.filterService.getFilter(id);
+    public ResponseEntity<FilterEditView> getById(@PathVariable Long id) {
+        return new ResponseEntity<>(this.filterService.getFilter(id), HttpStatus.OK);
     }
 
     @PostMapping("/filters")
-    public Filter create(@Validated(Create.class) @RequestBody FilterDto filterDto) {
-        return this.filterService.create(filterDto);
+    public ResponseEntity<Filter> create(@Validated(Create.class) @RequestBody FilterDto filterDto) {
+        return new ResponseEntity<>(this.filterService.create(filterDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/filters")
-    public Filter update(@Validated(Update.class) @RequestBody FilterDto filterDto)   {
-        return this.filterService.update(filterDto);
+    public ResponseEntity<Filter> update(@Validated(Update.class) @RequestBody FilterDto filterDto)   {
+        return new ResponseEntity<>(this.filterService.update(filterDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/filters")

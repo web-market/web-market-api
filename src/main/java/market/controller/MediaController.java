@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import market.dto.media.ImageGroupUploadDto;
 import market.projection.media.MediaView;
 import market.service.MediaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,15 +27,16 @@ public class MediaController {
     private final MediaService mediaService;
 
     @GetMapping("/media/media-folder/{id}")
-    public List<MediaView> getImagesByMediaFolderId(@PathVariable Long id) {
-        return this.mediaService.getMediaByFolder(id);
+    public ResponseEntity<List<MediaView>> getImagesByMediaFolderId(@PathVariable Long id) {
+        return new ResponseEntity<>(this.mediaService.getMediaByFolder(id), HttpStatus.OK);
     }
 
     @GetMapping("/media/{id}")
-    public MediaView getImagesByMediaId(@PathVariable Long id) {
-        return this.mediaService.getMedia(id);
+    public ResponseEntity<MediaView> getImagesByMediaId(@PathVariable Long id) {
+        return new ResponseEntity<>(this.mediaService.getMedia(id), HttpStatus.OK);
     }
 
+    //TODO: refactor method to handle such exceptions properly
     @SneakyThrows(IOException.class)
     @PostMapping(value = "/media", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<String> upload(@ModelAttribute ImageGroupUploadDto imageGroupUploadDto) {

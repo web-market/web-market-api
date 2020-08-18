@@ -11,10 +11,10 @@ public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long
     //Projections
     List<ManufacturerView> findAllBy();
 
-    ManufacturerView getById(Long id);
+    ManufacturerView findOneById(Long id);
 
     //DTOs
-    Manufacturer findOneById(Long id);
+    Manufacturer getById(Long id);
 
     void deleteById(Long id);
 

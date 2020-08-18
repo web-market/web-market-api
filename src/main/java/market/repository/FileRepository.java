@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface FileRepository extends JpaRepository<File, Long> {
 
+    //Projections
     List<ImageFileView> findAllByMediaId(Long id);
 
+    //DTOs
     void deleteAllByMediaId(Long id);
 
 }

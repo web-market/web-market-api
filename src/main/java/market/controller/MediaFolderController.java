@@ -9,6 +9,7 @@ import market.projection.mediaFolder.MediaFolderDropdownView;
 import market.projection.mediaFolder.MediaFolderEditView;
 import market.projection.mediaFolder.MediaFolderInlineView;
 import market.service.MediaFolderService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,33 +32,33 @@ public class MediaFolderController {
     private final MediaFolderService mediaFolderService;
 
     @GetMapping("/media-folder-inline")
-    public List<MediaFolderInlineView> getAllMediaCategories() {
-        return this.mediaFolderService.getFoldersInline();
+    public ResponseEntity<List<MediaFolderInlineView>> getAllMediaCategories() {
+        return new ResponseEntity<>(this.mediaFolderService.getFoldersInline(), HttpStatus.OK);
     }
 
     @GetMapping("/media-folder/all")
-    public List<MediaFolderDropdownView> getAllForDropdown() {
-        return this.mediaFolderService.getFolders();
+    public ResponseEntity<List<MediaFolderDropdownView>> getAllForDropdown() {
+        return new ResponseEntity<>(this.mediaFolderService.getFolders(), HttpStatus.OK);
     }
 
     @GetMapping("/available-folders-to-move-in/{id}")
-    public List<MediaFolderDropdownView> getAvailableParents(@PathVariable Long id) {
-        return this.mediaFolderService.getAllowedParents(id);
+    public ResponseEntity<List<MediaFolderDropdownView>> getAvailableParents(@PathVariable Long id) {
+        return new ResponseEntity<>(this.mediaFolderService.getAllowedParents(id), HttpStatus.OK);
     }
 
     @GetMapping("/media-folder/{id}")
-    public MediaFolderEditView getSingleCategory(@PathVariable Long id) {
-        return this.mediaFolderService.getFolderToEdit(id);
+    public ResponseEntity<MediaFolderEditView> getSingleCategory(@PathVariable Long id) {
+        return new ResponseEntity<>(this.mediaFolderService.getFolderToEdit(id), HttpStatus.OK);
     }
 
     @PostMapping("/media-folder")
-    public MediaFolder create(@Validated(Create.class) @RequestBody MediaFolderDto mediaFolderDto) {
-        return this.mediaFolderService.create(mediaFolderDto);
+    public ResponseEntity<MediaFolder> create(@Validated(Create.class) @RequestBody MediaFolderDto mediaFolderDto) {
+        return new ResponseEntity<>(this.mediaFolderService.create(mediaFolderDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/media-folder")
-    public MediaFolder update(@Validated(Update.class) @RequestBody MediaFolderDto mediaFolderDto) {
-        return this.mediaFolderService.update(mediaFolderDto);
+    public ResponseEntity<MediaFolder> update(@Validated(Update.class) @RequestBody MediaFolderDto mediaFolderDto) {
+        return new ResponseEntity<>(this.mediaFolderService.update(mediaFolderDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/media-folder/{id}")

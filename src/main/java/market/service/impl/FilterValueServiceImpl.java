@@ -24,19 +24,19 @@ public class FilterValueServiceImpl implements FilterValueService {
     @Override
     @Transactional(readOnly = true)
     public List<FilterValueView> getFilterValues() {
-        return this.filterValueRepository.getAllByOrderBySortOrderDesc();
+        return this.filterValueRepository.findAllByOrderBySortOrderDesc();
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<FilterValueView> getAllByFilter(Long filterId) {
-        return filterValueRepository.getAllByFilterIdOrderBySortOrderDesc(filterId);
+        return filterValueRepository.findAllByFilterIdOrderBySortOrderDesc(filterId);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<FilterValueView> getMentionedFilterValues(List<Long> ids) {
-        return this.filterValueRepository.getAllByIdIn(ids);
+        return this.filterValueRepository.findAllByIdIn(ids);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class FilterValueServiceImpl implements FilterValueService {
 
     @Override
     public List<FilterValue> getFullMentionedFilterValues(List<Long> ids) {
-        return this.filterValueRepository.findAllByIdIn(ids);
+        return this.filterValueRepository.getAllByIdIn(ids);
     }
 
     @Override

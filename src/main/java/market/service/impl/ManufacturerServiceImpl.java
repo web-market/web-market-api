@@ -28,13 +28,13 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     @Transactional(readOnly = true)
     public ManufacturerView getManufacturer(Long id) {
-        return this.manufacturerRepository.getById(id);
+        return this.manufacturerRepository.findOneById(id);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Manufacturer getFullManufacturer(Long id) {
-        return this.manufacturerRepository.findOneById(id);
+        return this.manufacturerRepository.getById(id);
     }
 
     @Override

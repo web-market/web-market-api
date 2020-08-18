@@ -15,13 +15,13 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     List<CategoryDropdownView> findAllByIdIsNotIn(List<Long> id);
 
-    List<CategoryDropdownView> getAllByParentCategoryId(Long id);
+    List<CategoryDropdownView> findAllByParentCategoryId(Long id);
 
-    List<CategoryItemView> getAllByParentCategoryIdIsNull();
+    List<CategoryItemView> findAllByParentCategoryIdIsNull();
 
-    List<CategoryItemView> getAllByParentCategoryIdOrderBySortOrderDesc(Long id);
+    List<CategoryItemView> findAllByParentCategoryIdOrderBySortOrderDesc(Long id);
 
-    CategoryEditView getCategoryEditViewById(Long id);
+    CategoryEditView findCategoryEditViewById(Long id);
 
     //DTOs
     Category getById(Long id);
