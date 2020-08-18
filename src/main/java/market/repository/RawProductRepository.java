@@ -1,6 +1,7 @@
 package market.repository;
 
 import market.entity.RawProduct;
+import market.projection.rawProduct.RawProductView;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -8,7 +9,11 @@ import java.util.List;
 //TODO: refactor by adding use of projections here
 public interface RawProductRepository extends JpaRepository<RawProduct, Long> {
 
-    RawProduct findOneById(Long id);
+    //Projections
+    List<RawProductView> findAllBy();
 
+    RawProductView findOneById(Long id);
+
+    //DTOs
     void deleteAllByIdIn(List<Long> ids);
 }

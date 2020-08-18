@@ -1,5 +1,7 @@
 package market.projection.rawProduct;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public interface RawProductView {
 
     Long getId();
@@ -7,5 +9,8 @@ public interface RawProductView {
     String getName();
 
     String getDescription();
+
+    @Value("#{target.getManufacturer().getId()}")
+    Long getManufacturerId();
 
 }

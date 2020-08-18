@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import market.dto.rawProduct.RawProductDto;
 import market.entity.Manufacturer;
 import market.entity.RawProduct;
+import market.projection.rawProduct.RawProductView;
 import market.repository.RawProductRepository;
 import market.service.ManufacturerService;
 import market.service.RawProductService;
@@ -24,13 +25,13 @@ public class RawProductServiceImpl implements RawProductService {
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
-    public List<RawProduct> getAll() {
-        return this.rawProductRepository.findAll();
+    public List<RawProductView> getAllRawProducts() {
+        return this.rawProductRepository.findAllBy();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public RawProduct findOneById(Long id) {
+    public RawProductView getRawProduct(Long id) {
         return this.rawProductRepository.findOneById(id);
     }
 

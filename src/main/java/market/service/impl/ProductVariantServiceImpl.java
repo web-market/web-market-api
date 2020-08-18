@@ -3,6 +3,7 @@ package market.service.impl;
 import lombok.RequiredArgsConstructor;
 import market.dto.productVariant.ProductVariantDto;
 import market.entity.ProductVariant;
+import market.projection.productVariant.ProductVariantView;
 import market.repository.ProductVariantRepository;
 import market.service.FilterValueService;
 import market.service.ProductVariantService;
@@ -23,19 +24,19 @@ public class ProductVariantServiceImpl implements ProductVariantService {
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
-    public List<ProductVariant> getProductVariants() {
-        return this.productVariantRepository.findAll();
+    public List<ProductVariantView> getProductVariants() {
+        return this.productVariantRepository.findAllBy();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductVariant> getProductVariantsByFilterValues(List<Long> filterValueIds) {
-        return this.productVariantRepository.getAllByFilterValuesIdIn(filterValueIds);
+    public List<ProductVariantView> getProductVariantsByFilterValues(List<Long> filterValueIds) {
+        return this.productVariantRepository.findAllByFilterValuesIdIn(filterValueIds);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ProductVariant getProductVariant(Long id) {
+    public ProductVariantView getProductVariant(Long id) {
         return this.productVariantRepository.findOneById(id);
     }
 

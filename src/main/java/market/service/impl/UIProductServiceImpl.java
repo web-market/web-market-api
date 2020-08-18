@@ -3,6 +3,7 @@ package market.service.impl;
 import lombok.RequiredArgsConstructor;
 import market.dto.uiProduct.UIProductDto;
 import market.entity.UIProduct;
+import market.projection.uiProduct.UIProductView;
 import market.repository.UIProductRepository;
 import market.service.CategoryService;
 import market.service.FilterValueService;
@@ -25,28 +26,31 @@ public class UIProductServiceImpl implements UIProductService {
     private final UIProductRepository UIProductRepository;
     private final ModelMapper modelMapper;
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<UIProductView> getAllUIProductsByNameLike(String name) {
+        return this.UIProductRepository.findAllByNameContainingIgnoreCase(name);
+    }
+
+    //TODO: find out why propagation is used here
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
+    public List<UIProductView> getAllUIProducts() {
+        return this.UIProductRepository.findAllBy();
+    }
+
 //    @Override
 //    public List<UIProduct> getAllByCategories(List<Long> ids) {
 //        return this.UIProductRepository.getAllByCategoriesIdIn(ids);
 //    }
 
     @Override
-    public List<UIProduct> getAllByNameLike(String name) {
-        return this.UIProductRepository.getAllByNameContainingIgnoreCase(name);
-    }
-
-    @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
-    public List<UIProduct> getAll() {
-        return this.UIProductRepository.findAll();
-    }
-
-    @Override
     @Transactional(readOnly = true)
-    public UIProduct findOneById(Long id) {
+    public UIProductView getUIProduct(Long id) {
         return this.UIProductRepository.findOneById(id);
     }
 
+    //TODO: finalize this method
     @Override
     @Transactional
     public UIProduct create(UIProductDto UIProductDto) {
@@ -58,6 +62,7 @@ public class UIProductServiceImpl implements UIProductService {
         return this.UIProductRepository.save(newUIProduct);
     }
 
+    //TODO: finalize this method
     @Override
     @Transactional
     public UIProduct update(UIProductDto UIProductDto) {

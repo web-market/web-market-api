@@ -1,17 +1,19 @@
 package market.service;
 
 import market.dto.rawProduct.RawProductDto;
-import market.dto.uiProduct.UIProductDto;
 import market.entity.RawProduct;
+import market.projection.rawProduct.RawProductView;
 
 import java.util.List;
 
 public interface RawProductService {
 
-    List<RawProduct> getAll();
+    //Projections
+    List<RawProductView> getAllRawProducts();
 
-    RawProduct findOneById(Long id);
+    RawProductView getRawProduct(Long id);
 
+    //DTOs
     RawProduct create(RawProductDto rawProductDto);
 
     RawProduct update(RawProductDto rawProductDto);

@@ -56,18 +56,15 @@ public class MediaServiceImpl implements MediaService {
     @Transactional
     public void storeImages(ImageGroupUploadDto uploads) throws IOException {
         for (MultipartFile image : uploads.getImages()) {
-            BufferedImage originalImage = ImageIO.read(image.getInputStream());
             Media media = this.create(uploads.getMediaFolderId());
-
             FileManagementUtils.createDirectoryIfNotExist(Paths.get(fileUploadProperties.getLocation() + media.getId()));
 
+            BufferedImage originalImage = ImageIO.read(image.getInputStream());
             this.imageService.storeResizedImage(image, media, originalImage.getWidth(), originalImage.getHeight());
-
             this.imageService.storeResizedImage(image, media, ImageSize.LOW_RESOLUTION_WIDTH, ImageSize.LOW_RESOLUTION_HEIGHT);
             this.imageService.storeResizedImage(image, media, ImageSize.MEDIUM_RESOLUTION_WIDTH, ImageSize.MEDIUM_RESOLUTION_HEIGHT);
             this.imageService.storeResizedImage(image, media, ImageSize.HIGH_RESOLUTION_WIDTH, ImageSize.HIGH_RESOLUTION_HEIGHT);
         }
-
     }
 
     @Override
@@ -77,5 +74,7 @@ public class MediaServiceImpl implements MediaService {
         this.fileService.removeFilesFromFolder(mediaId);
         this.fileService.deleteFilesByMedia(mediaId);
     }
+
+
 
 }

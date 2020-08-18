@@ -1,18 +1,24 @@
 package market.repository;
 
 import market.entity.UIProduct;
+import market.projection.uiProduct.UIProductView;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-//TODO: refactor by adding use of projections here
 public interface UIProductRepository extends JpaRepository<UIProduct, Long> {
 
-    UIProduct findOneById(Long id);
+    //Projections
+    List<UIProductView> findAllByNameContainingIgnoreCase(String name);
 
+    List<UIProductView> findAllBy();
+
+    //TODO: Stanislav should take a look to this one
+    //List<UIProduct> getAllByCategoriesIdIn(List<Long> ids);
+
+    UIProductView findOneById(Long id);
+
+    //DTOs
     void deleteAllByIdIn(List<Long> ids);
 
-//    List<UIProduct> getAllByCategoriesIdIn(List<Long> ids);
-
-    List<UIProduct> getAllByNameContainingIgnoreCase(String name);
 }

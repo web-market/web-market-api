@@ -49,6 +49,7 @@ public class ImageServiceImpl implements ImageService {
 
     @SneakyThrows(IOException.class)
     @Override
+    @Transactional
     public File storeResizedImage(MultipartFile image, Media media, int width, int height) {
         String imageName = FileManagementUtils.createImageName(image.getOriginalFilename(), width, height);
         Path path = FileManagementUtils.generatePathToImage(Paths.get(fileUploadProperties.getLocation() + media.getId()), imageName);
@@ -65,7 +66,7 @@ public class ImageServiceImpl implements ImageService {
                 .outputQuality(ImageSize.IMAGE_QUALITY)
                 .toFile(Path.of(imageToSave.getPath()).toFile());
 
-        return saveImage(imageToSave, media);
+        return this.saveImage(imageToSave, media);
     }
 
 }
