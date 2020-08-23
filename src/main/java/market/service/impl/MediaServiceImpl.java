@@ -75,6 +75,4 @@ public class MediaServiceImpl implements MediaService {
         this.fileService.deleteFilesByMedia(mediaId);
     }
 
-
-
 }
