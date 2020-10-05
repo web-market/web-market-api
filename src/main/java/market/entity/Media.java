@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@ToString(exclude = "uiProducts")
+@ToString(exclude = "productVariants")
 @Table(name = "media")
 @Entity
 public class Media {

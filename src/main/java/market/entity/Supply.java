@@ -1,0 +1,50 @@
+package market.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
+
+@Data
+@Table(name = "supply")
+@Entity
+public class Supply {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supply_sequence")
+    @SequenceGenerator(name = "supply_sequence", sequenceName = "supply_id_seq", allocationSize = 1)
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "comment")
+    private String comment;
+
+    @Column(name = "arrival_date")
+    private LocalDateTime arrivalDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "store_id")
+    @JsonIgnore
+    private Store store;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "provider_id")
+    @JsonIgnore
+    private Provider provider;
+
+}
