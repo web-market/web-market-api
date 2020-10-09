@@ -5,7 +5,7 @@ import market.dto.productVariant.ProductVariantDto;
 import market.entity.ProductVariant;
 import market.projection.productVariant.ProductVariantView;
 import market.repository.ProductVariantRepository;
-import market.service.FilterValueService;
+import market.filterValue.service.FilterValueService;
 import market.service.ProductVariantService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

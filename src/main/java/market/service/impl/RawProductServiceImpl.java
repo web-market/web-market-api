@@ -6,7 +6,7 @@ import market.entity.Manufacturer;
 import market.entity.RawProduct;
 import market.projection.rawProduct.RawProductView;
 import market.repository.RawProductRepository;
-import market.service.ManufacturerService;
+import market.manufacturer.service.ManufacturerService;
 import market.service.RawProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
