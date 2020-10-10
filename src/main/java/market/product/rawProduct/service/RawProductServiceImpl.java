@@ -1,13 +1,11 @@
-package market.service.impl;
+package market.product.rawProduct.service;
 
 import lombok.RequiredArgsConstructor;
-import market.dto.rawProduct.RawProductDto;
-import market.entity.Manufacturer;
 import market.entity.RawProduct;
-import market.projection.rawProduct.RawProductView;
-import market.repository.RawProductRepository;
 import market.manufacturer.service.ManufacturerService;
-import market.service.RawProductService;
+import market.product.rawProduct.dto.RawProductDto;
+import market.product.rawProduct.dto.RawProductView;
+import market.repository.RawProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,8 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RawProductServiceImpl implements RawProductService {
 
-    private final ManufacturerService manufacturerService;
     private final RawProductRepository rawProductRepository;
+    private final ManufacturerService manufacturerService;
     private final ModelMapper modelMapper;
 
     @Override
@@ -39,10 +37,7 @@ public class RawProductServiceImpl implements RawProductService {
     @Transactional
     public RawProduct create(RawProductDto rawProductDto) {
         RawProduct newRawProduct = this.modelMapper.map(rawProductDto, RawProduct.class);
-        if (rawProductDto.getManufacturerId() != null) {
-            Manufacturer manufacturer = this.manufacturerService.getFullManufacturer(rawProductDto.getManufacturerId());
-            newRawProduct.setManufacturer(manufacturer);
-        }
+        newRawProduct.setManufacturer(this.manufacturerService.getFullManufacturer(rawProductDto.getManufacturerId()));
         return this.rawProductRepository.save(newRawProduct);
     }
 
@@ -50,10 +45,7 @@ public class RawProductServiceImpl implements RawProductService {
     @Transactional
     public RawProduct update(RawProductDto rawProductDto) {
         RawProduct rawProduct = this.modelMapper.map(rawProductDto, RawProduct.class);
-        if (rawProductDto.getManufacturerId() != null) {
-            Manufacturer manufacturer = this.manufacturerService.getFullManufacturer(rawProductDto.getManufacturerId());
-            rawProduct.setManufacturer(manufacturer);
-        }
+        rawProduct.setManufacturer(this.manufacturerService.getFullManufacturer(rawProductDto.getManufacturerId()));
         return this.rawProductRepository.save(rawProduct);
     }
 

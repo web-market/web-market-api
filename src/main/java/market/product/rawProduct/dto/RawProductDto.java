@@ -1,4 +1,4 @@
-package market.dto.rawProduct;
+package market.product.rawProduct.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +22,5 @@ public class RawProductDto {
 
     @NotNull(groups = {Create.class, Update.class})
     private Long manufacturerId;
-
 
 }

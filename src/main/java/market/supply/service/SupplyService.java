@@ -1,5 +1,6 @@
 package market.supply.service;
 
+import market.supply.dto.SupplyCompositeDto;
 import market.supply.dto.SupplyItemView;
 
 import java.util.List;
@@ -11,6 +12,6 @@ public interface SupplyService {
 
     SupplyItemView getSupply(Long id);
 
-
+    void create(SupplyCompositeDto supplyCompositeDto);
 
 }

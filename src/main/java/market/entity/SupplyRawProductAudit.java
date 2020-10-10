@@ -17,28 +17,31 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Data
-@Table(name = "store_product_variant_audit")
+@Table(name = "supply_raw_product_audit")
 @Entity
-public class StoreProductVariantAudit {
+public class SupplyRawProductAudit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "store_product_variant_audit_sequence")
-    @SequenceGenerator(name = "store_product_variant_audit_sequence", sequenceName = "store_product_variant_audit_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supply_raw_product_audit_sequence")
+    @SequenceGenerator(name = "supply_raw_product_audit_sequence", sequenceName = "supply_raw_product_audit_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "product_variant_quantity")
-    private Long productVariantQuantity;
+    @Column(name = "raw_product_quantity")
+    private Long rawProductQuantity;
+
+    @Column(name = "price_per_item")
+    private Double pricePerItem;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "store_id")
+    @JoinColumn(name = "supply_id")
     @JsonIgnore
-    private Store store;
+    private Supply supply;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "product_variant_id")
+    @JoinColumn(name = "raw_product_id")
     @JsonIgnore
-    private ProductVariant productVariant;
+    private RawProduct rawProduct;
 
 }

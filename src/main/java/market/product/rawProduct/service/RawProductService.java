@@ -1,8 +1,8 @@
-package market.service;
+package market.product.rawProduct.service;
 
-import market.dto.rawProduct.RawProductDto;
+import market.product.rawProduct.dto.RawProductDto;
 import market.entity.RawProduct;
-import market.projection.rawProduct.RawProductView;
+import market.product.rawProduct.dto.RawProductView;
 
 import java.util.List;
 
