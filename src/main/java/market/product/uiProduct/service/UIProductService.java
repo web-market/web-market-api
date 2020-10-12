@@ -1,8 +1,8 @@
-package market.service;
+package market.product.uiProduct.service;
 
-import market.dto.uiProduct.UIProductDto;
 import market.entity.UIProduct;
-import market.projection.uiProduct.UIProductView;
+import market.product.uiProduct.dto.UIProductDto;
+import market.product.uiProduct.dto.UIProductView;
 
 import java.util.List;
 

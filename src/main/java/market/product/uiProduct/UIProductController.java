@@ -1,13 +1,12 @@
-package market.controller;
+package market.product.uiProduct;
 
 import lombok.RequiredArgsConstructor;
 import market.dto.BulkDeleteDto;
 import market.dto.transfer.Create;
 import market.dto.transfer.Update;
-import market.dto.uiProduct.UIProductDto;
 import market.entity.UIProduct;
-import market.projection.uiProduct.UIProductView;
-import market.service.UIProductService;
+import market.product.uiProduct.dto.UIProductDto;
+import market.product.uiProduct.dto.UIProductView;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -28,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UIProductController {
 
-    private final UIProductService UIProductService;
+    private final market.product.uiProduct.service.UIProductService UIProductService;
 
     @GetMapping
     public ResponseEntity<List<UIProductView>> getAll() {

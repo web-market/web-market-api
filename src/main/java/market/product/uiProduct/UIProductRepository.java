@@ -1,7 +1,7 @@
-package market.repository;
+package market.product.uiProduct;
 
 import market.entity.UIProduct;
-import market.projection.uiProduct.UIProductView;
+import market.product.uiProduct.dto.UIProductView;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

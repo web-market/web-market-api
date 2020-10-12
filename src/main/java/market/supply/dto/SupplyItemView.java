@@ -9,7 +9,7 @@ public interface SupplyItemView {
 
     Long getId();
 
-    String getName();
+    String getIdentificationNumber();
 
     String getComment();
 

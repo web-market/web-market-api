@@ -1,4 +1,4 @@
-package market.projection.uiProduct;
+package market.product.uiProduct.dto;
 
 public interface UIProductView {
 

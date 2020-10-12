@@ -28,8 +28,8 @@ public class Supply {
     @SequenceGenerator(name = "supply_sequence", sequenceName = "supply_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "identification_number", unique = true)
+    private String identificationNumber;
 
     @Column(name = "comment")
     private String comment;

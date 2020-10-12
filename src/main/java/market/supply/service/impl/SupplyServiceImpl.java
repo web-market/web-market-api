@@ -35,7 +35,6 @@ public class SupplyServiceImpl implements SupplyService {
     public void create(SupplyCompositeDto supplyCompositeDto) {
         var supply = this.modelMapper.map(supplyCompositeDto, Supply.class);
         supply.setStatus(SupplyStatus.DRAFT);
-        supply.setName("DEFAULT");
         this.supplyRawProductAuditService.create(supplyCompositeDto.getSupplyRawProductAudit(),
                 this.supplyRepository.save(supply));
     }

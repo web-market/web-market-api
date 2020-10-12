@@ -22,6 +22,9 @@ public class SupplyCompositeDto {
 
     private String comment;
 
+    @NotNull(groups = {Create.class, Update.class})
+    private String identificationNumber;
+
     @Valid
     private ProviderDto provider;
 

@@ -1,14 +1,13 @@
-package market.service.impl;
+package market.product.uiProduct.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import market.dto.uiProduct.UIProductDto;
-import market.entity.UIProduct;
-import market.projection.uiProduct.UIProductView;
-import market.repository.UIProductRepository;
 import market.category.service.CategoryService;
+import market.entity.UIProduct;
 import market.filterValue.service.FilterValueService;
 import market.manufacturer.service.ManufacturerService;
-import market.service.UIProductService;
+import market.product.uiProduct.service.UIProductService;
+import market.product.uiProduct.dto.UIProductDto;
+import market.product.uiProduct.dto.UIProductView;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,7 +22,7 @@ public class UIProductServiceImpl implements UIProductService {
     private final CategoryService categoryService;
     private final FilterValueService filterValueService;
     private final ManufacturerService manufacturerService;
-    private final UIProductRepository UIProductRepository;
+    private final market.product.uiProduct.UIProductRepository UIProductRepository;
     private final ModelMapper modelMapper;
 
     @Override

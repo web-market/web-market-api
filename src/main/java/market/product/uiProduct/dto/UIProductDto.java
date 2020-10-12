@@ -1,4 +1,4 @@
-package market.dto.uiProduct;
+package market.product.uiProduct.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
