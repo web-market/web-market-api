@@ -1,6 +1,7 @@
 package market.supply.controller;
 
 import lombok.RequiredArgsConstructor;
+import market.dto.transfer.Create;
 import market.supply.dto.SupplyCompositeDto;
 import market.supply.dto.SupplyItemView;
 import market.supply.service.SupplyService;
@@ -35,7 +36,7 @@ public class SupplyController {
     }
 
     @PostMapping("/supplies")
-    public ResponseEntity<Void> create(@Validated @RequestBody SupplyCompositeDto supplyCompositeDto) {
+    public ResponseEntity<Void> create(@Validated(Create.class) @RequestBody SupplyCompositeDto supplyCompositeDto) {
         this.supplyService.create(supplyCompositeDto);
         return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION,
                 "/supply-management/supplies").build();

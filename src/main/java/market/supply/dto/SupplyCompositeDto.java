@@ -2,10 +2,13 @@ package market.supply.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import market.supplyRawProductAudit.dto.SupplyRawProductAuditDto;
+import market.dto.transfer.Create;
+import market.dto.transfer.Update;
 import market.provider.dto.ProviderDto;
 import market.store.dto.StoreDto;
+import market.supplyRawProductAudit.dto.SupplyRawProductAuditDto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,18 +17,18 @@ import java.util.List;
 @NoArgsConstructor
 public class SupplyCompositeDto {
 
-    @NotNull
+    @NotNull(groups = {Create.class, Update.class})
     private LocalDateTime arrivalDate;
 
     private String comment;
 
-    @NotNull
+    @Valid
     private ProviderDto provider;
 
-    @NotNull
+    @Valid
     private StoreDto store;
 
-    @NotNull
+    @Valid
     private List<SupplyRawProductAuditDto> supplyRawProductAudit;
 
 }
