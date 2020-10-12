@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,14 +34,26 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void removeFilesFromFolder(Long mediaId) throws IOException {
+    public void removeFileGroupFromFolder(Long mediaId) throws IOException {
         FileUtils.deleteDirectory(new File(fileUploadProperties.getLocation() + mediaId));
+    }
+
+    @Override
+    public void removeFileGroupsFromFolder(List<Long> mediaIds) throws IOException {
+        for (Long mediaId : mediaIds) {
+            FileUtils.deleteDirectory(new File(fileUploadProperties.getLocation() + mediaId));
+        }
     }
 
     @Override
     @Transactional
     public void deleteFilesByMedia(Long mediaId) {
         this.fileRepository.deleteAllByMediaId(mediaId);
+    }
+
+    @Override
+    public void deleteFilesInManyMedia(List<Long> ids) {
+        this.fileRepository.deleteAllByMediaIdIn(ids);
     }
 
 }

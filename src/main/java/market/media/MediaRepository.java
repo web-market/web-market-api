@@ -18,4 +18,6 @@ public interface MediaRepository extends JpaRepository<Media, Long> {
 
     void deleteById(Long id);
 
+    void deleteAllByIdIn(List<Long> ids);
+
 }

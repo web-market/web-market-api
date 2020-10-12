@@ -17,7 +17,6 @@ public class RawProductDto {
     @NotNull(groups =  {Create.class, Update.class})
     private String name;
 
-    @NotNull(groups =  {Create.class, Update.class})
     private String description;
 
     @NotNull(groups = {Create.class, Update.class})

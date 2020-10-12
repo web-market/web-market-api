@@ -25,9 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
-//*TODO: parent_category_id not null but zero
-// and related categories*/
-
 @RestController
 @RequestMapping("/category-management")
 @RequiredArgsConstructor

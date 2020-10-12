@@ -7,6 +7,7 @@ import market.supply.service.SupplyService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +35,7 @@ public class SupplyController {
     }
 
     @PostMapping("/supplies")
-    public ResponseEntity<Void> create(@RequestBody SupplyCompositeDto supplyCompositeDto) {
+    public ResponseEntity<Void> create(@Validated @RequestBody SupplyCompositeDto supplyCompositeDto) {
         this.supplyService.create(supplyCompositeDto);
         return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION,
                 "/supply-management/supplies").build();

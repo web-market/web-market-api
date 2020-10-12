@@ -17,4 +17,6 @@ public interface MediaService {
 
     void delete(Long mediaId);
 
+    void deleteMany(List<Long> ids);
+
 }

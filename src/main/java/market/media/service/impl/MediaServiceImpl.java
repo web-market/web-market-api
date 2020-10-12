@@ -45,4 +45,10 @@ public class MediaServiceImpl implements MediaService {
         this.mediaRepository.deleteById(mediaId);
     }
 
+    @Override
+    @Transactional
+    public void deleteMany(List<Long> ids) {
+        this.mediaRepository.deleteAllByIdIn(ids);
+    }
+
 }

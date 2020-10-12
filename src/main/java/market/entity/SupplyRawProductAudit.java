@@ -29,7 +29,7 @@ public class SupplyRawProductAudit {
     @Column(name = "raw_product_quantity")
     private Long rawProductQuantity;
 
-    @Column(name = "price_per_item")
+    @Column(name = "price_per_item", precision = 10, scale = 2)
     private Double pricePerItem;
 
     @ManyToOne(fetch = FetchType.LAZY)
