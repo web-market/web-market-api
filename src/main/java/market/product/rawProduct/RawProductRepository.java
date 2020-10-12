@@ -1,4 +1,4 @@
-package market.repository;
+package market.product.rawProduct;
 
 import market.entity.RawProduct;
 import market.product.rawProduct.dto.RawProductView;

@@ -1,4 +1,4 @@
-package market.projection.productVariant;
+package market.product.productVariant.dto;
 
 import org.springframework.beans.factory.annotation.Value;
 

@@ -1,8 +1,8 @@
-package market.service;
+package market.product.productVariant.service;
 
-import market.dto.productVariant.ProductVariantDto;
+import market.product.productVariant.dto.ProductVariantDto;
 import market.entity.ProductVariant;
-import market.projection.productVariant.ProductVariantView;
+import market.product.productVariant.dto.ProductVariantView;
 
 import java.util.List;
 

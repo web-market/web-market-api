@@ -5,7 +5,7 @@ import market.entity.RawProduct;
 import market.manufacturer.service.ManufacturerService;
 import market.product.rawProduct.dto.RawProductDto;
 import market.product.rawProduct.dto.RawProductView;
-import market.repository.RawProductRepository;
+import market.product.rawProduct.RawProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

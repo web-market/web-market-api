@@ -1,7 +1,7 @@
-package market.repository;
+package market.product.productVariant;
 
 import market.entity.ProductVariant;
-import market.projection.productVariant.ProductVariantView;
+import market.product.productVariant.dto.ProductVariantView;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

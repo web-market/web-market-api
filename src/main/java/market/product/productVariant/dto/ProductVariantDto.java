@@ -1,4 +1,4 @@
-package market.dto.productVariant;
+package market.product.productVariant.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

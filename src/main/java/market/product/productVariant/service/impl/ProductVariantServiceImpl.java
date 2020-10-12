@@ -1,15 +1,14 @@
-package market.service.impl;
+package market.product.productVariant.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import market.dto.productVariant.ProductVariantDto;
 import market.entity.ProductVariant;
-import market.projection.productVariant.ProductVariantView;
-import market.repository.ProductVariantRepository;
 import market.filterValue.service.FilterValueService;
-import market.service.ProductVariantService;
+import market.product.productVariant.ProductVariantRepository;
+import market.product.productVariant.dto.ProductVariantDto;
+import market.product.productVariant.dto.ProductVariantView;
+import market.product.productVariant.service.ProductVariantService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -18,12 +17,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductVariantServiceImpl implements ProductVariantService {
 
-    private final FilterValueService filterValueService;
     private final ProductVariantRepository productVariantRepository;
+    private final FilterValueService filterValueService;
     private final ModelMapper modelMapper;
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true)
     public List<ProductVariantView> getProductVariants() {
         return this.productVariantRepository.findAllBy();
     }
