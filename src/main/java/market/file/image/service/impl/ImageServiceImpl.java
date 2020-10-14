@@ -8,12 +8,13 @@ import market.file.image.service.ImageService;
 import market.file.service.FileService;
 import market.fileProcessing.imageResizing.ImageProcessingService;
 import market.media.service.MediaService;
-import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -44,7 +45,7 @@ public class ImageServiceImpl implements ImageService {
     private void store(Map<ImageDto, BufferedImage> imageMap, Media media) throws IOException {
         for (var imageGroup : imageMap.entrySet()) {
             this.fileService.save(imageGroup.getKey(), media);
-            Thumbnails.of(imageGroup.getValue()).toFile(imageGroup.getKey().getPath());
+            ImageIO.write(imageGroup.getValue(), imageGroup.getKey().getExtension(), new File(imageGroup.getKey().getPath()));
         }
     }
 
