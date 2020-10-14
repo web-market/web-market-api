@@ -14,9 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Table(name = "supply")
@@ -52,5 +54,9 @@ public class Supply {
     @JoinColumn(name = "provider_id")
     @JsonIgnore
     private Provider provider;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supply")
+    @JsonIgnore
+    private List<SupplyRawProductAudit> supplyRawProductAudits;
 
 }

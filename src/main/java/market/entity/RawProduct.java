@@ -47,4 +47,8 @@ public class RawProduct {
     @Fetch(FetchMode.JOIN)
     @JsonIgnore
     private List<ProductVariant> productVariants;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "rawProduct")
+    @JsonIgnore
+    private List<SupplyRawProductAudit> supplyRawProductAudits;
 }
