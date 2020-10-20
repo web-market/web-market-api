@@ -42,11 +42,11 @@ public class FilterValue {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "product_variant_filter_value",
+            name = "product_filter_value",
             joinColumns = {@JoinColumn(name = "filter_value_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_variant_id")}
+            inverseJoinColumns = {@JoinColumn(name = "product_id")}
     )
     @JsonIgnore
-    private List<ProductVariant> productVariants;
+    private List<Product> products;
 
 }

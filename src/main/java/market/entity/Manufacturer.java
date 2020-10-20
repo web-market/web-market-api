@@ -34,5 +34,5 @@ public class Manufacturer {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "manufacturer")
     @Fetch(FetchMode.JOIN)
     @JsonIgnore
-    private List<RawProduct> rawProducts;
+    private List<Product> products;
 }

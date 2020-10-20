@@ -4,9 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import market.dto.transfer.Create;
 import market.dto.transfer.Update;
-import market.provider.dto.ProviderDto;
-import market.store.dto.StoreDto;
-import market.supplyRawProductAudit.dto.SupplyRawProductAuditDto;
+import market.provider.dto.ProviderSupplyDto;
+import market.store.dto.StoreSupplyDto;
+import market.supplyRawProductAudit.dto.SupplyProductAuditDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -26,12 +26,12 @@ public class SupplyCompositeDto {
     private String identificationNumber;
 
     @Valid
-    private ProviderDto provider;
+    private ProviderSupplyDto provider;
 
     @Valid
-    private StoreDto store;
+    private StoreSupplyDto store;
 
     @Valid
-    private List<SupplyRawProductAuditDto> supplyRawProductAudit;
+    private List<SupplyProductAuditDto> supplyProductAudit;
 
 }

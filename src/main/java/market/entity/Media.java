@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@ToString(exclude = "productVariants")
+@ToString(exclude = "products")
 @Table(name = "media")
 @Entity
 public class Media {
@@ -48,11 +48,11 @@ public class Media {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "product_variant_media",
+            name = "product_media",
             joinColumns = {@JoinColumn(name = "media_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_variant_id")}
+            inverseJoinColumns = {@JoinColumn(name = "product_id")}
     )
     @JsonIgnore
-    private List<ProductVariant> productVariants;
+    private List<Product> products;
 
 }

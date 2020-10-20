@@ -31,7 +31,7 @@ public class Store {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
     @Fetch(FetchMode.JOIN)
     @JsonIgnore
-    private List<StoreProductVariantAudit> storeProductVariantAudits;
+    private List<StoreProductAudit> storeProductAudits;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
     @JsonIgnore

@@ -8,7 +8,7 @@ import market.supply.dto.SupplyCompositeDto;
 import market.supply.dto.SupplyCompositeItemView;
 import market.supply.dto.SupplyItemView;
 import market.supply.service.SupplyService;
-import market.supplyRawProductAudit.SupplyRawProductAuditService;
+import market.supplyRawProductAudit.service.SupplyProductAuditService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +21,7 @@ public class SupplyServiceImpl implements SupplyService {
 
     private final SupplyRepository supplyRepository;
     private final ModelMapper modelMapper;
-    private final SupplyRawProductAuditService supplyRawProductAuditService;
+    private final SupplyProductAuditService supplyProductAuditService;
 
     @Override
     @Transactional(readOnly = true)
@@ -47,7 +47,7 @@ public class SupplyServiceImpl implements SupplyService {
         var supply = this.modelMapper.map(supplyCompositeDto, Supply.class);
         supply.setStatus(SupplyStatus.DRAFT);
         supply = this.supplyRepository.save(supply);
-        this.supplyRawProductAuditService.create(supplyCompositeDto.getSupplyRawProductAudit(), supply);
+        this.supplyProductAuditService.create(supplyCompositeDto.getSupplyProductAudit(), supply);
         return supply;
     }
 
