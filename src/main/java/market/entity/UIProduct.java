@@ -47,6 +47,10 @@ public class UIProduct {
     @JsonIgnore
     private List<Category> categories;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "uiProducts")
+    @JsonIgnore
+    private List<Media> media;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "related_ui_products",

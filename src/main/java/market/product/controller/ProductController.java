@@ -18,39 +18,39 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/product-variant-management")
+@RequestMapping(path = "/product-management")
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping("/product-variants")
+    @GetMapping("/products")
     public ResponseEntity<List<ProductView>> getAll() {
         return new ResponseEntity<>(this.productService.getProductVariants(), HttpStatus.OK);
     }
 
     //TODO: These path variable should be discussed
-    @GetMapping("/product-variants/filter-value/{ids}")
+    @GetMapping("/products/filter-value/{ids}")
     public ResponseEntity<List<ProductView>> getByFilterValues(@PathVariable Long[] ids) {
         return new ResponseEntity<>(this.productService.getProductVariantsByFilterValues(Arrays.asList(ids)), HttpStatus.OK);
     }
 
-    @GetMapping("/product-variants/{id}")
+    @GetMapping("/products/{id}")
     public ResponseEntity<ProductView> getOne(@PathVariable Long id) {
         return new ResponseEntity<>(this.productService.getProductVariant(id), HttpStatus.OK);
     }
 
-    @PostMapping("/product-variants")
+    @PostMapping("/products")
     public ResponseEntity<Product> create(@Validated(Create.class) @RequestBody ProductDto productDto) {
         return new ResponseEntity<>(this.productService.create(productDto), HttpStatus.CREATED);
     }
 
-    @PutMapping("/product-variants")
+    @PutMapping("/products")
     public ResponseEntity<Product> update(@Validated(Update.class) @RequestBody ProductDto productDto) {
         return new ResponseEntity<>(this.productService.update(productDto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/product-variants")
+    @DeleteMapping("/products")
     public ResponseEntity<String> delete(@Valid @RequestBody BulkDeleteDto bulkDeleteDto) {
         this.productService.bulkDelete(bulkDeleteDto.getIds());
         return ResponseEntity.ok("deleted successfully");

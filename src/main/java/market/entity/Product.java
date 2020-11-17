@@ -56,10 +56,6 @@ public class Product {
     @JsonIgnore
     private List<SupplyProductAudit> supplyProductAudits;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
-    @JsonIgnore
-    private List<Media> media;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "product_filter_value",
