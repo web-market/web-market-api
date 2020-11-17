@@ -41,6 +41,12 @@ public class Product {
     @JsonIgnore
     private Manufacturer manufacturer;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "model_id")
+    @JsonIgnore
+    private Model model;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     @Fetch(FetchMode.JOIN)
     @JsonIgnore
