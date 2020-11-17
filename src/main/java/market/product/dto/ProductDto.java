@@ -26,4 +26,7 @@ public class ProductDto {
     @NotNull(groups = {Create.class, Update.class})
     private Long manufacturerId;
 
+    @NotNull(groups = {Create.class, Update.class})
+    private Long modelId;
+
 }

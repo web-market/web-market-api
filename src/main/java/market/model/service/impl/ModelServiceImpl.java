@@ -32,6 +32,12 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Model getFullModel(Long id) {
+        return this.modelRepository.getById(id);
+    }
+
+    @Override
     @Transactional
     public Model create(ModelDto modelDto) {
         var model = this.modelMapper.map(modelDto, Model.class);

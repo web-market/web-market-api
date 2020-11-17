@@ -13,6 +13,8 @@ public interface ModelService {
     ModelView getModel(Long id);
 
     //DTOs
+    Model getFullModel(Long id);
+
     Model create(ModelDto modelDto);
 
     Model update(ModelDto modelDto);

@@ -31,7 +31,7 @@ public class ProductController {
 
     //TODO: These path variable should be discussed
     @GetMapping("/product-variants/filter-value/{ids}")
-    public ResponseEntity<List<ProductView>> getByFilerValues(@PathVariable Long[] ids) {
+    public ResponseEntity<List<ProductView>> getByFilterValues(@PathVariable Long[] ids) {
         return new ResponseEntity<>(this.productService.getProductVariantsByFilterValues(Arrays.asList(ids)), HttpStatus.OK);
     }
 

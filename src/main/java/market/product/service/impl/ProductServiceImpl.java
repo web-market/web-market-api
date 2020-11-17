@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import market.entity.Product;
 import market.filterValue.service.FilterValueService;
 import market.manufacturer.service.ManufacturerService;
+import market.model.service.ModelService;
 import market.product.ProductRepository;
 import market.product.dto.ProductDto;
 import market.product.dto.ProductView;
@@ -21,6 +22,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final FilterValueService filterValueService;
     private final ManufacturerService manufacturerService;
+    private final ModelService modelService;
     private final ModelMapper modelMapper;
 
     @Override
@@ -44,18 +46,20 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public Product create(ProductDto productDto) {
-        Product newProduct = this.modelMapper.map(productDto, Product.class);
+        var newProduct = this.modelMapper.map(productDto, Product.class);
         newProduct.setFilterValues(this.filterValueService.getFullMentionedFilterValues(productDto.getFilterValueIds()));
         newProduct.setManufacturer(this.manufacturerService.getFullManufacturer(productDto.getManufacturerId()));
+        newProduct.setModel(this.modelService.getFullModel(productDto.getModelId()));
         return this.productRepository.save(newProduct);
     }
 
     @Override
     @Transactional
     public Product update(ProductDto productDto) {
-        Product product = this.modelMapper.map(productDto, Product.class);
+        var product = this.modelMapper.map(productDto, Product.class);
         product.setFilterValues(this.filterValueService.getFullMentionedFilterValues(productDto.getFilterValueIds()));
         product.setManufacturer(this.manufacturerService.getFullManufacturer(productDto.getManufacturerId()));
+        product.setModel(this.modelService.getFullModel(productDto.getModelId()));
         return this.productRepository.save(product);
     }
 
