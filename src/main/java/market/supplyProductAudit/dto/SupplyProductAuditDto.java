@@ -1,4 +1,4 @@
-package market.supplyRawProductAudit.dto;
+package market.supplyProductAudit.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

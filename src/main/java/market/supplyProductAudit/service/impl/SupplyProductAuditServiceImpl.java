@@ -1,11 +1,11 @@
-package market.supplyRawProductAudit.service.impl;
+package market.supplyProductAudit.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import market.entity.Supply;
 import market.entity.SupplyProductAudit;
-import market.supplyRawProductAudit.SupplyProductAuditRepository;
-import market.supplyRawProductAudit.dto.SupplyProductAuditDto;
-import market.supplyRawProductAudit.service.SupplyProductAuditService;
+import market.supplyProductAudit.SupplyProductAuditRepository;
+import market.supplyProductAudit.dto.SupplyProductAuditDto;
+import market.supplyProductAudit.service.SupplyProductAuditService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;

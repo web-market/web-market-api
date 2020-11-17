@@ -2,7 +2,7 @@ package market.supply.dto;
 
 import market.provider.dto.ProviderItemView;
 import market.store.dto.StoreView;
-import market.supplyRawProductAudit.dto.SupplyProductAuditItemView;
+import market.supplyProductAudit.dto.SupplyProductAuditItemView;
 
 import java.time.LocalDateTime;
 import java.util.List;

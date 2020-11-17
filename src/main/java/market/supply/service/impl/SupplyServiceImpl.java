@@ -8,7 +8,7 @@ import market.supply.dto.SupplyCompositeDto;
 import market.supply.dto.SupplyCompositeItemView;
 import market.supply.dto.SupplyItemView;
 import market.supply.service.SupplyService;
-import market.supplyRawProductAudit.service.SupplyProductAuditService;
+import market.supplyProductAudit.service.SupplyProductAuditService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

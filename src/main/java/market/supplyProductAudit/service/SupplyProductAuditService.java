@@ -1,8 +1,8 @@
-package market.supplyRawProductAudit.service;
+package market.supplyProductAudit.service;
 
 import market.entity.Supply;
 import market.entity.SupplyProductAudit;
-import market.supplyRawProductAudit.dto.SupplyProductAuditDto;
+import market.supplyProductAudit.dto.SupplyProductAuditDto;
 
 import java.util.List;
 

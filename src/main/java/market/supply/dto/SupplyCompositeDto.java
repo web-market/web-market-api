@@ -6,7 +6,7 @@ import market.dto.transfer.Create;
 import market.dto.transfer.Update;
 import market.provider.dto.ProviderSupplyDto;
 import market.store.dto.StoreSupplyDto;
-import market.supplyRawProductAudit.dto.SupplyProductAuditDto;
+import market.supplyProductAudit.dto.SupplyProductAuditDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
