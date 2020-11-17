@@ -18,7 +18,7 @@ public interface FilterValueService {
     FilterValueView getFilterValue(Long id);
 
     //DTOs
-    List<FilterValue> getFullMentionedFilterValues(List<Long> ids);
+    List<FilterValue> getFullFilterValues(List<Long> ids);
 
     FilterValue create(FilterValueDto filterValueDto);
 

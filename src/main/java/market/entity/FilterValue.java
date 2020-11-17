@@ -28,8 +28,8 @@ public class FilterValue {
     @SequenceGenerator(name = "filter_value_sequence", sequenceName = "filter_value_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "value")
-    private String value;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "sort_order", columnDefinition = "bigint default 0")
     private Long sortOrder;

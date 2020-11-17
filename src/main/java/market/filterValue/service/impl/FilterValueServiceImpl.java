@@ -17,8 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FilterValueServiceImpl implements FilterValueService {
 
-    private final FilterService filterService;
     private final FilterValueRepository filterValueRepository;
+    private final FilterService filterService;
     private final ModelMapper modelMapper;
 
     @Override
@@ -46,7 +46,7 @@ public class FilterValueServiceImpl implements FilterValueService {
     }
 
     @Override
-    public List<FilterValue> getFullMentionedFilterValues(List<Long> ids) {
+    public List<FilterValue> getFullFilterValues(List<Long> ids) {
         return this.filterValueRepository.getAllByIdIn(ids);
     }
 

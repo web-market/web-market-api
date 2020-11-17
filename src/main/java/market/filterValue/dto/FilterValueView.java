@@ -6,7 +6,7 @@ public interface FilterValueView {
 
     Long getId();
 
-    String getValue();
+    String getName();
 
     Long getSortOrder();
 

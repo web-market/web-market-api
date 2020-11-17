@@ -17,7 +17,7 @@ public class FilterValueDto {
     private Long id;
 
     @NotBlank(groups = {Create.class, Update.class})
-    private String value;
+    private String name;
 
     @NotNull(groups = {Create.class, Update.class})
     private Long sortOrder;

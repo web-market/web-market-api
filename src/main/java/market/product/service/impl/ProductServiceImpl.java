@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Product create(ProductDto productDto) {
         var newProduct = this.modelMapper.map(productDto, Product.class);
-        newProduct.setFilterValues(this.filterValueService.getFullMentionedFilterValues(productDto.getFilterValueIds()));
+        newProduct.setFilterValues(this.filterValueService.getFullFilterValues(productDto.getFilterValueIds()));
         newProduct.setManufacturer(this.manufacturerService.getFullManufacturer(productDto.getManufacturerId()));
         newProduct.setModel(this.modelService.getFullModel(productDto.getModelId()));
         return this.productRepository.save(newProduct);
@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Product update(ProductDto productDto) {
         var product = this.modelMapper.map(productDto, Product.class);
-        product.setFilterValues(this.filterValueService.getFullMentionedFilterValues(productDto.getFilterValueIds()));
+        product.setFilterValues(this.filterValueService.getFullFilterValues(productDto.getFilterValueIds()));
         product.setManufacturer(this.manufacturerService.getFullManufacturer(productDto.getManufacturerId()));
         product.setModel(this.modelService.getFullModel(productDto.getModelId()));
         return this.productRepository.save(product);
