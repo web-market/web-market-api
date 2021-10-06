@@ -59,4 +59,8 @@ public class Supply {
     @JsonIgnore
     private List<SupplyProductAudit> supplyProductAudits;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supply")
+    @JsonIgnore
+    private List<StoreProductSupplyAudit> storeProductSupplyAudits;
+
 }

@@ -32,7 +32,6 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-
     @GetMapping("/categories/fill-dropdown")
     public ResponseEntity<List<CategoryDropdownView>> getAllCategories() {
         return new ResponseEntity<>(this.categoryService.getCategories(), HttpStatus.OK);

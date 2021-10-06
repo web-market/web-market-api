@@ -10,4 +10,5 @@ public interface SupplyProductAuditService {
 
     List<SupplyProductAudit> create(List<SupplyProductAuditDto> supplyProductAuditDtos, Supply supply);
 
+    void deleteBySupplyId(Long supplyId);
 }

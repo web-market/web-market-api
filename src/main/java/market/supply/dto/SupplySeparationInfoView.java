@@ -2,13 +2,12 @@ package market.supply.dto;
 
 import market.entity.SupplyStatus;
 import market.provider.dto.ProviderItemView;
-import market.store.dto.StoreView;
-import market.supplyProductAudit.dto.SupplyProductAuditItemView;
+import market.storeProductSupplyAudit.dto.StoreProductSupplyAuditItemView;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface SupplyCompositeItemView {
+public interface SupplySeparationInfoView {
 
     Long getId();
 
@@ -20,7 +19,8 @@ public interface SupplyCompositeItemView {
 
     ProviderItemView getProvider();
 
-    List<SupplyProductAuditItemView> getSupplyProductAudits();
+    List<StoreProductSupplyAuditItemView> getStoreProductSupplyAudits();
 
     SupplyStatus getStatus();
+
 }

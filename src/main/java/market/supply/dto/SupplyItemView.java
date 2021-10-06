@@ -1,5 +1,6 @@
 package market.supply.dto;
 
+import market.entity.SupplyStatus;
 import market.provider.dto.ProviderItemView;
 import market.store.dto.StoreView;
 
@@ -15,7 +16,7 @@ public interface SupplyItemView {
 
     LocalDateTime getArrivalDate();
 
-    StoreView getStore();
-
     ProviderItemView getProvider();
+
+    SupplyStatus getStatus();
 }

@@ -1,5 +1,8 @@
 package market.exceptionHandler;
 
+import market.exceptions.NotFoundException;
+import market.exceptions.ProcessCompletedSupplyException;
+import market.exceptions.WrongProductSeparationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ApiError> handleNotFoundException(EntityNotFoundException ex) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
+        return new ResponseEntity<>(apiError, apiError.getStatus());
+    }
+
+    @ExceptionHandler(WrongProductSeparationException.class)
+    public ResponseEntity<ApiError> handleWrongProductSeparationException(WrongProductSeparationException ex) {
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return new ResponseEntity<>(apiError, apiError.getStatus());
+    }
+
+    @ExceptionHandler(ProcessCompletedSupplyException.class)
+    public ResponseEntity<ApiError> handleProcessCompletedSupplyException(ProcessCompletedSupplyException ex) {
+        ApiError apiError = new ApiError(HttpStatus.FORBIDDEN, "Supply has been already processed and in COMPLETE status" + ex.getMessage());
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 

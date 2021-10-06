@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NotFoundException extends RuntimeException {
+public class WrongProductSeparationException extends RuntimeException {
 
     private String message;
 

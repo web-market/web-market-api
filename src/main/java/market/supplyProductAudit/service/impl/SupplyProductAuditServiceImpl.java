@@ -30,4 +30,10 @@ public class SupplyProductAuditServiceImpl implements SupplyProductAuditService 
         }
         return this.supplyProductAuditRepository.saveAll(audits);
     }
+
+    @Override
+    @Transactional
+    public void deleteBySupplyId(Long supplyId) {
+        this.supplyProductAuditRepository.deleteAllBySupplyId(supplyId);
+    }
 }

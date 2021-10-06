@@ -17,17 +17,14 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Data
-@Table(name = "store_product_audit")
+@Table(name = "store_product_supply_audit")
 @Entity
-public class StoreProductAudit {
+public class StoreProductSupplyAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "store_product_audit_sequence")
     @SequenceGenerator(name = "store_product_audit_sequence", sequenceName = "store_product_audit_id_seq", allocationSize = 1)
     private Long id;
-
-    @Column(name = "product_quantity")
-    private Long productQuantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
@@ -41,4 +38,12 @@ public class StoreProductAudit {
     @JsonIgnore
     private Product product;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "supply_id")
+    @JsonIgnore
+    private Supply supply;
+
+    @Column(name = "product_quantity")
+    private Long productQuantity;
 }

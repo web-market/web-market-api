@@ -43,7 +43,7 @@ public class Product {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     @Fetch(FetchMode.JOIN)
     @JsonIgnore
-    private List<StoreProductAudit> storeProducts;
+    private List<StoreProductSupplyAudit> storeProducts;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     @JsonIgnore
