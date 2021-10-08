@@ -5,6 +5,8 @@ import market.actualStoreState.ActualStoreStateRepository;
 import market.actualStoreState.dto.ActualStoreStateItemView;
 import market.actualStoreState.service.ActualStoreService;
 import market.entity.ActualStoreState;
+import market.entity.Product;
+import market.entity.Store;
 import market.supply.dto.ProductStoreProcessDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -40,7 +42,59 @@ public class ActualStoreServiceImpl implements ActualStoreService {
     }
 
     @Override
+    public void shiftProducts(Long storeFrom, Long storeTo, Long productId, Long quantity) {
+        ActualStoreState actualStoreFrom = this.actualStoreStateRepository.getByStoreIdAndProductId(storeFrom, productId);
+        Long overallQuantityInStoreFrom = actualStoreFrom.getOverallQuantity();
+        actualStoreFrom.setOverallQuantity(overallQuantityInStoreFrom - quantity);
+
+        ActualStoreState actualStoreTo = this.actualStoreStateRepository.getByStoreIdAndProductId(storeTo, productId);
+        if (actualStoreFrom.getId() != null) {
+            Long overallQuantityInStoreTo = actualStoreTo.getOverallQuantity();
+            actualStoreTo.setOverallQuantity(overallQuantityInStoreTo + quantity);
+            this.actualStoreStateRepository.saveAll(List.of(actualStoreFrom, actualStoreTo));
+            return;
+        }
+
+        final ActualStoreState newStoreForProduct = new ActualStoreState();
+        Store store = new Store();
+        store.setId(storeTo);
+        Product product = new Product();
+        product.setId(productId);
+
+        newStoreForProduct.setStore(store);
+        newStoreForProduct.setProduct(product);
+        newStoreForProduct.setOverallQuantity(quantity);
+
+        this.actualStoreStateRepository.saveAll(List.of(actualStoreFrom, newStoreForProduct));
+
+    }
+
+    @Override
+    public void removeProducts(Long storeFrom, Long productId, Long quantity) {
+        ActualStoreState actualStore = this.actualStoreStateRepository.getByStoreIdAndProductId(storeFrom, productId);
+        Long overallQuantityInStore = actualStore.getOverallQuantity();
+        actualStore.setOverallQuantity(overallQuantityInStore - quantity);
+
+        this.actualStoreStateRepository.save(actualStore);
+    }
+
+    @Override
     public List<ActualStoreStateItemView> getAllStores() {
         return this.actualStoreStateRepository.findAllBy();
+    }
+
+    @Override
+    public ActualStoreState getByStoreIdAndProductId(Long storeId, Long productId) {
+        return this.actualStoreStateRepository.getByStoreIdAndProductId(storeId, productId);
+    }
+
+    @Override
+    public boolean existsByStoreIdAndProductId(Long storeId, Long productId) {
+        return this.actualStoreStateRepository.existsByStoreIdAndProductId(storeId, productId);
+    }
+
+    @Override
+    public boolean isEnoughProducts(Long productId, Long storeId, Long quantity) {
+        return this.actualStoreStateRepository.isEnoughProducts(productId, storeId, quantity);
     }
 }

@@ -1,5 +1,6 @@
 package market.exceptionHandler;
 
+import market.exceptions.NotEnoughProductsToPerformOperationException;
 import market.exceptions.NotFoundException;
 import market.exceptions.ProcessCompletedSupplyException;
 import market.exceptions.WrongProductSeparationException;
@@ -31,6 +32,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(WrongProductSeparationException.class)
     public ResponseEntity<ApiError> handleWrongProductSeparationException(WrongProductSeparationException ex) {
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return new ResponseEntity<>(apiError, apiError.getStatus());
+    }
+
+    @ExceptionHandler(NotEnoughProductsToPerformOperationException.class)
+    public ResponseEntity<ApiError> handleNotEnoughProductsToPerformOperationException(NotEnoughProductsToPerformOperationException ex) {
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, "Not enough products to perform operation." + ex.getMessage());
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
